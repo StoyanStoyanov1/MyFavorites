@@ -13,6 +13,9 @@ export default function Header() {
 					<Link to={Path.Home}>Movies</Link>
 					<Link to={Path.Home}>Podcasts</Link>
 				</div>
+				<div className="favorites-container">
+					<h1 className="favorites-text">My Favorites</h1>
+				</div>
 				<div className="nav-right">
 					<Link className='' to={Path.Home}>Login</Link>
 					<Link className='' to={Path.Home}>Register</Link>
@@ -20,5 +23,5 @@ export default function Header() {
 				</div>
 			</nav>
 		</header>
-)
+	)
 }
