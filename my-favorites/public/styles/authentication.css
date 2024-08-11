@@ -1,15 +1,14 @@
-/* Основен стил за секцията */
+
 #authentication {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f0f0f0;
     padding: 20px;
 }
 
 form {
-    background: #ffffff;
+    background: rgb(255, 255, 255, 0.6);
     border-radius: 12px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
     padding: 30px;
@@ -24,9 +23,9 @@ fieldset {
 }
 
 legend {
-    font-size: 28px;
+    font-size: 24px;
     font-weight: bold;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     color: #333333;
 }
 
@@ -41,14 +40,21 @@ legend {
     color: #333333;
 }
 
-input[type="text"],
-input[type="password"] {
+input {
     width: 100%;
     padding: 12px;
     border: 1px solid #cccccc;
     border-radius: 6px;
     box-sizing: border-box;
     font-size: 16px;
+    background: rgb(255, 255, 255, 0.6);
+
+}
+
+input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
 
 .auth-button {
