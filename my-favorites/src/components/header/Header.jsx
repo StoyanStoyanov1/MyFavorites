@@ -17,8 +17,8 @@ export default function Header() {
 					<h1 className="favorites-text">My Favorites</h1>
 				</div>
 				<div className="nav-right">
-					<Link className='' to={Path.Home}>Login</Link>
-					<Link className='' to={Path.Home}>Register</Link>
+					<Link className='' to={Path.Login}>Login</Link>
+					<Link className={Path.Register} to={Path.Register}>Register</Link>
 					<Link className='' to={Path.Home}>Logout</Link>
 				</div>
 			</nav>
