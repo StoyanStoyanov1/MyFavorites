@@ -2,14 +2,14 @@ import React, {useState} from 'react';
 import Path from './../../utils/paths.js'
 import {Link} from "react-router-dom";
 import languageHeader from "../../utils/languages/languageHeader.js";
+import {useLanguage} from "../../context/LanguageContext.jsx";
 
 export default function Header() {
-	const [language, setLanguage] = useState('en');
+	const [language, setLanguage] = useLanguage();
 
 
 	const handleLanguageChange = (e) => {
-		const selectedLanguage = e.target.value;
-		setLanguage(selectedLanguage);
+		setLanguage(e.target.value);
 	};
 	return (
 		<header>
