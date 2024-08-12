@@ -2,13 +2,16 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { BrowserRouter } from 'react-router-dom';
-import Login from './Login'; 
+import Login from './Login';
+import MochLanguageProvider from "../../test/MochLanguageProvider.jsx";
 
 describe.only('Login Component', () => {
 	test('renders the input fields and checks the link to Register', () => {
 		render(
 			<BrowserRouter>
-				<Login />
+				<MochLanguageProvider>
+					<Login />
+				</MochLanguageProvider>
 			</BrowserRouter>
 		);
 
