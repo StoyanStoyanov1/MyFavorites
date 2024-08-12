@@ -1,27 +1,46 @@
-import React from 'react';
-import Path from './../../paths.js'
+import React, {useState} from 'react';
+import Path from './../../utils/paths.js'
 import {Link} from "react-router-dom";
+import languageHeader from "../../utils/languages/languageHeader.js";
 
 export default function Header() {
+	const [language, setLanguage] = useState('en');
+
+
+	const handleLanguageChange = (e) => {
+		const selectedLanguage = e.target.value;
+		setLanguage(selectedLanguage);
+	};
 	return (
 		<header>
+
 			<nav>
+
 				<div className="nav-left">
 
-					<Link to={Path.Home}>Home</Link>
-					<Link to={Path.Home}>Books</Link>
-					<Link to={Path.Home}>Movies</Link>
-					<Link to={Path.Home}>Podcasts</Link>
+
+					<Link to={Path.Home}>{languageHeader.books[language]}</Link>
+					<Link to={Path.Home}>{languageHeader.movies[language]}</Link>
+					<Link to={Path.Home}>{languageHeader.podcasts[language]}</Link>
 				</div>
 				<div className="favorites-container">
-					<h1 className="favorites-text">My Favorites</h1>
+					<Link className="favorites-text" to={Path.Home}>My Favorites</Link>
 				</div>
 				<div className="nav-right">
-					<Link className='' to={Path.Login}>Login</Link>
-					<Link className={Path.Register} to={Path.Register}>Register</Link>
-					<Link className='' to={Path.Home}>Logout</Link>
+
+					<Link to={Path.Login}>{languageHeader.login[language]}</Link>
+					<Link to={Path.Register}>{languageHeader.register[language]}</Link>
+					<Link to={Path.Home}>{languageHeader.logout[language]}</Link>
+					<div className="language-selector">
+						<select value={language} onChange={handleLanguageChange}>
+							<option value="en">English</option>
+							<option value="de">Deutsch</option>
+							<option value="bg">Български</option>
+						</select>
+					</div>
 				</div>
 			</nav>
+
 		</header>
 	)
 }

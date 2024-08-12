@@ -1,7 +1,7 @@
 import React from "react";
-import {authFormKeys} from "../../formKeys.js";
-import {Form, Link} from "react-router-dom";
-import Path from '../../paths.js'
+import {authFormKeys} from "../../utils/formKeys/authFormKeys.js";
+import {Link} from "react-router-dom";
+import Path from './../../utils/paths.js'
 
 export default function Register() {
 

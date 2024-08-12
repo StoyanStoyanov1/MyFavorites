@@ -3,7 +3,7 @@ import React from 'react';
 import {Navigate, Route, Routes} from "react-router-dom";
 
 //configurations
-import Path from "./paths.js";
+import Path from "./utils/paths.js";
 
 //components
 import Header from "./components/header/Header.jsx";
