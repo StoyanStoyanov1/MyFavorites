@@ -8,6 +8,10 @@ const port = 3030;
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(cors({
+	origin: 'http://localhost:5173/',
+	credentials: true
+}));
 app.use(express.json());
 
 mongoose.connection.on('connected', () => console.log('MongoDB Connected'));
