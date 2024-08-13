@@ -1,4 +1,4 @@
-const languageHeader = {
+const translateHeader = {
 	books: {
 		en: 'Books',
 		bg: 'Книги',
@@ -32,4 +32,4 @@ const languageHeader = {
 
 };
 
-export default languageHeader;
+export default translateHeader;

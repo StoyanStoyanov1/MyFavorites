@@ -1,4 +1,4 @@
-const languageAuth = {
+const translateAuth = {
 	password: {
 		en: 'Password',
 		bg: 'Парола',
@@ -36,4 +36,4 @@ const languageAuth = {
 	}
 };
 
-export default languageAuth;
+export default translateAuth;
