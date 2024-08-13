@@ -14,6 +14,10 @@ app.use(cors({
 }));
 app.use(express.json());
 
+mongoose.connect('mongodb://localhost:27017/my-favorites')
+	.then(() => console.log('Connected to MongoDB'))
+	.catch((err) => console.error('Could not connect to MongoDB...', err));
+
 mongoose.connection.on('connected', () => console.log('MongoDB Connected'));
 mongoose.connection.on('disconnected', () => console.log('MongoDB Disconnected'));
 mongoose.connection.on('error', err => console.log('MongoDB Error:', err));
