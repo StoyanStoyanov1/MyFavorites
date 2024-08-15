@@ -47,3 +47,5 @@ async function generateToken(user) {
 	const token = await jwt.sign(payload, SECRET, {expireIn: '2h'});
 	return token;
 }
+
+module.exports = router;

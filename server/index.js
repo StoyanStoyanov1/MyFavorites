@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const {router} = require("express/lib/application");
 const port = 3030;
 
 app.use(express.static('public'));
@@ -26,5 +27,7 @@ app.use((err, req, res, next) => {
 	console.error(err.stack);
 	res.status(500).send('Something broke!');
 });
+
+router()
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
