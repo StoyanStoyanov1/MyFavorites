@@ -33,7 +33,33 @@ const translateAuth = {
 		en: 'Enter your username',
 		de: 'Geben Sie Ihren Benutzernamen ein',
 		bg: 'Напишете Вашето потребителско име'
+	},
+	gender: {
+		en: 'Gender',
+		de: 'Geschlecht',
+		bg: 'Пол'
+	},
+	other: {
+		en: 'Other',
+		de: 'Andere',
+		bg: 'Други',
+	},
+	male: {
+		en: 'Male',
+		de: 'Männlich',
+		bg: 'Мъжки'
+	},
+	female: {
+		en: 'Female',
+		de: 'Weiblich',
+		bg: 'Женски',
+	},
+	dateOfBirth: {
+		en: 'Date of Birth',
+		de: 'Geburtsdatum',
+		bg: 'Рожденна дата'
 	}
+
 };
 
 export default translateAuth;
