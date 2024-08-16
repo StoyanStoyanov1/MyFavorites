@@ -1,17 +1,31 @@
-import React from "react";
+import React, {useContext} from "react";
 import {authFormKeys} from "../../utils/formKeys/authFormKeys.js";
 import {Link} from "react-router-dom";
 import Path from './../../utils/paths.js'
 import translateHeader from "../../utils/translator/translateHeader.js";
 import {useLanguage} from "../../context/LanguageContext.jsx";
 import translateAuth from "../../utils/translator/translateAuth.js";
-
+import authContext from "../../context/authContext.jsx";
+import useForm from "../../hooks/useForm.js"
 
 export default function Login() {
-	const [ language ] = useLanguage()
+	const [ language ] = useLanguage();
+	const { loginSubmitHandler } = useContext(authContext);
+	const {values, onChange, onSubmit} = useForm(submitHandler, {
+		[authFormKeys.Email]: '',
+		[authFormKeys.Password]: '',
+	});
+
+	async function submitHandler(values) {
+		try {
+			await loginSubmitHandler(values);
+		} catch (error) {
+			console.error(error);
+		}
+	}
 	return (
 		<section id='authentication'>
-			<form >
+			<form onSubmit={onSubmit}>
 				<fieldset>
 					<legend>{translateHeader.login[language]}</legend>
 					<div className='input-container'>
@@ -22,6 +36,8 @@ export default function Login() {
 							name={authFormKeys.Email}
 							type="text"
 							placeholder={translateAuth.enterYourEmail[language]}
+							onChange={onChange}
+							value={values[authFormKeys.Email]}
 						/>
 					</div>
 					<div className='input-container'>
@@ -32,16 +48,8 @@ export default function Login() {
 							name={authFormKeys.Password}
 							type="password"
 							placeholder={translateAuth.enterYourPassword[language]}
-						/>
-					</div>
-					<div className='input-container'>
-						<label htmlFor={authFormKeys.ConfirmPassword} className='auth-input'>{translateAuth.confPassword[language]}</label>
-						<input
-							id={authFormKeys.ConfirmPassword}
-							className={authFormKeys.ConfirmPassword}
-							name={authFormKeys.ConfirmPassword}
-							type="password"
-							placeholder={translateAuth.enterYourConfPassword[language]}
+							onChange={onChange}
+							value={values[authFormKeys.Password]}
 						/>
 					</div>
 

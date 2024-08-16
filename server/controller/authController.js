@@ -31,15 +31,11 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
 	const userData = req.body;
 
-	const user = await userService.findByEmail(userData.email);
-
-	if (!user) {
-		throw new Error('User does not exist');
-	}
 	try {
-		const {assessToken, user} = await authService.login(userData);
-		res.cookie('auth', assessToken, options);
-		res.status(201).json({assessToken, user});
+		console.log(userData)
+		const {accessToken, user} = await authService.login(userData);
+		res.cookie('auth', accessToken, options);
+		res.status(201).json({accessToken, user});
 	} catch (error) {
 		if (error.message === 'User does not exist' || error.message === 'Invalid password') {
 			return res.status(401).json({ message: error.message });
