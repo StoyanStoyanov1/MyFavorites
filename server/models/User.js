@@ -16,11 +16,9 @@ const userSchema = mongoose.Schema({
 	},
 	gender: {
 		type: String,
-		required: true,
 	},
 	birthDate: {
 		type: String,
-		required: true,
 	},
 	books: [{
 		type: mongoose.Schema.Types.ObjectId,

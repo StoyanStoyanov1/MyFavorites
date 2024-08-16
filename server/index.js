@@ -3,17 +3,19 @@ const app = express();
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const {router} = require("express/lib/application");
 const port = 3030;
+
+const userRouter = require('./router');  // Импортиране на рутера
 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors({
-	origin: 'http://localhost:5173/',
+	origin: 'http://localhost:5174',
 	credentials: true
 }));
 app.use(express.json());
+app.use('/api',userRouter);
 
 mongoose.connect('mongodb://localhost:27017/my-favorites')
 	.then(() => console.log('Connected to MongoDB'))
@@ -27,7 +29,5 @@ app.use((err, req, res, next) => {
 	console.error(err.stack);
 	res.status(500).send('Something broke!');
 });
-
-router()
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
