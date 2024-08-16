@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const authService = require('../service/authService');
 const {getErrorMessage} = require('../utils/errorUtils');
+const userService = require('../service/userService')
 
 const options = {
 	httpOnly: true,
@@ -20,6 +21,9 @@ router.post('/register', async (req, res) => {
 			const errors = Object.values(error.errors).map(err => err.message);
 			return res.status(400).json({ message: errors.join(', ') });
 		}
+		if (error.message === 'User already exists') {
+			return res.status(401).json({ message: error.message });
+		}
 		res.status(500).json({ message: 'Server error' });
 	}
 });
@@ -27,12 +31,20 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
 	const userData = req.body;
 
+	const user = await userService.findByEmail(userData.email);
+
+	if (!user) {
+		throw new Error('User does not exist');
+	}
 	try {
 		const {assessToken, user} = await authService.login(userData);
 		res.cookie('auth', assessToken, options);
 		res.status(201).json({assessToken, user});
-	} catch (err) {
-		res.status(500).json({error: getErrorMessage(err)})
+	} catch (error) {
+		if (error.message === 'User does not exist' || error.message === 'Invalid password') {
+			return res.status(401).json({ message: error.message });
+		}
+		res.status(500).json({error: getErrorMessage(error)})
 	}
 })
 
