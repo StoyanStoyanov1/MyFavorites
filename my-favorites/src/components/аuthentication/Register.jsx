@@ -41,7 +41,7 @@ export default function Register() {
 							className={authFormKeys.Password}
 							name={authFormKeys.Password}
 							type="password"
-							placeholder={translateAuth.enterYourEmail[language]}
+							placeholder={translateAuth.enterYourPassword[language]}
 						/>
 					</div>
 					<div className='input-container'>
