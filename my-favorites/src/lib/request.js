@@ -1,4 +1,3 @@
-import {options} from "axios";
 
 const buildOptions = (data) => {
 	const options = {};

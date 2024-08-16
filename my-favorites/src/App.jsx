@@ -12,19 +12,22 @@ import Login from "./components/аuthentication/Login.jsx"
 
 //context
 import {LanguageProvider} from "./context/LanguageContext.jsx";
+import {AuthProvider} from "./context/authContext.jsx";
 
 
 function App() {
 	return (
-		<LanguageProvider>
-			<div id='box'>
-				<Header/>
-				<Routes>
-					<Route path={Path.Register} element={<Register/>}/>
-					<Route path={Path.Login} element={<Login/>}/>
-				</Routes>
-			</div>
-		</LanguageProvider>
+		<AuthProvider>
+			<LanguageProvider>
+				<div id='box'>
+					<Header/>
+					<Routes>
+						<Route path={Path.Register} element={<Register/>}/>
+						<Route path={Path.Login} element={<Login/>}/>
+					</Routes>
+				</div>
+			</LanguageProvider>
+		</AuthProvider>
 	)
 }
 
