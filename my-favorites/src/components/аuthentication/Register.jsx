@@ -21,7 +21,8 @@ export default function Register() {
 		[authFormKeys.ConfirmPassword]: '',
 		[authFormKeys.Username]: '',
 		[authFormKeys.Gender]: 'other',
-		[authFormKeys.birthDate]: '',
+		[authFormKeys.BirthDate]: '',
+		[authFormKeys.Aktiv]: false,
 	});
 
 	useEffect(() => {
@@ -132,15 +133,15 @@ export default function Register() {
 					</div>
 
 					<div className='input-container'>
-						<label htmlFor={authFormKeys.birthDate} className='auth-input'>{translateAuth.dateOfBirth[language]}</label>
+						<label htmlFor={authFormKeys.BirthDate} className='auth-input'>{translateAuth.dateOfBirth[language]}</label>
 						<div className='birthDate-Form'>
 							<input
 								type='date'
-								id={authFormKeys.birthDate}
-								name={authFormKeys.birthDate}
+								id={authFormKeys.BirthDate}
+								name={authFormKeys.BirthDate}
 								max={maxDate}
 								onChange={onChange}
-								value={values[authFormKeys.birthDate]}
+								value={values[authFormKeys.BirthDate]}
 							/>
 						</div>
 					</div>

@@ -4,5 +4,6 @@ export const authFormKeys = {
 	ConfirmPassword: 'confirmPassword',
 	Username: 'username',
 	Gender: 'gender',
-	birthDate : 'birthDate',
+	BirthDate : 'birthDate',
+	Aktiv: 'aktiv'
 }

@@ -1,12 +1,13 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import Path from './../../utils/paths.js'
 import {Link} from "react-router-dom";
 import translateHeader from "../../utils/translator/translateHeader.js";
 import {useLanguage} from "../../context/LanguageContext.jsx";
+import authContext from "../../context/authContext.jsx";
 
 export default function Header() {
 	const [language, setLanguage] = useLanguage();
-
+	const {_id, username, isAuthenticated} = useContext(authContext);
 
 	const handleLanguageChange = (e) => {
 		setLanguage(e.target.value);
@@ -28,9 +29,13 @@ export default function Header() {
 				</div>
 				<div className="nav-right">
 
-					<Link to={Path.Login}>{translateHeader.login[language]}</Link>
-					<Link to={Path.Register}>{translateHeader.register[language]}</Link>
-					<Link to={Path.Home}>{translateHeader.logout[language]}</Link>
+					{isAuthenticated && <Link to={Path.Logout}>{translateHeader.logout[language]}</Link> ||
+						<>
+						<Link to={Path.Login}>{translateHeader.login[language]}</Link>
+						<Link to={Path.Register}>{translateHeader.register[language]}</Link>
+					</>}
+
+
 					<div className="language-selector">
 						<select value={language} onChange={handleLanguageChange}>
 							<option value="en">English</option>

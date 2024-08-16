@@ -1,6 +1,6 @@
 import React, {createContext, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-import * as authService from '../service/userService.js';
+import * as authService from '../services/authService.js';
 import Path from "../utils/paths.js";
 import usePersistedState from "../hooks/usePersistedState.js";
 
@@ -25,9 +25,17 @@ export const AuthProvider = ({ children }) => {
 
 	};
 
+	const logoutHandler = () => {
+		setAuth({});
+		localStorage.removeItem('accessToken');
+		navigate(Path.Login);
+	}
+
 	const values = {
 		registerSubmitHandler,
+		logoutHandler,
 		username: auth.username,
+		email: auth.email,
 		_id: auth._id,
 		isAuthenticated: !!auth.email,
 	};
