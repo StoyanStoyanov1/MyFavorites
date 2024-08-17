@@ -32,7 +32,6 @@ router.post('/login', async (req, res) => {
 	const userData = req.body;
 
 	try {
-		console.log(userData)
 		const {accessToken, user} = await authService.login(userData);
 		res.cookie('auth', accessToken, options);
 		res.status(201).json({accessToken, user});

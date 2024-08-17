@@ -7,7 +7,6 @@ import {useLanguage} from "../../context/LanguageContext.jsx";
 import useForm from "../../hooks/useForm.js";
 import {authFormKeys} from "../../utils/formKeys/authFormKeys.js";
 import authContext from "../../context/authContext.jsx";
-import {validatorAuthKeys} from '../../validators/validatorAuthKeys.js';
 import authValidator from "../../validators/authValidator.js";
 import translateAuthErrors from "../../utils/translator/translateAuthErrors.js";
 
@@ -18,7 +17,7 @@ export default function Register() {
 
 	const [maxDate, setMaxDate] = useState('');
 
-	const [validator, setValidator] = useState(validatorAuthKeys);
+	const [validator, setValidator] = useState({});
 
 	const {values, onChange, onSubmit} = useForm(submitHandler, {
 		[authFormKeys.Email]: '',
@@ -35,7 +34,7 @@ export default function Register() {
 			const { validatorMessages } = authValidator(values, {}, language);
 			setValidator(validatorMessages);
 		}
-	}, [validator, language]);
+	}, [language, values]);
 
 	useEffect(() => {
 		const today = new Date().toISOString().split('T')[0];
@@ -59,7 +58,7 @@ export default function Register() {
 
 			if (error.message === 'User already exists') message = translateAuthErrors.userIsExist[language]
 
-			alert(message ? message : error.message);
+			alert(message ? message : error.message)
 		}
 	}
 

@@ -2,9 +2,10 @@ import {authFormKeys} from "../utils/formKeys/authFormKeys.js";
 import translateAuthValidator from "../utils/translator/translateAuthValidators.js";
 import {useLanguage} from "../context/LanguageContext.jsx";
 
-export default function authValidator(values, validatorMessages, language) {
+export default function authValidator(values, validator, language) {
 	let inputIsValid = true;
 
+	const validatorMessages = validator;
 	if (!values[authFormKeys.Email]) {
 		validatorMessages[authFormKeys.Email] = translateAuthValidator.noEmail[language];
 		inputIsValid = false;
