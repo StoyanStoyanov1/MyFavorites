@@ -9,6 +9,7 @@ import {authFormKeys} from "../../utils/formKeys/authFormKeys.js";
 import authContext from "../../context/authContext.jsx";
 import {validatorAuthKeys} from '../../validators/validatorAuthKeys.js';
 import authValidator from "../../validators/authValidator.js";
+import translateAuthErrors from "../../utils/translator/translateAuthErrors.js";
 
 export default function Register() {
 	const [registrationAttempt, setRegistrationAttempt] = useState(false);
@@ -54,7 +55,11 @@ export default function Register() {
 		try {
 			await registerSubmitHandler(values);
 		} catch (error) {
-			console.error('Error during registration:', error);
+			let message;
+
+			if (error.message === 'User already exists') message = translateAuthErrors.userIsExist[language]
+
+			alert(message ? message : error.message);
 		}
 	}
 

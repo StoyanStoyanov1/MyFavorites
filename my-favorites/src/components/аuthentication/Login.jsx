@@ -7,6 +7,7 @@ import {useLanguage} from "../../context/LanguageContext.jsx";
 import translateAuth from "../../utils/translator/translateAuth.js";
 import authContext from "../../context/authContext.jsx";
 import useForm from "../../hooks/useForm.js"
+import translateAuthErrors from "../../utils/translator/translateAuthErrors.js";
 
 export default function Login() {
 	const [ language ] = useLanguage();
@@ -20,7 +21,13 @@ export default function Login() {
 		try {
 			await loginSubmitHandler(values);
 		} catch (error) {
-			alert(error.message);
+			let message;
+
+			if (error.message === "User does not exist") message = translateAuthErrors.userNotExist[language];
+
+			else if (error.message === "Invalid password") message = translateAuthErrors.invalidPassword[language];
+
+			alert(message? message : error.message);
 		}
 	}
 	return (
