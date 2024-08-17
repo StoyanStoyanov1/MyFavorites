@@ -28,6 +28,21 @@ const translateHeader = {
 		en: 'Logout',
 		bg: 'Изход',
 		de: 'Ausloggen',
+	},
+	myRecommendations: {
+		en: "My Recommendations",
+		de: "Meine Empfehlungen",
+		bg: "Моите препоръки"
+	},
+	recommend: {
+		en: "Recommend",
+		de: "Empfehlen",
+		bg: "Препоръчай"
+	},
+	favorites: {
+		en: "Favorites",
+		de: "Favoriten",
+		bg: "Любими",
 	}
 
 };

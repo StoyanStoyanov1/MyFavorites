@@ -30,11 +30,22 @@ export default function Header() {
 				</div>
 				<div className="nav-right">
 
-					{isAuthenticated && <Link to={Path.Logout}>{translateHeader.logout[language]}</Link> ||
+					{isAuthenticated && <>
+							<div className='profilMenu'>
+								<button className="profilMenu-button">{username}</button>
+								<div className="profilMenu-content">
+									<Link to={Path.Home}>{translateHeader.myRecommendations[language]}</Link>
+									<Link to={Path.Home}>{translateHeader.recommend[language]}</Link>
+									<Link to={Path.Home}>{translateHeader.favorites[language]}</Link>
+									<Link to={Path.Logout}>{translateHeader.logout[language]}</Link>
+								</div>
+							</div>
+							</>
+						||
 						<>
-						<Link to={Path.Login}>{translateHeader.login[language]}</Link>
-						<Link to={Path.Register}>{translateHeader.register[language]}</Link>
-					</>}
+							<Link to={Path.Login}>{translateHeader.login[language]}</Link>
+							<Link to={Path.Register}>{translateHeader.register[language]}</Link>
+						</>}
 
 
 					<div className="language-selector">
