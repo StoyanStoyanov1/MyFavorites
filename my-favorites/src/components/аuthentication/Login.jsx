@@ -20,7 +20,7 @@ export default function Login() {
 		try {
 			await loginSubmitHandler(values);
 		} catch (error) {
-			console.error(error);
+			alert(error.message);
 		}
 	}
 	return (

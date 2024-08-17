@@ -1,21 +1,25 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, {useContext, useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 import Path from './../../utils/paths.js';
 import translateAuth from "../../utils/translator/translateAuth.js";
 import translateHeader from "../../utils/translator/translateHeader.js";
-import { useLanguage } from "../../context/LanguageContext.jsx";
-import useSelected from "../../hooks/useSelected.js";
+import {useLanguage} from "../../context/LanguageContext.jsx";
 import useForm from "../../hooks/useForm.js";
-import { authFormKeys } from "../../utils/formKeys/authFormKeys.js";
+import {authFormKeys} from "../../utils/formKeys/authFormKeys.js";
 import authContext from "../../context/authContext.jsx";
+import {validatorAuthKeys} from '../../validators/validatorAuthKeys.js';
+import authValidator from "../../validators/authValidator.js";
 
 export default function Register() {
+	const [registrationAttempt, setRegistrationAttempt] = useState(false);
 	const [language] = useLanguage();
-	const { registerSubmitHandler } = useContext(authContext);
+	const {registerSubmitHandler} = useContext(authContext);
 
 	const [maxDate, setMaxDate] = useState('');
 
-	const { values, onChange, onSubmit } = useForm(submitHandler, {
+	const [validator, setValidator] = useState(validatorAuthKeys);
+
+	const {values, onChange, onSubmit} = useForm(submitHandler, {
 		[authFormKeys.Email]: '',
 		[authFormKeys.Password]: '',
 		[authFormKeys.ConfirmPassword]: '',
@@ -26,11 +30,27 @@ export default function Register() {
 	});
 
 	useEffect(() => {
+		if (registrationAttempt) {
+			const { validatorMessages } = authValidator(values, {}, language);
+			setValidator(validatorMessages);
+		}
+	}, [validator, language]);
+
+	useEffect(() => {
 		const today = new Date().toISOString().split('T')[0];
 		setMaxDate(today);
 	}, []);
 
-	async function submitHandler(values) {
+	async function submitHandler() {
+		setRegistrationAttempt(true);
+		const { inputIsValid, validatorMessages } = authValidator(values, {}, language);
+
+		setValidator(validatorMessages)
+
+		if (!inputIsValid) {
+			return;
+		}
+
 		try {
 			await registerSubmitHandler(values);
 		} catch (error) {
@@ -55,10 +75,16 @@ export default function Register() {
 							onChange={onChange}
 							value={values[authFormKeys.Email]}
 						/>
-					</div>
+						{validator[authFormKeys.Email] &&
+							<div className='authValidate'>
+								<p>{validator[authFormKeys.Email]}</p>
+							</div>
+						}
 
+					</div>
 					<div className='input-container'>
-						<label htmlFor={authFormKeys.Password} className='auth-input'>{translateAuth.password[language]}</label>
+						<label htmlFor={authFormKeys.Password}
+							   className='auth-input'>{translateAuth.password[language]}</label>
 						<input
 							id={authFormKeys.Password}
 							className={authFormKeys.Password}
@@ -68,10 +94,16 @@ export default function Register() {
 							onChange={onChange}
 							value={values[authFormKeys.Password]}
 						/>
+						{validator[authFormKeys.Password] &&
+							<div className='authValidate'>
+								<p>{validator[authFormKeys.Password]}</p>
+							</div>
+						}
 					</div>
 
 					<div className='input-container'>
-						<label htmlFor={authFormKeys.ConfirmPassword} className='auth-input'>{translateAuth.confPassword[language]}</label>
+						<label htmlFor={authFormKeys.ConfirmPassword}
+							   className='auth-input'>{translateAuth.confPassword[language]}</label>
 						<input
 							id={authFormKeys.ConfirmPassword}
 							className={authFormKeys.ConfirmPassword}
@@ -81,10 +113,16 @@ export default function Register() {
 							onChange={onChange}
 							value={values[authFormKeys.ConfirmPassword]}
 						/>
+						{validator[authFormKeys.ConfirmPassword] &&
+							<div className='authValidate'>
+								<p>{validator[authFormKeys.ConfirmPassword]}</p>
+							</div>
+						}
 					</div>
 
 					<div className='input-container'>
-						<label htmlFor={authFormKeys.Username} className='auth-input'>{translateAuth.username[language]}</label>
+						<label htmlFor={authFormKeys.Username}
+							   className='auth-input'>{translateAuth.username[language]}</label>
 						<input
 							id={authFormKeys.Username}
 							className={authFormKeys.Username}
@@ -94,10 +132,16 @@ export default function Register() {
 							onChange={onChange}
 							value={values[authFormKeys.Username]}
 						/>
+						{validator[authFormKeys.Username] &&
+							<div className='authValidate'>
+								<p>{validator[authFormKeys.Username]}</p>
+							</div>
+						}
 					</div>
 
 					<div className='input-container'>
-						<label htmlFor={authFormKeys.Gender} className='auth-input'>{translateAuth.gender[language]}</label>
+						<label htmlFor={authFormKeys.Gender}
+							   className='auth-input'>{translateAuth.gender[language]}</label>
 						<div className="gender-form">
 							<label>
 								<input
@@ -133,7 +177,8 @@ export default function Register() {
 					</div>
 
 					<div className='input-container'>
-						<label htmlFor={authFormKeys.BirthDate} className='auth-input'>{translateAuth.dateOfBirth[language]}</label>
+						<label htmlFor={authFormKeys.BirthDate}
+							   className='auth-input'>{translateAuth.dateOfBirth[language]}</label>
 						<div className='birthDate-Form'>
 							<input
 								type='date'
@@ -144,6 +189,11 @@ export default function Register() {
 								value={values[authFormKeys.BirthDate]}
 							/>
 						</div>
+						{validator[authFormKeys.BirthDate] &&
+							<div className='authValidate'>
+								<p>{validator[authFormKeys.BirthDate]}</p>
+							</div>
+						}
 					</div>
 
 					<button type="submit" className='auth-button'>{translateHeader.register[language]}</button>
@@ -151,7 +201,8 @@ export default function Register() {
 					<p className='auth-field'>
 						{language === 'en' ?
 							<span>If you already have a profile, click <Link to={Path.Login}>Here</Link></span> :
-							language === 'de' ? <span>Wenn Sie bereits ein Profil haben, klicken Sie <Link to={Path.Login}>hier</Link></span> :
+							language === 'de' ? <span>Wenn Sie bereits ein Profil haben, klicken Sie <Link
+									to={Path.Login}>hier</Link></span> :
 								<span>Ако вече имате профил, кликнете <Link to={Path.Login}>тук</Link></span>}
 					</p>
 				</fieldset>
