@@ -11,6 +11,8 @@ import authValidator from "../../validators/authValidator.js";
 import translateAuthErrors from "../../utils/translator/translateAuthErrors.js";
 
 export default function Register() {
+
+
 	const [registrationAttempt, setRegistrationAttempt] = useState(false);
 	const [language] = useLanguage();
 	const {registerSubmitHandler} = useContext(authContext);
@@ -27,11 +29,11 @@ export default function Register() {
 		[authFormKeys.Gender]: 'other',
 		[authFormKeys.BirthDate]: '',
 		[authFormKeys.Aktiv]: false,
-	});
+	}, changeValidator);
 
 	useEffect(() => {
 		if (registrationAttempt) {
-			const { validatorMessages } = authValidator(values, {}, language);
+			const {validatorMessages} = authValidator(values, {}, language);
 			setValidator(validatorMessages);
 		}
 	}, [language, values]);
@@ -41,9 +43,19 @@ export default function Register() {
 		setMaxDate(today);
 	}, []);
 
+	function changeValidator(e) {
+		const inputIsValid =!e.target.value.includes(" ")
+
+		if (!inputIsValid) {
+			alert(translateAuthErrors.includesSpaces[language])
+		}
+
+		return inputIsValid;
+	}
+
 	async function submitHandler() {
 		setRegistrationAttempt(true);
-		const { inputIsValid, validatorMessages } = authValidator(values, {}, language);
+		const {inputIsValid, validatorMessages} = authValidator(values, {}, language);
 
 		setValidator(validatorMessages)
 

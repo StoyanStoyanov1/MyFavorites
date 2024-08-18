@@ -1,9 +1,11 @@
 import {useState} from 'react';
 
-export default function useForm(submitHandler, initialValues) {
+export default function useForm(submitHandler, initialValues, onChangeValidator) {
 	const [values, setValues] = useState(initialValues);
 
 	const onChange = (e) => {
+		if (!onChangeValidator(e)) return;
+
 		setValues(state => ({
 			...state,
 			[e.target.name]: e.target.value

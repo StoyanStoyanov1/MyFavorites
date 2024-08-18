@@ -13,6 +13,11 @@ const translateAuthErrors = {
 		en: "Invalid password.",
 		de: "Ungültiges Passwort.",
 		bg: "Невалидна парола."
+	},
+	includesSpaces: {
+		en: "You cannot include spaces.",
+		de: "Sie dürfen keine Leerzeichen verwenden.",
+		bg: "Не можете да поставяте празно разстояние.",
 	}
 }
 
