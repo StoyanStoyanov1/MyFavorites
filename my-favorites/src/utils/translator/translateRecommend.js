@@ -62,7 +62,12 @@ const translateRecommend = {
 	placeholderDescription: {
 		en: "Add a description of your recommendation.",
 		de: "Fügen Sie eine Beschreibung Ihrer Empfehlung hinzu.",
-		bg: "Добавете описание на Вашата препоръка."
+		bg: "Добавете описание на Вашата препоръка.",
+	},
+	selectYear: {
+		en: "Select  year",
+		de: "Jahr auswählen",
+		bg: "Изберете година"
 	}
 };
 

@@ -3,22 +3,36 @@ import {recommendFormKeys} from "../../utils/formKeys/recommendFormKeys.js";
 import translateRecommend from "../../utils/translator/translateRecommend.js";
 import {useLanguage} from "../../context/LanguageContext.jsx";
 import translateGenreOptions from "../../utils/translator/translateGenreOptions.js"
+import useForm from "../../hooks/useForm.js";
+import {authFormKeys} from "../../utils/formKeys/authFormKeys.js";
 
 export default function Recommend() {
 	const [language] = useLanguage()
 
-	const [typeRecommend, setTypeRecommend] = useState('');
 	const [genre, setGenre] = useState('');
+	const [year, setYear] = useState('');
 	const currentYear = new Date().getFullYear();
 	const years = Array.from({ length: currentYear - 1970 + 1 }, (_, i) => currentYear - i);
+	const {values, onChange, onSubmit} = useForm(() => {}, {
+		[recommendFormKeys.Type]: '',
+		[recommendFormKeys.Title]: '',
+		[recommendFormKeys.Genre]: '',
+		[recommendFormKeys.Year]: '',
+		[recommendFormKeys.Description]: '',
+	});
 
-	const changeTypeRecommend = (e) => {
-		setTypeRecommend(e.target.value);
-		setGenre('')
-	};
+	const validateInput = (e) => {
+
+		if (!values[recommendFormKeys.Title] && !e.target.value.trim()) {
+			return;
+		}
+
+
+		onChange(e);
+	}
 	return (
 		<section id='authentication'>
-			<form>
+			<form onSubmit={onSubmit}>
 				<fieldset>
 					<legend>{translateRecommend.recommend[language]}</legend>
 
@@ -29,8 +43,8 @@ export default function Recommend() {
 							id={recommendFormKeys.Type}
 							className={recommendFormKeys.Type}
 							name={recommendFormKeys.Type}
-							onChange={changeTypeRecommend}
-							value={typeRecommend}
+							onChange={onChange}
+							value={values[recommendFormKeys.Type]}
 						>
 							<option value='' disabled hidden>{translateRecommend.selectType[language]}</option>
 							<option value="book">{translateRecommend.book[language]}</option>
@@ -39,7 +53,7 @@ export default function Recommend() {
 						</select>
 					</div>
 
-					{typeRecommend && (
+					{values[recommendFormKeys.Type] && (
 						<>
 							<div className='input-container'>
 								<label htmlFor={recommendFormKeys.Title}
@@ -50,6 +64,8 @@ export default function Recommend() {
 									name={recommendFormKeys.Title}
 									type="text"
 									placeholder={translateRecommend.title[language]}
+									onChange={validateInput}
+									value={values[recommendFormKeys.Title]}
 								/>
 
 							</div>
@@ -60,8 +76,10 @@ export default function Recommend() {
 									id={recommendFormKeys.Genre}
 									className={recommendFormKeys.Genre}
 									name={recommendFormKeys.Genre}
+									value={values[recommendFormKeys.Genre]}
+									onChange={onChange}
 								>
-									{translateGenreOptions[typeRecommend][language].map((genre) => (
+									{translateGenreOptions[values[recommendFormKeys.Type]][language].map((genre) => (
 										<option key={genre.value} value={genre.value}>
 											{genre.label}
 										</option>
@@ -75,7 +93,12 @@ export default function Recommend() {
 									id={recommendFormKeys.Year}
 									className={recommendFormKeys.Year}
 									name={recommendFormKeys.Year}
+									value={values[recommendFormKeys.Year]}
+									onChange={onChange}
 								>
+									<option value=''>
+										{translateRecommend.selectYear[language]}
+									</option>
 									{years.map(year => (
 										<option key={year} value={year}>
 											{year}
@@ -93,6 +116,8 @@ export default function Recommend() {
 								className={recommendFormKeys.Description}
 								name={recommendFormKeys.Description}
 								placeholder={translateRecommend.placeholderDescription[language]}
+								onChange={onChange}
+								value={values[recommendFormKeys.Description]}
 								>
 
 								</textarea>

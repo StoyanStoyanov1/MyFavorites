@@ -29,7 +29,7 @@ export default function Register() {
 		[authFormKeys.Gender]: 'other',
 		[authFormKeys.BirthDate]: '',
 		[authFormKeys.Aktiv]: false,
-	}, changeValidator);
+	});
 
 	useEffect(() => {
 		if (registrationAttempt) {
@@ -47,10 +47,10 @@ export default function Register() {
 		const inputIsValid =!e.target.value.includes(" ")
 
 		if (!inputIsValid) {
-			alert(translateAuthErrors.includesSpaces[language])
+			return alert(translateAuthErrors.includesSpaces[language])
 		}
 
-		return inputIsValid;
+		onChange(e);
 	}
 
 	async function submitHandler() {
@@ -88,7 +88,7 @@ export default function Register() {
 							name={authFormKeys.Email}
 							type="text"
 							placeholder={translateAuth.enterYourEmail[language]}
-							onChange={onChange}
+							onChange={changeValidator}
 							value={values[authFormKeys.Email]}
 						/>
 						{validator[authFormKeys.Email] &&
@@ -107,7 +107,7 @@ export default function Register() {
 							name={authFormKeys.Password}
 							type="password"
 							placeholder={translateAuth.enterYourPassword[language]}
-							onChange={onChange}
+							onChange={changeValidator}
 							value={values[authFormKeys.Password]}
 						/>
 						{validator[authFormKeys.Password] &&
@@ -126,7 +126,7 @@ export default function Register() {
 							name={authFormKeys.ConfirmPassword}
 							type="password"
 							placeholder={translateAuth.enterYourConfPassword[language]}
-							onChange={onChange}
+							onChange={changeValidator}
 							value={values[authFormKeys.ConfirmPassword]}
 						/>
 						{validator[authFormKeys.ConfirmPassword] &&
@@ -145,7 +145,7 @@ export default function Register() {
 							name={authFormKeys.Username}
 							type="text"
 							placeholder={translateAuth.yourUsername[language]}
-							onChange={onChange}
+							onChange={changeValidator}
 							value={values[authFormKeys.Username]}
 						/>
 						{validator[authFormKeys.Username] &&
