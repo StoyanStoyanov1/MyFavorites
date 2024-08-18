@@ -4,16 +4,19 @@ import translateRecommend from "../../utils/translator/translateRecommend.js";
 import {useLanguage} from "../../context/LanguageContext.jsx";
 import translateGenreOptions from "../../utils/translator/translateGenreOptions.js"
 import useForm from "../../hooks/useForm.js";
-import {authFormKeys} from "../../utils/formKeys/authFormKeys.js";
+import translateAuthErrors from "../../utils/translator/translateAuthErrors.js";
+import recommendValidator from "../../validators/recommendValidator.js";
 
 export default function Recommend() {
 	const [language] = useLanguage()
 
-	const [genre, setGenre] = useState('');
-	const [year, setYear] = useState('');
+	const [validator, setValidator] = useState({});
+
+	const [recommendAttempt, setRecommendAttempt] = useState(false);
+
 	const currentYear = new Date().getFullYear();
 	const years = Array.from({ length: currentYear - 1970 + 1 }, (_, i) => currentYear - i);
-	const {values, onChange, onSubmit} = useForm(() => {}, {
+	const {values, onChange, onSubmit} = useForm(submitHandler, {
 		[recommendFormKeys.Type]: '',
 		[recommendFormKeys.Title]: '',
 		[recommendFormKeys.Genre]: '',
@@ -22,14 +25,41 @@ export default function Recommend() {
 	});
 
 	const validateInput = (e) => {
+		if (!values[recommendFormKeys[e.target.name]] && e.target.value === ' ') {
+			return ;
+		}
+		onChange(e);
+	}
 
-		if (!values[recommendFormKeys.Title] && !e.target.value.trim()) {
+	async function submitHandler() {
+		if (!values[recommendFormKeys.Type]) return;
+
+		const {inputIsValid, validatorMessages} = recommendValidator(values, {}, language)
+
+		setRecommendAttempt(true);
+		setValidator(validatorMessages)
+
+		if (!inputIsValid) {
 			return;
 		}
 
+		try {
 
-		onChange(e);
+		} catch (error) {
+			let message;
+
+			if (error.message === 'User already exists') message = translateAuthErrors.userIsExist[language]
+
+			alert(message ? message : error.message)
+		}
 	}
+
+	useEffect(() => {
+		if (recommendAttempt) {
+			const {validatorMessages} = recommendValidator(values, {}, language);
+			setValidator(validatorMessages);
+		}
+	}, [language, values]);
 	return (
 		<section id='authentication'>
 			<form onSubmit={onSubmit}>
@@ -67,6 +97,10 @@ export default function Recommend() {
 									onChange={validateInput}
 									value={values[recommendFormKeys.Title]}
 								/>
+								{validator[recommendFormKeys.Title] &&
+									<div className='authValidate'>
+										<p>{validator[recommendFormKeys.Title]}</p>
+									</div>}
 
 							</div>
 							<div className='input-container'>
@@ -85,6 +119,10 @@ export default function Recommend() {
 										</option>
 									))}
 								</select>
+								{validator[recommendFormKeys.Genre] &&
+									<div className='authValidate'>
+										<p>{validator[recommendFormKeys.Genre]}</p>
+									</div>}
 							</div>
 							<div className='input-container'>
 								<label htmlFor={recommendFormKeys.Year}
@@ -105,6 +143,10 @@ export default function Recommend() {
 										</option>
 									))}
 								</select>
+								{validator[recommendFormKeys.Year] &&
+									<div className='authValidate'>
+										<p>{validator[recommendFormKeys.Year]}</p>
+									</div>}
 							</div>
 
 							<div className='input-container'>
@@ -116,11 +158,14 @@ export default function Recommend() {
 								className={recommendFormKeys.Description}
 								name={recommendFormKeys.Description}
 								placeholder={translateRecommend.placeholderDescription[language]}
-								onChange={onChange}
+								onChange={validateInput}
 								value={values[recommendFormKeys.Description]}
 								>
-
 								</textarea>
+								{validator[recommendFormKeys.Description] &&
+									<div className='authValidate'>
+										<p>{validator[recommendFormKeys.Description]}</p>
+									</div>}
 							</div>
 						</>
 					)}
