@@ -7,7 +7,7 @@ const userSchema = mongoose.Schema({
 		required: true,
 		validate: {
 			validator: (value) => {
-				return !(value.length > 2) || value.length > 12;
+				return value.length >= 2 && value.length <= 12;
 			},
 			message: "The username must be between 2 and 12 characters long."
 		}
