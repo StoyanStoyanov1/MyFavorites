@@ -30,6 +30,13 @@ export default function Login() {
 			alert(message? message : error.message);
 		}
 	}
+
+	const validateInput = (e) => {
+		if (!values[authFormKeys[e.target.name]] && e.target.value === ' ') {
+			return ;
+		}
+		onChange(e);
+	}
 	return (
 		<section id='authentication'>
 			<form onSubmit={onSubmit}>
@@ -43,7 +50,7 @@ export default function Login() {
 							name={authFormKeys.Email}
 							type="text"
 							placeholder={translateAuth.enterYourEmail[language]}
-							onChange={onChange}
+							onChange={validateInput}
 							value={values[authFormKeys.Email]}
 						/>
 					</div>
@@ -55,7 +62,7 @@ export default function Login() {
 							name={authFormKeys.Password}
 							type="password"
 							placeholder={translateAuth.enterYourPassword[language]}
-							onChange={onChange}
+							onChange={validateInput}
 							value={values[authFormKeys.Password]}
 						/>
 					</div>
