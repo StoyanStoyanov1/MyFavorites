@@ -36,7 +36,11 @@ const contentSchema = mongoose.Schema({
 			},
 			message: "The description must be at least 20 characters long."
 		},
-	}
+	},
+	comments: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Comment'
+	}],
 
 
 

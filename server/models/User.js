@@ -51,23 +51,10 @@ const userSchema = mongoose.Schema({
 	birthDate: {
 		type: String,
 	},
-	books: [{
+	contents: [{
 		type: mongoose.Schema.Types.ObjectId,
-		ref: "Book"
+		ref: 'Content'
 	}],
-	podcasts: [{
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'PodCast'
-	}],
-	movies: [{
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Movie'
-	}],
-	messages: [{
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Message'
-	}
-	]
 
 }, {timestamps: true});
 
