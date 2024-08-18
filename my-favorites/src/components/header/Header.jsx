@@ -35,7 +35,7 @@ export default function Header() {
 								<button className="profilMenu-button">{username}</button>
 								<div className="profilMenu-content">
 									<Link to={Path.Home}>{translateHeader.myRecommendations[language]}</Link>
-									<Link to={Path.Home}>{translateHeader.recommend[language]}</Link>
+									<Link to={Path.Recommend}>{translateHeader.recommend[language]}</Link>
 									<Link to={Path.Home}>{translateHeader.favorites[language]}</Link>
 									<Link to={Path.Logout}>{translateHeader.logout[language]}</Link>
 								</div>
