@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const authService = require('../service/authService');
 const {getErrorMessage} = require('../utils/errorUtils');
-const userService = require('../service/userService')
 
 const options = {
 	httpOnly: true,

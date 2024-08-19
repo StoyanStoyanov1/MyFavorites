@@ -9,9 +9,11 @@ import recommendValidator from "../../validators/recommendValidator.js";
 import * as contentService from "../../services/contentService.js"
 import {useNavigate} from "react-router-dom";
 import Path from "../../utils/paths.js";
+import authContext from "../../context/authContext.jsx";
 
 export default function Recommend() {
 	const [language] = useLanguage()
+	const {_id} = useContext(authContext)
 
 	const navigate = useNavigate();
 	const [validator, setValidator] = useState({});
@@ -49,6 +51,7 @@ export default function Recommend() {
 		}
 
 		try {
+			values.userId = _id;
 			await contentService.create(values);
 			navigate(Path.Home)
 		} catch (error) {

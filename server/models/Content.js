@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const contentSchema = mongoose.Schema({
+	userId: {
+		type: mongoose.Types.ObjectId,
+		require: true,
+	},
 	type: {
 		type: String,
 		enum: ['book', 'movie', 'podcast'],
