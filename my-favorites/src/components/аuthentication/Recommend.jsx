@@ -8,7 +8,7 @@ import translateAuthErrors from "../../utils/translator/translateAuthErrors.js";
 import recommendValidator from "../../validators/recommendValidator.js";
 import * as contentService from "../../services/contentService.js"
 import {useNavigate} from "react-router-dom";
-import Path from "../../utils/paths.js";
+import Path from "../../paths.js";
 import authContext from "../../context/authContext.jsx";
 
 export default function Recommend() {

@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import {authFormKeys} from "../../utils/formKeys/authFormKeys.js";
 import {Link} from "react-router-dom";
-import Path from './../../utils/paths.js'
+import Path from '../../paths.js'
 import translateHeader from "../../utils/translator/translateHeader.js";
 import {useLanguage} from "../../context/LanguageContext.jsx";
 import translateAuth from "../../utils/translator/translateAuth.js";

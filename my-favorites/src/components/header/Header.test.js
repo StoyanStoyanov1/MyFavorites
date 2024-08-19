@@ -2,7 +2,7 @@ import React from 'react';
 import {render, screen} from '@testing-library/react';
 import {BrowserRouter as Router} from 'react-router-dom';
 import Header from './Header.jsx';
-import Path from './../../utils/paths.js';
+import Path from '../../paths.js';
 import MochLanguageProvider from "../../test/MochLanguageProvider.jsx";
 
 describe('Header Component', () => {

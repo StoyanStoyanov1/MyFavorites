@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import Path from './../../utils/paths.js';
+import Path from '../../paths.js';
 import translateAuth from "../../utils/translator/translateAuth.js";
 import translateHeader from "../../utils/translator/translateHeader.js";
 import {useLanguage} from "../../context/LanguageContext.jsx";

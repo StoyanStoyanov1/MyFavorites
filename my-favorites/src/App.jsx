@@ -3,7 +3,7 @@ import React from 'react';
 import {Navigate, Route, Routes} from "react-router-dom";
 
 //configurations
-import Path from "./utils/paths.js";
+import Path from "./paths.js";
 
 //components
 import Header from "./components/header/Header.jsx";
@@ -11,12 +11,12 @@ import Register from "./components/аuthentication/Register.jsx";
 import Login from "./components/аuthentication/Login.jsx"
 import Logout from "./components/аuthentication/Logout.jsx";
 import Recommend from "./components/аuthentication/Recommend.jsx";
+import Footer from "./components/footer/Footer.jsx";
+import Contents from "./components/contents/Contents.jsx";
 
 //context
 import {LanguageProvider} from "./context/LanguageContext.jsx";
 import {AuthProvider} from "./context/authContext.jsx";
-import Footer from "./components/footer/Footer.jsx";
-
 
 function App() {
 	return (
@@ -29,6 +29,7 @@ function App() {
 						<Route path={Path.Login} element={<Login/>}/>
 						<Route path={Path.Logout} element={<Logout/>}/>
 						<Route path={Path.Recommend} element={<Recommend/>}/>
+						<Route path={Path.Contents} element={<Contents/>}/>
 					</Routes>
 					<Footer/>
 				</div>

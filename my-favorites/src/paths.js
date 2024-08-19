@@ -3,7 +3,8 @@ const Path = {
 	Register: '/register',
 	Login: '/login',
 	Logout: '/logout',
-	Recommend: '/recommend'
+	Recommend: '/recommend',
+	Contents: '/contents',
 };
 
 export default Path;

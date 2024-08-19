@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import Path from './../../utils/paths.js'
+import Path from '../../paths.js'
 import {Link} from "react-router-dom";
 import translateHeader from "../../utils/translator/translateHeader.js";
 import {useLanguage} from "../../context/LanguageContext.jsx";
@@ -21,7 +21,7 @@ export default function Header() {
 				<div className="nav-left">
 
 
-					<Link to={Path.Home}>{translateHeader.books[language]}</Link>
+					<Link to={Path.Contents}>{translateHeader.books[language]}</Link>
 					<Link to={Path.Home}>{translateHeader.movies[language]}</Link>
 					<Link to={Path.Home}>{translateHeader.podcasts[language]}</Link>
 				</div>

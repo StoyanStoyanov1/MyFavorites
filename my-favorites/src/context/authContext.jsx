@@ -1,7 +1,7 @@
 import React, {createContext, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import * as authService from '../services/authService.js';
-import Path from "../utils/paths.js";
+import Path from "../paths.js";
 import usePersistedState from "../hooks/usePersistedState.js";
 
 
