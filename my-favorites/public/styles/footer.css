@@ -1,0 +1,21 @@
+#box {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+footer {
+    margin-top: auto;
+    background-color: #2d1f5b;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    position: relative;
+    width: 100%;
+}
+
+
+footer p {
+    margin: 0;
+}

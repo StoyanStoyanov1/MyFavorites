@@ -15,6 +15,7 @@ import Recommend from "./components/аuthentication/Recommend.jsx";
 //context
 import {LanguageProvider} from "./context/LanguageContext.jsx";
 import {AuthProvider} from "./context/authContext.jsx";
+import Footer from "./components/footer/Footer.jsx";
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
 						<Route path={Path.Logout} element={<Logout/>}/>
 						<Route path={Path.Recommend} element={<Recommend/>}/>
 					</Routes>
+					<Footer/>
 				</div>
 			</LanguageProvider>
 		</AuthProvider>

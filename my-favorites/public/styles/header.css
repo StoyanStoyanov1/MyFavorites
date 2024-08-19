@@ -1,9 +1,7 @@
-
 header {
     background-color: #2d1f5b;
     padding: 10px 0;
 }
-
 
 nav {
     top: 0;
@@ -132,6 +130,6 @@ nav a:hover {
     display: block;
 }
 
-.profilMenu {
+.profilMenu{
     z-index: 1001;
 }
