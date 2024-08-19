@@ -6,10 +6,14 @@ import translateGenreOptions from "../../utils/translator/translateGenreOptions.
 import useForm from "../../hooks/useForm.js";
 import translateAuthErrors from "../../utils/translator/translateAuthErrors.js";
 import recommendValidator from "../../validators/recommendValidator.js";
+import * as contentService from "../../services/contentService.js"
+import {useNavigate} from "react-router-dom";
+import Path from "../../utils/paths.js";
 
 export default function Recommend() {
 	const [language] = useLanguage()
 
+	const navigate = useNavigate();
 	const [validator, setValidator] = useState({});
 
 	const [recommendAttempt, setRecommendAttempt] = useState(false);
@@ -32,6 +36,7 @@ export default function Recommend() {
 	}
 
 	async function submitHandler() {
+
 		if (!values[recommendFormKeys.Type]) return;
 
 		const {inputIsValid, validatorMessages} = recommendValidator(values, {}, language)
@@ -44,7 +49,8 @@ export default function Recommend() {
 		}
 
 		try {
-
+			await contentService.create(values);
+			navigate(Path.Home)
 		} catch (error) {
 			let message;
 
