@@ -5,6 +5,7 @@ const Path = {
 	Logout: '/logout',
 	Recommend: '/recommend',
 	Contents: '/contents',
+	ContentDetail: '/content/detail'
 };
 
 export default Path;

@@ -13,6 +13,7 @@ import Logout from "./components/аuthentication/Logout.jsx";
 import Recommend from "./components/аuthentication/Recommend.jsx";
 import Footer from "./components/footer/Footer.jsx";
 import Contents from "./components/contents/Contents.jsx";
+import ContentDetails from "./components/contents/ContentDetails.jsx";
 
 //context
 import {LanguageProvider} from "./context/LanguageContext.jsx";
@@ -30,6 +31,7 @@ function App() {
 						<Route path={Path.Logout} element={<Logout/>}/>
 						<Route path={Path.Recommend} element={<Recommend/>}/>
 						<Route path={Path.Contents} element={<Contents/>}/>
+						<Route path={Path.ContentDetail} element={<ContentDetails/>}/>
 					</Routes>
 					<Footer/>
 				</div>
