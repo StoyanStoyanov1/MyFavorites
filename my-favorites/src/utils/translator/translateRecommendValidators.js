@@ -18,7 +18,12 @@ const translateRecommendValidators = {
 		en: "Add a description that is at least 20 characters long",
 		de: "Fügen Sie eine Beschreibung hinzu, die mindestens 20 Zeichen lang ist",
 		bg: "Добавете описание, което да е дълго най-малко 20 символа"
-	}
+	},
+	image: {
+		en: "Your link must start with http:// or https://",
+		de: "Ihr Link muss mit http:// oder https:// beginnen",
+		bg: "Вашия линк трябва да започва с http:// или https//"
+	},
 }
 
 export default translateRecommendValidators;

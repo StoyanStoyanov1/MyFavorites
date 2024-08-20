@@ -32,7 +32,7 @@ export default function Recommend() {
 
 	const validateInput = (e) => {
 		if (!values[recommendFormKeys[e.target.name]] && e.target.value === ' ') {
-			return ;
+			e.target.value = '';
 		}
 		onChange(e);
 	}
@@ -49,6 +49,10 @@ export default function Recommend() {
 		if (!inputIsValid) {
 			return;
 		}
+
+		Object.keys(values).map(key => {
+			values[key] = values[key].trim();
+		})
 
 		try {
 			values.userId = _id;
@@ -157,18 +161,36 @@ export default function Recommend() {
 										<p>{validator[recommendFormKeys.Year]}</p>
 									</div>}
 							</div>
+							<div className='input-container'>
+								<label htmlFor={recommendFormKeys.Image}
+									   className='auth-input'>{translateRecommend.image[language]}</label>
+								<input
+									id={recommendFormKeys.Image}
+									className={recommendFormKeys.Image}
+									name={recommendFormKeys.Image}
+									type="text"
+									placeholder={translateRecommend.imagePlaceholder[language]}
+									onChange={validateInput}
+									value={values[recommendFormKeys.Image]}
+								/>
+								{validator[recommendFormKeys.Image] &&
+									<div className='authValidate'>
+										<p>{validator[recommendFormKeys.Image]}</p>
+									</div>}
+
+							</div>
 
 							<div className='input-container'>
 								<label htmlFor={recommendFormKeys.Description} className='auth-input'>
 									{translateRecommend.description[language]}
 								</label>
 								<textarea
-								id={recommendFormKeys.Description}
-								className={recommendFormKeys.Description}
-								name={recommendFormKeys.Description}
-								placeholder={translateRecommend.placeholderDescription[language]}
-								onChange={validateInput}
-								value={values[recommendFormKeys.Description]}
+									id={recommendFormKeys.Description}
+									className={recommendFormKeys.Description}
+									name={recommendFormKeys.Description}
+									placeholder={translateRecommend.placeholderDescription[language]}
+									onChange={validateInput}
+									value={values[recommendFormKeys.Description]}
 								>
 								</textarea>
 								{validator[recommendFormKeys.Description] &&

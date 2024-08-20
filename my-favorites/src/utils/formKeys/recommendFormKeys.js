@@ -4,4 +4,5 @@ export const recommendFormKeys = {
 	Genre: 'genre',
 	Year: 'year',
 	Description: 'description',
+	Image: 'image',
 }

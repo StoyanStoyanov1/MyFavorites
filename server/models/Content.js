@@ -16,10 +16,9 @@ const contentSchema = mongoose.Schema({
 		trim: true,
 		validate: {
 			validator: (value) => {
-				return value[0] !== ' ' && value.length >= 2
+				return value.length >= 2
 			},
-			message: "The title cannot start with a blank space and must be at least 2 characters long.",
-
+			message: "The title must be at least 2 characters long.",
 		}
 	},
 	genre: {
@@ -40,6 +39,15 @@ const contentSchema = mongoose.Schema({
 			},
 			message: "The description must be at least 20 characters long."
 		},
+	},
+	image: {
+		type: String,
+		validate: {
+			validator: (value) => {
+				return /^https?:\/\//.test(value)
+			},
+			message: "Your link must start with http:// or https://"
+		}
 	},
 	comments: [{
 		type: mongoose.Schema.Types.ObjectId,

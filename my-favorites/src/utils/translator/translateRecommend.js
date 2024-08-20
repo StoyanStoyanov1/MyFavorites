@@ -68,6 +68,16 @@ const translateRecommend = {
 		en: "Select  year",
 		de: "Jahr auswählen",
 		bg: "Изберете година"
+	},
+	image: {
+		en: "Image",
+		de: "Bild",
+		bg: "Изображение"
+	},
+	imagePlaceholder: {
+		en: "Place a link to your image",
+		de: "Fügen Sie einen Link zu Ihrem Bild ein",
+		bg: "Поставете линк към Вашето изображение",
 	}
 };
 

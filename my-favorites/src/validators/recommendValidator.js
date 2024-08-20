@@ -26,5 +26,9 @@ export default function recommendValidator(values, validator, language) {
 		inputIsValid = false;
 	}
 
+	if (values[recommendFormKeys.Image] !== '' && !/^https?:\/\//.test(values[recommendFormKeys.Image])) {
+		validatorMessages[recommendFormKeys.Image] = translateRecommendValidators.image[language]
+		inputIsValid = false;
+	}
 	return { inputIsValid, validatorMessages };
 }
