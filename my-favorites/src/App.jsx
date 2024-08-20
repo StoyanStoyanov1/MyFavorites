@@ -14,6 +14,7 @@ import Recommend from "./components/аuthentication/Recommend.jsx";
 import Footer from "./components/footer/Footer.jsx";
 import Contents from "./components/contents/Contents.jsx";
 import ContentDetails from "./components/contents/ContentDetails.jsx";
+import ContentInfo from "./components/contents/ContentInfo.jsx";
 
 //context
 import {LanguageProvider} from "./context/LanguageContext.jsx";
@@ -32,6 +33,7 @@ function App() {
 						<Route path={Path.Recommend} element={<Recommend/>}/>
 						<Route path={Path.Books} element={<Contents/>}/>
 						<Route path={Path.ContentDetail} element={<ContentDetails/>}/>
+						<Route path={Path.ContentInfo} element={<ContentInfo/>}/>
 					</Routes>
 					<Footer/>
 				</div>
