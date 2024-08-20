@@ -1,17 +1,53 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ContentDetails from "./ContentDetails.jsx";
-import {useLanguage} from "../../context/LanguageContext.jsx";
-import {recommendFormKeys} from "../../utils/formKeys/recommendFormKeys.js";
+import { useLanguage } from "../../context/LanguageContext.jsx";
+import { recommendFormKeys } from "../../utils/formKeys/recommendFormKeys.js";
 import translateGenreOptions from "../../utils/translator/translateGenreOptions.js";
-import translateRecommend from "../../utils/translator/translateRecommend.js";
+import { useLocation } from "react-router-dom";
+import * as contentService from "../../services/contentService.js";
+import translateContents from "../../utils/translator/translateContents/translateContents.js";
+import translateHeader from "../../utils/translator/translateHeader.js";
+import useForm from "../../hooks/useForm.js";
+import recommendValidator from "../../validators/recommendValidator.js";
+import Path from "../../paths.js";
+import translateAuthErrors from "../../utils/translator/translateAuthErrors.js";
 
 export default function Contents() {
-	const items = Array.from({ length: 40 }); // Създава масив с 40 елемента
 	const [language] = useLanguage();
+	const location = useLocation();
+	const path = location.pathname.split('/')[1];
+
+	const [items, setItems] = useState([]);
+	const { values, onChange, onSubmit } = useForm(submitHandler, {
+		title: '',
+		genre: '',
+	});
+
+	useEffect(() => {
+		contentService.getAll(path)
+			.then(result => {
+				setItems(result);
+			})
+			.catch(err => {
+				console.error(err);
+			});
+	}, [path]);
+
+	async function submitHandler(event) {
+
+		try {
+			const searchResult = await contentService.getSearchResult(values.title, values.genre, path);
+			setItems(searchResult);
+		} catch (error) {
+			let message;
+			alert(message ? message : error.message);
+		}
+	}
 
 	return (
 		<div id='content-body'>
-			<div className='search'>
+			<h1 className='content-header'>{translateHeader[path][language]}</h1>
+			<form className='search' onSubmit={onSubmit}>
 				<div className='search-input'>
 					<label htmlFor={recommendFormKeys.Title} className='search-label'></label>
 					<input
@@ -19,7 +55,9 @@ export default function Contents() {
 						className='search-field'
 						name={recommendFormKeys.Title}
 						type="text"
-						placeholder={translateRecommend.title[language]}
+						placeholder={translateContents.searchTitle[language]}
+						onChange={onChange}
+						value={values.title}
 					/>
 				</div>
 				<div className='search-container'>
@@ -28,6 +66,8 @@ export default function Contents() {
 						id={recommendFormKeys.Genre}
 						className='search-field'
 						name={recommendFormKeys.Genre}
+						onChange={onChange}
+						value={values.genre}
 					>
 						{translateGenreOptions.movie[language].map((genre) => (
 							<option key={genre.value} value={genre.value}>
@@ -36,11 +76,11 @@ export default function Contents() {
 						))}
 					</select>
 				</div>
-				<button type="submit" className='search-button'>Search</button>
-			</div>
+				<button type="submit" className='search-button'>{translateContents.searchButton[language]}</button>
+			</form>
 			<div className='contents-body'>
-				{items.map((_, index) => (
-					<ContentDetails key={index}/>
+				{items.map((content) => (
+					<ContentDetails key={content._id} {...content} />
 				))}
 			</div>
 		</div>

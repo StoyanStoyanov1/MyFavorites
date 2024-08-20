@@ -14,4 +14,23 @@ router.post('/create', async (req, res) => {
 	}
 })
 
+router.get('/books', async (req, res) => {
+	try {
+		const books = await contentService.findByType('book');
+		res.status(201).json(books);
+	} catch (err) {
+		res.status(500).json({message: err});
+	}
+});
+
+router.post('/books/search', async (req, res) => {
+	try {
+		const {title, genre} = req.body
+		const searchResult = await contentService.search('book', title, genre);
+		res.status(201).json(searchResult);
+	} catch (err) {
+		res.status(500).json({message: err});
+	}
+})
+
 module.exports = router;

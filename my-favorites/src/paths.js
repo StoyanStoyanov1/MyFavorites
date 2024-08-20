@@ -4,7 +4,7 @@ const Path = {
 	Login: '/login',
 	Logout: '/logout',
 	Recommend: '/recommend',
-	Contents: '/contents',
+	Books: '/books',
 	ContentDetail: '/content/detail'
 };
 

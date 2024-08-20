@@ -21,7 +21,7 @@ export default function Header() {
 				<div className="nav-left">
 
 
-					<Link to={Path.Contents}>{translateHeader.books[language]}</Link>
+					<Link to={Path.Books}>{translateHeader.books[language]}</Link>
 					<Link to={Path.ContentDetail}>{translateHeader.movies[language]}</Link>
 					<Link to={Path.Home}>{translateHeader.podcasts[language]}</Link>
 				</div>

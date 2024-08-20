@@ -58,6 +58,6 @@ const contentSchema = mongoose.Schema({
 
 }, {timestamps: true});
 
-const Content = mongoose.model('Book', contentSchema)
+const Content = mongoose.model('Contents', contentSchema)
 
 module.exports = Content;
