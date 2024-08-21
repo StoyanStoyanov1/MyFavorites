@@ -34,7 +34,7 @@ function App() {
 						<Route path={Path.Books} element={<Contents/>}/>
 						<Route path={Path.Movies} element={<Contents/>}/>
 						<Route path={Path.Podcasts} element={<Contents/>}/>
-						<Route path={`${Path.Content}/:contentId`} element={<ContentInfo/>}/>
+						<Route path={`${Path.Details}/:detailId`} element={<ContentInfo/>}/>
 					</Routes>
 					<Footer/>
 				</div>

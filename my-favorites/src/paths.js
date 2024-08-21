@@ -5,7 +5,7 @@ const Path = {
 	Logout: '/logout',
 	Recommend: '/recommend',
 	Books: '/books',
-	Content: '/content',
+	Details: '/details',
 	Podcasts: '/podcasts',
 	Movies: '/movies'
 

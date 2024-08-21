@@ -2,9 +2,9 @@ import React, {useEffect, useState} from 'react';
 import translateRecommend from "../../utils/translator/translateRecommend.js";
 import { recommendFormKeys } from "../../utils/formKeys/recommendFormKeys.js";
 import { useLanguage } from "../../context/LanguageContext.jsx";
-import translateGenreOptions from "../../utils/translator/translateGenreOptions.js";
 import {useNavigate} from "react-router-dom";
 import Path from "../../paths.js";
+import translateGenre from "./translateGenre.js";
 
 export default function ContentDetails({
 	_id,
@@ -18,20 +18,13 @@ export default function ContentDetails({
 	const [language] = useLanguage();
 	const navigate = useNavigate()
 
-	const translateGenre = (genre) => {
-		const genreOptions = translateGenreOptions.movie[language];
-		if (genreOptions) {
-			const genreOption = genreOptions.find(option => option.value === genre);
-			return genreOption ? genreOption.label : genre;
-		}
-		return genre;
-	}
+
 
 	const [creatorText, setCreatorText] = useState({});
 
 	const handleClick = (e) => {
 		e.preventDefault();
-		navigate(`${Path.Content}/${_id}`)
+		navigate(`${Path.Details}/${_id}`)
 	}
 
 	useEffect(() => {
@@ -66,7 +59,7 @@ export default function ContentDetails({
 					<p>{translateRecommend[recommendFormKeys.Title][language]}: {title}</p>
 				</div>
 				<p>{creatorText.text}: {translateGenre(creator)}</p>
-				<p>{translateRecommend[recommendFormKeys.Genre][language]}: {translateGenre(genre)}</p>
+				<p>{translateRecommend[recommendFormKeys.Genre][language]}: {translateGenre(genre, language)}</p>
 				<p>{translateRecommend[recommendFormKeys.Year][language]}: {year}</p>
 
 			</div>

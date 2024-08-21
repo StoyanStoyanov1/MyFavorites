@@ -24,7 +24,6 @@ export default function Contents() {
 		contentService.getAll(path)
 			.then(result => {
 				setItems(result);
-				console.log(path)
 			})
 			.catch(err => {
 				console.error(err);

@@ -69,4 +69,15 @@ router.post('/podcasts/search', async (req, res) => {
 		res.status(500).json({message: err});
 	}
 });
+
+router.get('/info/:id', async (req, res) => {
+	const id = req.params.id;
+
+	try {
+		const result = await contentService.findById(id);
+		res.status(201).json(result);
+	} catch (err) {
+		res.status(500).json({message: err});
+	}
+})
 module.exports = router;

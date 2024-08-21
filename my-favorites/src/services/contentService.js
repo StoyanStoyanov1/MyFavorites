@@ -19,3 +19,9 @@ export const getSearchResult = async (title, genre, path) => {
 
 	return result;
 }
+
+export const getById = async (id) => {
+	const result = await request('GET', `${baseUrl}/info/${id}`);
+
+	return result;
+}

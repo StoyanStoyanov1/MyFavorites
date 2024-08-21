@@ -77,7 +77,6 @@
 }
 
 .content-description {
-    margin-top: 20px;
     font-size: 16px;
     line-height: 1.5;
     color: #666;
@@ -89,3 +88,4 @@
     min-height: 150px;
     overflow-y: auto;
 }
+
