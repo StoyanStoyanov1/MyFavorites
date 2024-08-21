@@ -78,7 +78,39 @@ const translateRecommend = {
 		en: "Place a link to your image",
 		de: "Fügen Sie einen Link zu Ihrem Bild ein",
 		bg: "Поставете линк към Вашето изображение",
+	},
+	director: {
+		en: "Director",
+		de: "Regisseur",
+		bg: "Режисьор",
+	},
+	directorPlaceholder: {
+		en: "Enter the director of the film",
+		de: "Geben Sie den Regisseur des Films ein",
+		bg: "Напишете режисьора на филма"
+	},
+	host: {
+		en: "Host",
+		de: "Moderator",
+		bg: "Водещ",
+	},
+	hostPlaceholder: {
+		en: "Enter the host of the podcast",
+		de: "Geben Sie den Moderator des Podcasts ein",
+		bg: "Напишете водещия на подкаст",
+	},
+	author: {
+		en: "Author",
+		de: "Autor",
+		bg: "Автор",
+	},
+	authorPlaceholder: {
+		en: "Enter the author of the book",
+		de: "Geben Sie den Autor des Buches ein",
+		bg: "Напишете автора на книгата",
 	}
+
+
 };
 
 export default translateRecommend;

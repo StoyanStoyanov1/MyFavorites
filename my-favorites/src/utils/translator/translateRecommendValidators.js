@@ -24,6 +24,11 @@ const translateRecommendValidators = {
 		de: "Ihr Link muss mit http:// oder https:// beginnen",
 		bg: "Вашия линк трябва да започва с http:// или https//"
 	},
+	creator: {
+		en: "This field must be between 2 and 20 characters long",
+		de: "Dieses Feld muss zwischen 2 und 20 Zeichen lang sein",
+		bg: "Това поле трябва да е между 2 и 20 символа дълго."
+	}
 }
 
 export default translateRecommendValidators;

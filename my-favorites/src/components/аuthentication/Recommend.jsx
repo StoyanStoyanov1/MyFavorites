@@ -19,16 +19,20 @@ export default function Recommend() {
 	const [validator, setValidator] = useState({});
 
 	const [recommendAttempt, setRecommendAttempt] = useState(false);
+	const [creatorText, setCreatorText] = useState({});
 
 	const currentYear = new Date().getFullYear();
-	const years = Array.from({ length: currentYear - 1970 + 1 }, (_, i) => currentYear - i);
+	const years = Array.from({length: currentYear - 1970 + 1}, (_, i) => currentYear - i);
 	const {values, onChange, onSubmit} = useForm(submitHandler, {
-		[recommendFormKeys.Type]: '',
-		[recommendFormKeys.Title]: '',
-		[recommendFormKeys.Genre]: '',
-		[recommendFormKeys.Year]: '',
-		[recommendFormKeys.Description]: '',
-	});
+			[recommendFormKeys.Type]: '',
+			[recommendFormKeys.Title]: '',
+			[recommendFormKeys.Genre]: '',
+			[recommendFormKeys.Year]: '',
+			[recommendFormKeys.Description]: '',
+			[recommendFormKeys.Creator]: '',
+			[recommendFormKeys.Image]: '',
+		}
+	);
 
 	const validateInput = (e) => {
 		if (!values[recommendFormKeys[e.target.name]] && e.target.value === ' ') {
@@ -73,6 +77,25 @@ export default function Recommend() {
 			setValidator(validatorMessages);
 		}
 	}, [language, values]);
+
+	useEffect(() => {
+		if (values[recommendFormKeys.Type] === 'movie') {
+			setCreatorText({
+				text: translateRecommend.director[language],
+				placeholder: translateRecommend.directorPlaceholder[language],
+			});
+		} else if (values[recommendFormKeys.Type] === 'podcast') {
+			setCreatorText({
+				text: translateRecommend.host[language],
+				placeholder: translateRecommend.hostPlaceholder[language],
+			});
+		} else if (values[recommendFormKeys.Type] === 'book') {
+			setCreatorText({
+				text: translateRecommend.author[language],
+				placeholder: translateRecommend.authorPlaceholder[language],
+			});
+		}
+	}, [values[recommendFormKeys.Type], language]);
 	return (
 		<section id='authentication'>
 			<form onSubmit={onSubmit}>
@@ -113,6 +136,24 @@ export default function Recommend() {
 								{validator[recommendFormKeys.Title] &&
 									<div className='authValidate'>
 										<p>{validator[recommendFormKeys.Title]}</p>
+									</div>}
+
+							</div>
+							<div className='input-container'>
+								<label htmlFor={recommendFormKeys.Creator}
+									   className='auth-input'>{creatorText.text}</label>
+								<input
+									id={recommendFormKeys.Creator}
+									className={recommendFormKeys.Creator}
+									name={recommendFormKeys.Description}
+									type="text"
+									placeholder={creatorText.placeholder}
+									onChange={validateInput}
+									value={values[recommendFormKeys.Creator]}
+								/>
+								{validator[recommendFormKeys.Creator] &&
+									<div className='authValidate'>
+										<p>{validator[recommendFormKeys.Creator]}</p>
 									</div>}
 
 							</div>

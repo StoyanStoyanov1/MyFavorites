@@ -30,5 +30,9 @@ export default function recommendValidator(values, validator, language) {
 		validatorMessages[recommendFormKeys.Image] = translateRecommendValidators.image[language]
 		inputIsValid = false;
 	}
+
+	if (values[recommendFormKeys.Creator].length < 2 || values[recommendFormKeys.Creator].length > 20) {
+		validatorMessages[recommendFormKeys.Creator] = translateRecommendValidators.creator[language]
+	}
 	return { inputIsValid, validatorMessages };
 }

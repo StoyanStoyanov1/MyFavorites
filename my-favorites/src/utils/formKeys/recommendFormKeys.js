@@ -5,4 +5,5 @@ export const recommendFormKeys = {
 	Year: 'year',
 	Description: 'description',
 	Image: 'image',
+	Creator: 'creator',
 }
