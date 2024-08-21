@@ -50,12 +50,10 @@ const contentSchema = mongoose.Schema({
 			message: "The description must be at least 20 characters long."
 		},
 	},
-	rating: [{
-		type: Number,
-	}],
+
 	voters: [{
 		type: mongoose.Schema.Types.ObjectId,
-		ref: 'User',
+		ref: 'Vote',
 	}],
 	image: {
 		type: String,
