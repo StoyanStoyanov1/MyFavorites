@@ -29,6 +29,16 @@ const contentSchema = mongoose.Schema({
 		type: String,
 		require: true,
 	},
+	creator: {
+		type: String,
+		require: true,
+		validate: {
+			validator: value => {
+				return value.length >= 2 && value.length <= 20;
+			},
+			message: props => `This message ${props.value}is too short or too long; it should be between 2 and 20 characters.`
+		}
+	},
 	description: {
 		type: String,
 		require: true,
@@ -40,6 +50,13 @@ const contentSchema = mongoose.Schema({
 			message: "The description must be at least 20 characters long."
 		},
 	},
+	rating: [{
+		type: Number,
+	}],
+	voters: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User',
+	}],
 	image: {
 		type: String,
 		validate: {
@@ -53,6 +70,11 @@ const contentSchema = mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Comment'
 	}],
+	followers: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User'
+	}],
+
 
 
 
