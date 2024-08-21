@@ -66,8 +66,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 20em; /* Определете конкретна ширина */
-    height: 30em; /* Определете конкретна височина */
+    width: 20em;
+    height: 30em;
     padding: 10px;
     background: rgba(255, 255, 255, 0.6);
     border-radius: 10px;
@@ -76,33 +76,10 @@
     box-sizing: border-box;
 }
 
+.section-content:hover {
+    background: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
 
-@media (max-width: 1200px) {
-    .section-content {
-        max-width: calc(20% - 20px);
-        flex: 1 1 calc(20% - 20px);
-    }
-}
-
-@media (max-width: 992px) {
-    .section-content {
-        max-width: calc(25% - 20px);
-        flex: 1 1 calc(25% - 20px);
-    }
-}
-
-@media (max-width: 768px) {
-    .section-content {
-        max-width: calc(33.33% - 20px);
-        flex: 1 1 calc(33.33% - 20px);
-    }
-}
-
-@media (max-width: 576px) {
-    .section-content {
-        max-width: 100%;
-        flex: 1 1 100%;
-    }
 }
 
 .upercase {
@@ -112,11 +89,14 @@
     margin-bottom: 10px;
 }
 
-.content-photo img {
+.upercase img {
     max-width: 100%;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 10px;
+    border: 5px solid #ccc;
+    max-height: 17em;
+
 }
 
 .content-info {

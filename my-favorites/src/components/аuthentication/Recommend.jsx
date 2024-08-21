@@ -145,7 +145,7 @@ export default function Recommend() {
 								<input
 									id={recommendFormKeys.Creator}
 									className={recommendFormKeys.Creator}
-									name={recommendFormKeys.Description}
+									name={recommendFormKeys.Creator}
 									type="text"
 									placeholder={creatorText.placeholder}
 									onChange={validateInput}

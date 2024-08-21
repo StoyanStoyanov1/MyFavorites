@@ -32,8 +32,9 @@ function App() {
 						<Route path={Path.Logout} element={<Logout/>}/>
 						<Route path={Path.Recommend} element={<Recommend/>}/>
 						<Route path={Path.Books} element={<Contents/>}/>
-						<Route path={Path.ContentDetail} element={<ContentDetails/>}/>
-						<Route path={Path.ContentInfo} element={<ContentInfo/>}/>
+						<Route path={Path.Movies} element={<Contents/>}/>
+						<Route path={Path.Podcasts} element={<Contents/>}/>
+						<Route path={`${Path.Content}/:contentId`} element={<ContentInfo/>}/>
 					</Routes>
 					<Footer/>
 				</div>

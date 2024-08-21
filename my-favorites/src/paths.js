@@ -5,8 +5,11 @@ const Path = {
 	Logout: '/logout',
 	Recommend: '/recommend',
 	Books: '/books',
-	ContentDetail: '/content/detail',
-	ContentInfo: '/content/info',
+	Content: '/content',
+	Podcasts: '/podcasts',
+	Movies: '/movies'
+
+
 };
 
 export default Path;

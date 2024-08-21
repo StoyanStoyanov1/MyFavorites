@@ -1,16 +1,22 @@
-import React from 'react';
-import noImage from '../../../public/images/noImage.jpg';
+import React, {useEffect, useState} from 'react';
 import translateRecommend from "../../utils/translator/translateRecommend.js";
 import { recommendFormKeys } from "../../utils/formKeys/recommendFormKeys.js";
 import { useLanguage } from "../../context/LanguageContext.jsx";
 import translateGenreOptions from "../../utils/translator/translateGenreOptions.js";
+import {useNavigate} from "react-router-dom";
+import Path from "../../paths.js";
 
 export default function ContentDetails({
+	_id,
 	title,
 	genre,
-	year
+	year,
+	image,
+	creator,
+	type,
 									   }) {
 	const [language] = useLanguage();
+	const navigate = useNavigate()
 
 	const translateGenre = (genre) => {
 		const genreOptions = translateGenreOptions.movie[language];
@@ -21,24 +27,48 @@ export default function ContentDetails({
 		return genre;
 	}
 
+	const [creatorText, setCreatorText] = useState({});
+
+	const handleClick = (e) => {
+		e.preventDefault();
+		navigate(`${Path.Content}/${_id}`)
+	}
+
+	useEffect(() => {
+		if (type === 'movie') {
+			setCreatorText({
+				text: translateRecommend.director[language],
+				placeholder: translateRecommend.directorPlaceholder[language],
+			});
+		} else if (type === 'podcast') {
+			setCreatorText({
+				text: translateRecommend.host[language],
+				placeholder: translateRecommend.hostPlaceholder[language],
+			});
+		} else if (type === 'book') {
+			setCreatorText({
+				text: translateRecommend.author[language],
+				placeholder: translateRecommend.authorPlaceholder[language],
+			});
+		}
+	}, [type, language]);
 	return (
-		<section className='section-content'>
+		<section className='section-content' onClick={handleClick}>
 			<div className='upercase'>
-				<div className='content-photo'>
-					<img
-						src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvFBa3G11OUBYADP7ouSBgwiiRzSYorF4dfg&s'
-						alt='No Image'
-					/>
-				</div>
+				<img
+					src={image}
+					alt='No Image'
+					onError={(e) => e.target.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkK98VBjmf1Q6_3SC9Nmz8CILkBdm1BUiFLg&s'}
+				/>
 			</div>
 			<div className='infocase'>
 				<div className='content-title'>
 					<p>{translateRecommend[recommendFormKeys.Title][language]}: {title}</p>
 				</div>
+				<p>{creatorText.text}: {translateGenre(creator)}</p>
 				<p>{translateRecommend[recommendFormKeys.Genre][language]}: {translateGenre(genre)}</p>
 				<p>{translateRecommend[recommendFormKeys.Year][language]}: {year}</p>
-				<p>Other2</p>
-				<p>Other3</p>
+
 			</div>
 		</section>
 	);

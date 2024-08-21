@@ -8,9 +8,6 @@ import * as contentService from "../../services/contentService.js";
 import translateContents from "../../utils/translator/translateContents/translateContents.js";
 import translateHeader from "../../utils/translator/translateHeader.js";
 import useForm from "../../hooks/useForm.js";
-import recommendValidator from "../../validators/recommendValidator.js";
-import Path from "../../paths.js";
-import translateAuthErrors from "../../utils/translator/translateAuthErrors.js";
 
 export default function Contents() {
 	const [language] = useLanguage();
@@ -27,6 +24,7 @@ export default function Contents() {
 		contentService.getAll(path)
 			.then(result => {
 				setItems(result);
+				console.log(path)
 			})
 			.catch(err => {
 				console.error(err);
