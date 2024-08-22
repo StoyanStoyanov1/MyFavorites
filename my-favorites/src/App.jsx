@@ -13,8 +13,8 @@ import Logout from "./components/аuthentication/Logout.jsx";
 import Recommend from "./components/аuthentication/Recommend.jsx";
 import Footer from "./components/footer/Footer.jsx";
 import Contents from "./components/contents/Contents.jsx";
-import ContentDetails from "./components/contents/ContentDetails.jsx";
 import ContentInfo from "./components/contents/ContentInfo.jsx";
+import Home from "./components/home/Home.jsx";
 
 //context
 import {LanguageProvider} from "./context/LanguageContext.jsx";
@@ -27,6 +27,7 @@ function App() {
 				<div id='box'>
 					<Header/>
 					<Routes>
+						<Route path={Path.Home} element={<Home/>}/>
 						<Route path={Path.Register} element={<Register/>}/>
 						<Route path={Path.Login} element={<Login/>}/>
 						<Route path={Path.Logout} element={<Logout/>}/>
