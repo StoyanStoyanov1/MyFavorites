@@ -1,26 +1,34 @@
 import React, {useEffect, useState} from 'react';
-import {useParams} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import * as contentService from '../../services/contentService.js';
 import translateRecommend from '../../utils/translator/translateRecommend.js';
 import {useLanguage} from '../../context/LanguageContext.jsx';
 import translateGenre from "./translateGenre.js";
+import Path from "../../paths.js"
+import translateContents from "../../utils/translator/translateContents/translateContents.js";
 
 export default function ContentInfo() {
+	const navigate = useNavigate();
+
 	const [language] = useLanguage();
 	const {detailId} = useParams();
 	const [content, setContent] = useState(null);
 	const [creatorText, setCreatorText] = useState('')
 
+
 	useEffect(() => {
 		contentService.getById(detailId)
 			.then(result => setContent(result))
-			.catch(err => console.error(err));
+			.catch(err => {
+				console.error(err.message.message);
+				navigate(Path.Home);
+				alert(translateContents.notFoundMessage[language])
+			});
 	}, [detailId]);
 
 	useEffect(() => {
 
 		if (content) {
-			console.log(content.type)
 			if (content.type === 'movie') {
 				setCreatorText(translateRecommend.director[language]);
 			} else if (content.type === 'podcast') {
@@ -31,7 +39,6 @@ export default function ContentInfo() {
 		}
 	}, [content, language]);
 
-	console.log(creatorText)
 	return (
 		content ? (
 			<div className='container-content'>
@@ -62,7 +69,7 @@ export default function ContentInfo() {
 					<span>{translateRecommend.description[language]}:</span>
 					<div className='content-description'>
 						<p>
-							{content.description || 'This is a detailed description of the content. It provides an in-depth look at the plot, characters, and other interesting aspects of the movie. The description should be informative and engaging, capturing the attention of the reader. If the content is longer than this space allows, it will scroll within the fixed-size box, keeping the layout tidy and readable.'}
+							{content.description}
 						</p>
 					</div>
 				</div>
