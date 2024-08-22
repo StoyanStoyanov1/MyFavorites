@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import ContentDetails from "./ContentDetails.jsx";
-import { useLanguage } from "../../context/LanguageContext.jsx";
-import { recommendFormKeys } from "../../utils/formKeys/recommendFormKeys.js";
+import {useLanguage} from "../../context/LanguageContext.jsx";
+import {recommendFormKeys} from "../../utils/formKeys/recommendFormKeys.js";
 import translateGenreOptions from "../../utils/translator/translateGenreOptions.js";
-import { useLocation } from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import * as contentService from "../../services/contentService.js";
 import translateContents from "../../utils/translator/translateContents/translateContents.js";
 import translateHeader from "../../utils/translator/translateHeader.js";
@@ -15,26 +15,31 @@ export default function Contents() {
 	const path = location.pathname.split('/')[1];
 
 	const [items, setItems] = useState([]);
-	const { values, onChange, onSubmit } = useForm(submitHandler, {
+	const {values, onChange, onSubmit} = useForm(submitHandler, {
 		title: '',
 		genre: '',
 	});
+
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		contentService.getAll(path)
 			.then(result => {
 				setItems(result);
+				setIsLoading(false);
 			})
+
 			.catch(err => {
 				console.error(err);
 			});
 	}, [path]);
 
 	async function submitHandler(event) {
-
+		setIsLoading(true);
 		try {
 			const searchResult = await contentService.getSearchResult(values.title, values.genre, path);
 			setItems(searchResult);
+			setIsLoading(false)
 		} catch (error) {
 			let message;
 			alert(message ? message : error.message);
@@ -76,10 +81,16 @@ export default function Contents() {
 				<button type="submit" className='search-button'>{translateContents.searchButton[language]}</button>
 			</form>
 			<div className='contents-body'>
-				{items.map((content) => (
-					<ContentDetails key={content._id} {...content} />
-				))}
+				{isLoading ? <div className="lds-dual-ring"></div>
+					: !items.length ? <div className='not-found-message'>
+							<p>{translateContents.notFound[language]}</p></div> :
+
+							items.map((content) => (
+								<ContentDetails key={content._id} {...content} />
+							))
+						}
 			</div>
+
 		</div>
 	);
 }
