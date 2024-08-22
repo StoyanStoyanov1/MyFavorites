@@ -77,7 +77,7 @@ router.get('/info/:id', async (req, res) => {
 		const result = await contentService.findById(id);
 		res.status(201).json(result);
 	} catch (err) {
-		res.status(500).json({message: err});
+		res.status(404).json({message: err});
 	}
 })
 module.exports = router;
