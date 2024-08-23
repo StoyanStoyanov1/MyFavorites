@@ -27,3 +27,24 @@
 .home-link:hover {
     text-decoration: underline;
 }
+
+.not-found {
+    text-align: center;
+    padding: 50px;
+    color: #721c24;
+    margin: auto;
+}
+
+.not-found-code {
+    font-size: 72px;
+    margin: 0;
+}
+
+.not-found-message {
+    font-size: 24px;
+}
+
+.home-link {
+    color: #004085;
+    text-decoration: underline;
+}

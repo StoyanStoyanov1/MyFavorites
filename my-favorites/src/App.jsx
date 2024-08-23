@@ -15,11 +15,12 @@ import Footer from "./components/footer/Footer.jsx";
 import Contents from "./components/contents/Contents.jsx";
 import ContentInfo from "./components/contents/ContentInfo.jsx";
 import Home from "./components/home/Home.jsx";
+import NotFoundPage from "./components/NotFoundPage.jsx";
 
 //context
 import {LanguageProvider} from "./context/LanguageContext.jsx";
 import {AuthProvider} from "./context/authContext.jsx";
-import ErrorBoundary from "./ErrorBoundary.jsx";
+import ErrorBoundary from "./components/ErrorBoundary.jsx";
 
 function App() {
 	return (
@@ -40,6 +41,7 @@ function App() {
 							<Route path={`${Path.Details}/:detailId`} element={<ContentInfo/>}/>
 							<Route path={`${Path.EditRecommend}/:contentId`} element={<Recommend/>}/>
 							<Route path={`${Path.MyRecommends}/:userId`} element={<Contents/>}/>
+							<Route path="*" element={<NotFoundPage/>}/>
 						</Routes>
 						<Footer/>
 					</div>
