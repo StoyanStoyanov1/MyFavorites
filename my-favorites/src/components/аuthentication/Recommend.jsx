@@ -99,11 +99,7 @@ export default function Recommend() {
 				navigate(Path.Home)
 			}
 		} catch (error) {
-			let message;
-
-			if (error.message === 'User already exists') message = translateAuthErrors.userIsExist[language]
-
-			alert(message ? message : error.message.message)
+			console.error(error.message);
 		}
 	}
 
