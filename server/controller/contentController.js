@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const contentService = require('../service/contentService');
 const userService = require('../service/userService')
+const {Types} = require("mongoose");
 
 router.post('/create', async (req, res) => {
 	try {
@@ -108,9 +109,14 @@ router.delete('/:contentId', async (req, res) => {
 
 router.get('/my-recommends/:userId', async (req, res) => {
 	const userId = req.params.userId;
+
+	if (!Types.ObjectId.isValid(userId)) {
+		return res.status(400).json({ message: 'Invalid User ID format' });
+	}
 	try {
 		const user = await userService.getById(userId);
-		const contestPromises = Object.values(user.contents).map( contentId => contentService.findById(contentId));
+
+			const contestPromises = Object.values(user.contents).map( contentId => contentService.findById(contentId));
 		const contests = await Promise.all(contestPromises)
 
 		res.status(200).json([...contests]);

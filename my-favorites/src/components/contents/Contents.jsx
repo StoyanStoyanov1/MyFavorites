@@ -3,13 +3,16 @@ import ContentDetails from "./ContentDetails.jsx";
 import {useLanguage} from "../../context/LanguageContext.jsx";
 import {recommendFormKeys} from "../../utils/formKeys/recommendFormKeys.js";
 import translateGenreOptions from "../../utils/translator/translateGenreOptions.js";
-import {useLocation, useParams} from "react-router-dom";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
 import * as contentService from "../../services/contentService.js";
 import translateContents from "../../utils/translator/translateContents/translateContents.js";
 import translateHeader from "../../utils/translator/translateHeader.js";
 import useForm from "../../hooks/useForm.js";
+import Path from "../../paths.js";
 
 export default function Contents() {
+	const navigate = useNavigate();
+
 	const {userId} = useParams();
 	const [language] = useLanguage();
 	const location = useLocation();
@@ -33,6 +36,9 @@ export default function Contents() {
 
 			.catch(err => {
 				console.error(err.message);
+				if (err.message === 'Invalid User ID format') {
+					navigate('*')
+				}
 			});
 	}, [path]);
 
