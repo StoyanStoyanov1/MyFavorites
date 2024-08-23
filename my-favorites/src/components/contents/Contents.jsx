@@ -8,7 +8,6 @@ import * as contentService from "../../services/contentService.js";
 import translateContents from "../../utils/translator/translateContents/translateContents.js";
 import translateHeader from "../../utils/translator/translateHeader.js";
 import useForm from "../../hooks/useForm.js";
-import Path from "../../paths.js";
 import translateRecommend from "../../utils/translator/translateRecommend.js";
 
 export default function Contents() {
@@ -28,12 +27,10 @@ export default function Contents() {
 		genre: '',
 	});
 
-	console.log()
 	const [isLoading, setIsLoading] = useState(true);
 	useEffect(() => {
 		contentService.getAll(`${path}/${userId ? userId: ''}`)
 			.then(result => {
-				console.log(result)
 				setItems(result);
 				setIsLoading(false);
 			})
@@ -41,12 +38,14 @@ export default function Contents() {
 			.catch(err => {
 				console.error(err.message);
 				if (err.message === 'Invalid User ID format') {
-					navigate('*')
+					navigate('*');
 				}
 			});
+
+
 	}, [path]);
 
-	async function searchHandler(event) {
+	async function searchHandler() {
 		setIsLoading(true);
 		try {
 			const searchResult = await contentService.getSearchResult(values.title, values.genre, values.type);
