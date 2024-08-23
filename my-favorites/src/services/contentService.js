@@ -25,3 +25,9 @@ export const getById = async (id) => {
 
 	return result;
 }
+
+export const edit = async (values, contentId) => {
+	const result = await request('PUT', `${baseUrl}/edit/${contentId}`, values);
+
+	return result;
+}

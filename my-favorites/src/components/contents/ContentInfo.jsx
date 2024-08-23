@@ -13,7 +13,7 @@ export default function ContentInfo() {
 	const [language] = useLanguage();
 	const {detailId} = useParams();
 	const [content, setContent] = useState(null);
-	const [creatorText, setCreatorText] = useState('')
+	const [creatorText, setCreatorText] = useState('');
 
 
 	useEffect(() => {
@@ -52,7 +52,7 @@ export default function ContentInfo() {
 					<p className='favorite'>Favorite</p>
 
 					<div className='buttons'>
-						<button>Edit</button>
+						<button onClick={() => navigate(`${Path.EditRecommend}/${detailId}`)}>Edit</button>
 						<button>Delete</button>
 					</div>
 				</div>
@@ -75,7 +75,8 @@ export default function ContentInfo() {
 				</div>
 			</div>
 		) : (
-			<p>Loading...</p>
-		)
+			<section id='authentication'>
+				<div className="lds-dual-ring"></div>
+			</section>)
 	);
 }

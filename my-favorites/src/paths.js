@@ -7,7 +7,8 @@ const Path = {
 	Books: '/books',
 	Details: '/details',
 	Podcasts: '/podcasts',
-	Movies: '/movies'
+	Movies: '/movies',
+	EditRecommend: '/recommend/edit'
 
 
 };

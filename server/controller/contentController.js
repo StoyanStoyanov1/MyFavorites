@@ -80,4 +80,15 @@ router.get('/info/:id', async (req, res) => {
 		res.status(404).json({message: err});
 	}
 })
+
+router.put('/edit/:contentId', async (req, res) => {
+	try {
+		const contentId = req.params.contentId;
+		const values = req.body;
+		const result = await contentService.edit(values, contentId);
+		res.status(201).json(result);
+	} catch (err) {
+		res.status(500).json({message: err});
+	}
+})
 module.exports = router;

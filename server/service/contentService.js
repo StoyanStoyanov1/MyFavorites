@@ -23,3 +23,5 @@ exports.search = async (type, title, genre) => {
 
 	return await Content.find(query).lean();
 };
+
+exports.edit = async (values, contentId) => await Content.findByIdAndUpdate(contentId, values, {new: true});

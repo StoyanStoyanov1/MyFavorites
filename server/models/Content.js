@@ -59,7 +59,7 @@ const contentSchema = mongoose.Schema({
 		type: String,
 		validate: {
 			validator: (value) => {
-				return /^https?:\/\//.test(value)
+				return !value.length || /^https?:\/\//.test(value)
 			},
 			message: "Your link must start with http:// or https://"
 		}

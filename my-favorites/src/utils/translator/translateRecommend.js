@@ -108,6 +108,11 @@ const translateRecommend = {
 		en: "Enter the author of the book",
 		de: "Geben Sie den Autor des Buches ein",
 		bg: "Напишете автора на книгата",
+	},
+	edit: {
+		en: "Edit",
+		de: "Bearbeiten",
+		bg: "Редактирай",
 	}
 
 
