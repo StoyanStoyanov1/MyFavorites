@@ -44,13 +44,14 @@ router.get('/movies', async (req, res) => {
 
 router.post('/movies/search', async (req, res) => {
 	try {
-		const {title, genre} = req.body
-		const searchResult = await contentService.search('movie', title, genre);
+		const values = req.body
+		const searchResult = await contentService.search('movie', values);
 		res.status(201).json(searchResult);
 	} catch (err) {
 		res.status(500).json({message: err});
 	}
 });
+
 router.get('/podcasts', async (req, res) => {
 	try {
 		const books = await contentService.findByType('podcast');
@@ -103,5 +104,18 @@ router.delete('/:contentId', async (req, res) => {
 	} catch (err) {
 		res.status(500).json({message: 'Content is not found!'})
 	}
-})
+});
+
+router.get('/my-recommends/:userId', async (req, res) => {
+	const userId = req.params.userId;
+	try {
+		const user = await userService.getById(userId);
+		const contestPromises = Object.values(user.contents).map( contentId => contentService.findById(contentId));
+		const contests = await Promise.all(contestPromises)
+
+		res.status(200).json([...contests]);
+	} catch (err) {
+		res.status(500).json({ message: err.message });
+	}
+});
 module.exports = router;

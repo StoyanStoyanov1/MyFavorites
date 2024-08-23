@@ -8,9 +8,8 @@ const Path = {
 	Details: '/details',
 	Podcasts: '/podcasts',
 	Movies: '/movies',
-	EditRecommend: '/recommend/edit'
-
-
+	EditRecommend: '/recommend/edit',
+	MyRecommends: '/my-recommends',
 };
 
 export default Path;
