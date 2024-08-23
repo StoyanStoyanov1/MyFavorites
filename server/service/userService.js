@@ -8,4 +8,6 @@ exports.getAll = async () => await User.find().lean();
 
 exports.getById = async (id) => await User.findById(id).lean();
 
-exports.contentToList = async (userId, contentId) => await User.findByIdAndUpdate(userId, {$push: {contents: contentId}})
+exports.contentToList = async (userId, contentId) => await User.findByIdAndUpdate(userId, {$push: {contents: contentId}});
+
+exports.deteleContent = async (userId, contentId) => await User.findByIdAndUpdate(userId, {$pull: {contents: contentId}}, {new: true});

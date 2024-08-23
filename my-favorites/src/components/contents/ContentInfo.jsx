@@ -39,6 +39,17 @@ export default function ContentInfo() {
 		}
 	}, [content, language]);
 
+	const handleDelete = async () => {
+		try {
+			await contentService.remove(content._id);
+			console.log('Delete successful');
+			navigate(Path.Home);
+		} catch (err)  {
+			alert(err.message);
+			navigate(Path.Home);
+		}
+
+	}
 	return (
 		content ? (
 			<div className='container-content'>
@@ -53,7 +64,7 @@ export default function ContentInfo() {
 
 					<div className='buttons'>
 						<button onClick={() => navigate(`${Path.EditRecommend}/${detailId}`)}>Edit</button>
-						<button>Delete</button>
+						<button onClick={handleDelete}>Delete</button>
 					</div>
 				</div>
 

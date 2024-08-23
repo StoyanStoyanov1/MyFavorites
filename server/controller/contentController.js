@@ -90,5 +90,18 @@ router.put('/edit/:contentId', async (req, res) => {
 	} catch (err) {
 		res.status(500).json({message: err});
 	}
+});
+
+router.delete('/:contentId', async (req, res) => {
+	const contentId = req.params.contentId;
+
+	try {
+		 const content = await contentService.findById(contentId);
+		 await contentService.delete(contentId);
+		 await userService.deteleContent(content.userId, contentId);
+		 res.status(201).json(content)
+	} catch (err) {
+		res.status(500).json({message: 'Content is not found!'})
+	}
 })
 module.exports = router;

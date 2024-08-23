@@ -30,4 +30,10 @@ export const edit = async (values, contentId) => {
 	const result = await request('PUT', `${baseUrl}/edit/${contentId}`, values);
 
 	return result;
+};
+
+export const remove = async (contentId) => {
+	const result = await request('DELETE', `${baseUrl}/${contentId}`);
+
+	return result;
 }
