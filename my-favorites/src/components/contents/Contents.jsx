@@ -9,6 +9,7 @@ import translateContents from "../../utils/translator/translateContents/translat
 import translateHeader from "../../utils/translator/translateHeader.js";
 import useForm from "../../hooks/useForm.js";
 import Path from "../../paths.js";
+import translateRecommend from "../../utils/translator/translateRecommend.js";
 
 export default function Contents() {
 	const navigate = useNavigate();
@@ -18,13 +19,16 @@ export default function Contents() {
 	const location = useLocation();
 	let path = location.pathname.split('/')[1];
 
+	const currentType = userId? '': path.slice(0, -1)
+
 	const [items, setItems] = useState([]);
-	const {values, onChange, onSubmit} = useForm(submitHandler, {
-		type: '',
+	const {values, onChange, onSubmit} = useForm(searchHandler, {
+		type: currentType,
 		title: '',
 		genre: '',
 	});
 
+	console.log()
 	const [isLoading, setIsLoading] = useState(true);
 	useEffect(() => {
 		contentService.getAll(`${path}/${userId ? userId: ''}`)
@@ -42,10 +46,10 @@ export default function Contents() {
 			});
 	}, [path]);
 
-	async function submitHandler(event) {
+	async function searchHandler(event) {
 		setIsLoading(true);
 		try {
-			const searchResult = await contentService.getSearchResult(values.title, values.genre, path);
+			const searchResult = await contentService.getSearchResult(values.title, values.genre, values.type);
 			setItems(searchResult);
 		} catch (error) {
 			let message;
@@ -87,6 +91,22 @@ export default function Contents() {
 						))}
 					</select>
 				</div>
+				{userId ? <div className='search-container'>
+
+					<select
+						id={recommendFormKeys.Type}
+						className={recommendFormKeys.Type}
+						name={recommendFormKeys.Type}
+						onChange={onChange}
+						value={values[recommendFormKeys.Type]}
+					>
+						<option value='' disabled hidden>{translateRecommend.selectType[language]}</option>
+						<option value="book">{translateRecommend.book[language]}</option>
+						<option value="movie">{translateRecommend.movie[language]}</option>
+						<option value="podcast">{translateRecommend.podcast[language]}</option>
+					</select>
+				</div> : ''}
+
 				<button type="submit" className='search-button'>{translateContents.searchButton[language]}</button>
 			</form>
 			<div className='contents-body'>
@@ -94,10 +114,10 @@ export default function Contents() {
 					: !items.length ? <div className='not-found-message'>
 							<p>{translateContents.notFound[language]}</p></div> :
 
-							items.map((content) => (
-								<ContentDetails key={content._id} {...content} />
-							))
-						}
+						items.map((content) => (
+							<ContentDetails key={content._id} {...content} />
+						))
+				}
 			</div>
 
 		</div>

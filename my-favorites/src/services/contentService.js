@@ -14,8 +14,8 @@ export const getAll = async (path) => {
 	return result;
 }
 
-export const getSearchResult = async (title, genre, path) => {
-	const result = await request('POST', `${baseUrl}/${path}/search`, {title, genre});
+export const getSearchResult = async (title, genre, type) => {
+	const result = await request('POST', `${baseUrl}/contents/search`, {title, genre, type});
 
 	return result;
 }

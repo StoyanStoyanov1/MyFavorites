@@ -24,10 +24,10 @@ router.get('/books', async (req, res) => {
 	}
 });
 
-router.post('/books/search', async (req, res) => {
+router.post('/contents/search', async (req, res) => {
 	try {
-		const {title, genre} = req.body
-		const searchResult = await contentService.search('book', title, genre);
+		const {title, genre, type} = req.body
+		const searchResult = await contentService.search(type, title, genre);
 		res.status(201).json(searchResult);
 	} catch (err) {
 		res.status(500).json({message: err});
@@ -43,15 +43,6 @@ router.get('/movies', async (req, res) => {
 	}
 });
 
-router.post('/movies/search', async (req, res) => {
-	try {
-		const values = req.body
-		const searchResult = await contentService.search('movie', values);
-		res.status(201).json(searchResult);
-	} catch (err) {
-		res.status(500).json({message: err});
-	}
-});
 
 router.get('/podcasts', async (req, res) => {
 	try {
@@ -62,15 +53,6 @@ router.get('/podcasts', async (req, res) => {
 	}
 });
 
-router.post('/podcasts/search', async (req, res) => {
-	try {
-		const {title, genre} = req.body
-		const searchResult = await contentService.search('podcast', title, genre);
-		res.status(201).json(searchResult);
-	} catch (err) {
-		res.status(500).json({message: err});
-	}
-});
 
 router.get('/info/:id', async (req, res) => {
 	const id = req.params.id;
