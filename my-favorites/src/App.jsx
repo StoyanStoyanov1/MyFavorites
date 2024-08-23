@@ -19,30 +19,33 @@ import Home from "./components/home/Home.jsx";
 //context
 import {LanguageProvider} from "./context/LanguageContext.jsx";
 import {AuthProvider} from "./context/authContext.jsx";
+import ErrorBoundary from "./ErrorBoundary.jsx";
 
 function App() {
 	return (
-		<AuthProvider>
-			<LanguageProvider>
-				<div id='box'>
-					<Header/>
-					<Routes>
-						<Route path={Path.Home} element={<Home/>}/>
-						<Route path={Path.Register} element={<Register/>}/>
-						<Route path={Path.Login} element={<Login/>}/>
-						<Route path={Path.Logout} element={<Logout/>}/>
-						<Route path={Path.Recommend} element={<Recommend/>}/>
-						<Route path={Path.Books} element={<Contents/>}/>
-						<Route path={Path.Movies} element={<Contents/>}/>
-						<Route path={Path.Podcasts} element={<Contents/>}/>
-						<Route path={`${Path.Details}/:detailId`} element={<ContentInfo/>}/>
-						<Route path={`${Path.EditRecommend}/:contentId`} element={<Recommend/>}/>
-						<Route path={`${Path.MyRecommends}/:userId`} element={<Contents/>}/>
-					</Routes>
-					<Footer/>
-				</div>
-			</LanguageProvider>
-		</AuthProvider>
+		<ErrorBoundary>
+			<AuthProvider>
+				<LanguageProvider>
+					<div id='box'>
+						<Header/>
+						<Routes>
+							<Route path={Path.Home} element={<Home/>}/>
+							<Route path={Path.Register} element={<Register/>}/>
+							<Route path={Path.Login} element={<Login/>}/>
+							<Route path={Path.Logout} element={<Logout/>}/>
+							<Route path={Path.Recommend} element={<Recommend/>}/>
+							<Route path={Path.Books} element={<Contents/>}/>
+							<Route path={Path.Movies} element={<Contents/>}/>
+							<Route path={Path.Podcasts} element={<Contents/>}/>
+							<Route path={`${Path.Details}/:detailId`} element={<ContentInfo/>}/>
+							<Route path={`${Path.EditRecommend}/:contentId`} element={<Recommend/>}/>
+							<Route path={`${Path.MyRecommends}/:userId`} element={<Contents/>}/>
+						</Routes>
+						<Footer/>
+					</div>
+				</LanguageProvider>
+			</AuthProvider>
+		</ErrorBoundary>
 	)
 }
 
