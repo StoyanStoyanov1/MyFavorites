@@ -42,7 +42,9 @@ export default function Contents() {
 				}
 			});
 
-
+		if (userId) {
+			values.type = '';
+		}
 	}, [path]);
 
 	async function searchHandler() {
