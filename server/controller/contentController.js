@@ -82,8 +82,11 @@ router.delete('/:contentId', async (req, res) => {
 	try {
 		 const content = await contentService.findById(contentId);
 		 await contentService.delete(contentId);
-		 await userService.deteleContent(content.userId, contentId);
-		 res.status(201).json(content)
+		 await userService.removeContent(content.userId, contentId);
+		for (const userId of content['favorites_user_ids']) {
+			await userService.removeFavorite(userId, contentId);
+		}
+		 res.status(201).json(content);
 	} catch (err) {
 		res.status(500).json({message: 'Content is not found!'})
 	}
@@ -106,4 +109,5 @@ router.get('/my-recommends/:userId', async (req, res) => {
 		res.status(500).json({ message: err.message });
 	}
 });
+
 module.exports = router;
