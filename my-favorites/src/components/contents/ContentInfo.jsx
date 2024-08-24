@@ -1,20 +1,23 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import * as contentService from '../../services/contentService.js';
+import * as userService from '../../services/userService.js';
 import translateRecommend from '../../utils/translator/translateRecommend.js';
 import {useLanguage} from '../../context/LanguageContext.jsx';
 import translateGenre from "./translateGenre.js";
-import Path from "../../paths.js"
+import Path from "../../paths.js";
 import translateContents from "../../utils/translator/translateContents/translateContents.js";
+import authContext from "../../context/authContext.jsx";
 
 export default function ContentInfo() {
 	const navigate = useNavigate();
-
+	const {_id} = useContext(authContext);
 	const [language] = useLanguage();
 	const {detailId} = useParams();
 	const [content, setContent] = useState(null);
+	const [user, setUser] = useState(null);
 	const [creatorText, setCreatorText] = useState('');
-
+	const [isLiked, setIsLiked] = useState(false);
 
 	useEffect(() => {
 		contentService.getById(detailId)
@@ -39,6 +42,19 @@ export default function ContentInfo() {
 		}
 	}, [content, language]);
 
+	useEffect(() => {
+		if (content && _id) {
+			userService.getById(_id)
+				.then(foundUser => {
+					setUser(foundUser);
+					setIsLiked(foundUser.favorites.includes(content._id));
+				})
+				.catch(err => {
+					console.error(err.message);
+				})
+		}
+	}, [_id, content]);
+
 	const handleDelete = async () => {
 		try {
 			await contentService.remove(content._id);
@@ -50,6 +66,20 @@ export default function ContentInfo() {
 		}
 
 	}
+
+	const handleLike = async () => {
+
+		if (isLiked) {
+			userService.removeFavorite(content._id, _id);
+			user.favorites = user.favorites.filter(contentId => contentId !== content._id);
+		} else {
+			userService.addFavorite(content._id, _id);
+			user.favorites.push(content._id);
+		}
+
+		setIsLiked(user.favorites.includes(content._id));
+	}
+
 	return (
 		content ? (
 			<div className='container-content'>
@@ -60,7 +90,8 @@ export default function ContentInfo() {
 						onError={(e) => e.target.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkK98VBjmf1Q6_3SC9Nmz8CILkBdm1BUiFLg&s'}
 					/>
 					<p className='likes'>Likes: </p>
-					<p className='favorite'>Favorite</p>
+					<div className={`heart ${isLiked? 'is-liked' : 'not-liked'}`} onClick={handleLike}></div>
+
 
 					<div className='buttons'>
 						<button onClick={() => navigate(`${Path.EditRecommend}/${detailId}`)}>Edit</button>

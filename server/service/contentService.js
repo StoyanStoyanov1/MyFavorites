@@ -27,3 +27,7 @@ exports.search = async (type, title, genre) => {
 exports.edit = async (values, contentId) => await Content.findByIdAndUpdate(contentId, values, {new: true});
 
 exports.delete = async (contentId) => await Content.findByIdAndDelete(contentId);
+
+exports.addUserToFavoritesList = async (contentId, userId) => await Content.findByIdAndUpdate(contentId, {$push: {'favorites_user_ids': userId}}, {new: true}).lean();
+
+exports.removeUserFromFavoritesList = async (contentId, userId) => await Content.findByIdAndUpdate(contentId, {$pull: {'favorites_user_ids': userId}}, {new: true}).lean();

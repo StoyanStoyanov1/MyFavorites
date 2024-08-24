@@ -8,6 +8,10 @@ exports.getAll = async () => await User.find().lean();
 
 exports.getById = async (id) => await User.findById(id).lean();
 
-exports.contentToList = async (userId, contentId) => await User.findByIdAndUpdate(userId, {$push: {contents: contentId}});
+exports.contentToList = async (userId, contentId) => await User.findByIdAndUpdate(userId, {$push: {contents: contentId}}, {new: true}).lean();
 
-exports.deteleContent = async (userId, contentId) => await User.findByIdAndUpdate(userId, {$pull: {contents: contentId}}, {new: true});
+exports.deleteContent = async (userId, contentId) => await User.findByIdAndUpdate(userId, {$pull: {contents: contentId}}, {new: true}).lean();
+
+exports.addFavorite = async (userId, contentId) => await User.findByIdAndUpdate(userId, {$push: {favorites: contentId}}, {new: true}).lean();
+
+exports.removeFavorite = async (userId, contentId) => await User.findByIdAndUpdate(userId, {$pull: {favorites: contentId}}, {new: true}).lean()

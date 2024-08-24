@@ -89,3 +89,44 @@
     overflow-y: auto;
 }
 
+.heart {
+    width: 27px;
+    height: 27px;
+    position: relative;
+    transform: rotate(-45deg);
+    margin: 5px;
+    cursor: pointer;
+}
+
+.heart::before,
+.heart::after {
+    content: '';
+    width: 27px;
+    height: 27px;
+    background-color: inherit;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.heart::before {
+    top: -14.5px;
+    left: 0;
+}
+
+.heart::after {
+    top: 0;
+    left: 14.5px;
+}
+
+
+.heart:hover {
+    background-color: #ff002c;
+}
+
+.is-liked {
+    background: #ff002c;
+}
+
+.not-liked {
+    background: #d2cfcf;
+}
