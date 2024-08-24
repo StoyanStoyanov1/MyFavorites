@@ -68,12 +68,10 @@ const contentSchema = mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Comment'
 	}],
-	followers: [{
+	favorites_user_ids: [{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User'
 	}],
-
-
 
 
 }, {timestamps: true});

@@ -55,6 +55,10 @@ const userSchema = mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Content'
 	}],
+	favorites: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Content'
+	}
 
 }, {timestamps: true});
 
