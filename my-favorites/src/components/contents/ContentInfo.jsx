@@ -8,6 +8,7 @@ import translateGenre from "./translateGenre.js";
 import Path from "../../paths.js";
 import translateContents from "../../utils/translator/translateContents/translateContents.js";
 import authContext from "../../context/authContext.jsx";
+import translateMessages from "../../utils/translator/translateMessages/translateMessages.js";
 
 export default function ContentInfo() {
 	const navigate = useNavigate();
@@ -18,10 +19,15 @@ export default function ContentInfo() {
 	const [user, setUser] = useState(null);
 	const [creatorText, setCreatorText] = useState('');
 	const [isLiked, setIsLiked] = useState(false);
+	const [isDisabled, setIsDisabled] = useState(false);
+	const [favoriteMessage, setFavoriteMessage] = useState({})
 
 	useEffect(() => {
 		contentService.getById(detailId)
-			.then(result => setContent(result))
+			.then(foundContent => {
+				setContent(foundContent);
+				setFavoriteMessage(translateMessages(foundContent));
+			})
 			.catch(err => {
 				console.error(err.message.message);
 				navigate(Path.Home);
@@ -67,8 +73,13 @@ export default function ContentInfo() {
 
 	}
 
+	console.log(favoriteMessage)
 	const handleLike = async () => {
+		setTimeout(() => {
+			setIsDisabled(false);
+		}, 2000);
 
+		setIsDisabled(true);
 		if (isLiked) {
 			userService.removeFavorite(content._id, _id);
 			user.favorites = user.favorites.filter(contentId => contentId !== content._id);
@@ -83,14 +94,20 @@ export default function ContentInfo() {
 	return (
 		content ? (
 			<div className='container-content'>
+				{isDisabled && <div className='message-box'>
+					<p>{isLiked ? favoriteMessage.addFavorite[language] : favoriteMessage.removeFavorite[language]}</p>
+				</div>}
 				<div className='left-site'>
 					<img
 						src={content.image}
 						alt='Image'
 						onError={(e) => e.target.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkK98VBjmf1Q6_3SC9Nmz8CILkBdm1BUiFLg&s'}
 					/>
-					<p className='likes'>Likes: </p>
-					<div className={`heart ${isLiked? 'is-liked' : 'not-liked'}`} onClick={handleLike}></div>
+					<div
+						className={`heart ${isLiked ? 'is-liked' : 'not-liked'}`}
+						onClick={!isDisabled ? handleLike : null}
+					>
+					</div>
 
 
 					<div className='buttons'>
