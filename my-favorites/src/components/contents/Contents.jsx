@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import ContentDetails from "./ContentDetails.jsx";
 import {useLanguage} from "../../context/LanguageContext.jsx";
 import {recommendFormKeys} from "../../utils/formKeys/recommendFormKeys.js";
@@ -9,32 +9,37 @@ import translateContents from "../../utils/translator/translateContents/translat
 import translateHeader from "../../utils/translator/translateHeader.js";
 import useForm from "../../hooks/useForm.js";
 import translateRecommend from "../../utils/translator/translateRecommend.js";
+import authContext from "../../context/authContext.jsx";
 
 export default function Contents() {
 	const navigate = useNavigate();
 
+	const {_id} = useContext(authContext);
 	const {userId} = useParams();
 	const [language] = useLanguage();
 	const location = useLocation();
 	let path = location.pathname.split('/')[1];
 
-	const currentType = userId? '': path.slice(0, -1)
-
-	const [items, setItems] = useState([]);
-	const {values, onChange, onSubmit} = useForm(searchHandler, {
-		type: currentType,
+	const currentType = userId ? '' : path.slice(0, -1);
+	const initialValues = {
+		type: !userId ? currentType : '',
 		title: '',
 		genre: '',
-	});
+	};
+
+	const [items, setItems] = useState([]);
+	const {values, onChange, onSubmit, setValues} = useForm(searchHandler, initialValues);
+	const [foundItems, setFoundItems] = useState([]);
 
 	const [isLoading, setIsLoading] = useState(true);
 	useEffect(() => {
-		contentService.getAll(`${path}/${userId ? userId: ''}`)
+		setValues(initialValues);
+		contentService.getAll(`${path}/${userId ? userId : ''}`)
 			.then(result => {
+				setFoundItems(result);
 				setItems(result);
 				setIsLoading(false);
 			})
-
 			.catch(err => {
 				console.error(err.message);
 				if (err.message === 'Invalid User ID format') {
@@ -42,21 +47,31 @@ export default function Contents() {
 				}
 			});
 
-		if (userId) {
-			values.type = '';
-		}
-	}, [path]);
+	}, [path, userId]);
 
 	async function searchHandler() {
-		setIsLoading(true);
-		try {
-			const searchResult = await contentService.getSearchResult(values.title, values.genre, values.type);
-			setItems(searchResult);
-		} catch (error) {
-			let message;
-			alert(message ? message : error.message);
-		} finally {
-			setIsLoading(false);
+
+		if (!userId) {
+			setIsLoading(true);
+
+			try {
+				const searchResult = await contentService.getSearchResult(values.title, values.genre, values.type);
+				setItems(searchResult);
+			} catch (error) {
+				alert(error.message);
+			} finally {
+				setIsLoading(false);
+			}
+		} else {
+
+			const resultSearch = foundItems.filter(item =>
+				(!values.type || item.type.includes(values.type)) &&
+				(!values.genre || item.genre.includes(values.genre)) &&
+				(!values.title || item.title.includes(values.title))
+			);
+
+			setItems(resultSearch)
+
 		}
 	}
 
@@ -101,7 +116,7 @@ export default function Contents() {
 						onChange={onChange}
 						value={values[recommendFormKeys.Type]}
 					>
-						<option value='' disabled hidden>{translateRecommend.selectType[language]}</option>
+						<option value=''>{translateRecommend.selectType[language]}</option>
 						<option value="book">{translateRecommend.book[language]}</option>
 						<option value="movie">{translateRecommend.movie[language]}</option>
 						<option value="podcast">{translateRecommend.podcast[language]}</option>
