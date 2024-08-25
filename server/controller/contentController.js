@@ -110,4 +110,22 @@ router.get('/my-recommends/:userId', async (req, res) => {
 	}
 });
 
+router.get('/my-favorites/:userId', async (req, res) => {
+	const userId = req.params.userId;
+
+	if (!Types.ObjectId.isValid(userId)) {
+		return res.status(400).json({ message: 'Invalid User ID format' });
+	}
+	try {
+		const user = await userService.getById(userId);
+
+		const contestPromises = Object.values(user.favorites).map( contentId => contentService.findById(contentId));
+		const contests = await Promise.all(contestPromises)
+
+		res.status(200).json([...contests]);
+	} catch (err) {
+		res.status(500).json({ message: err.message });
+	}
+})
+
 module.exports = router;
