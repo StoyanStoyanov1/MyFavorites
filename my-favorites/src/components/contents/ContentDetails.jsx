@@ -28,7 +28,7 @@ export default function ContentDetails({
 	}
 
 	useEffect(() => {
-		if (type === 'movie') {
+		if (type === 'movie' || type === 'series') {
 			setCreatorText({
 				text: translateRecommend.director[language],
 				placeholder: translateRecommend.directorPlaceholder[language],

@@ -7,7 +7,7 @@ const contentSchema = mongoose.Schema({
 	},
 	type: {
 		type: String,
-		enum: ['book', 'movie', 'podcast'],
+		enum: ['book', 'movie', 'podcast', 'series'],
 		required: true
 	},
 	title: {

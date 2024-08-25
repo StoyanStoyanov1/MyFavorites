@@ -42,7 +42,7 @@ export default function ContentInfo() {
 				setCreatorText(translateRecommend.director[language]);
 			} else if (content.type === 'podcast') {
 				setCreatorText(translateRecommend.host[language])
-			} else if (content.type === 'book') {
+			} else if (content.type === 'book' || content.type === 'series') {
 				setCreatorText(translateRecommend.author[language]);
 			}
 		}

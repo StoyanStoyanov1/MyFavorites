@@ -48,6 +48,16 @@ const translateHeader = {
 		en: "My Recommendations",
 		de: "Meine Empfehlungen",
 		bg: "Моите препоръки",
+	},
+	'my-favorites': {
+		en: "My Favorites",
+		de: "Meine Favoriten",
+		bg: "Моите любими",
+	},
+	series: {
+		en: "Series",
+		de: "Serien",
+		bg: "Сериали"
 	}
 
 };

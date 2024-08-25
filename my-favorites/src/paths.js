@@ -8,6 +8,7 @@ const Path = {
 	Details: '/details',
 	Podcasts: '/podcasts',
 	Movies: '/movies',
+	Series: '/series',
 	EditRecommend: '/recommend/edit',
 	MyRecommends: '/my-recommends',
 	MyFavorites: '/my-favorites',

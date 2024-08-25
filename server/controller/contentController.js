@@ -43,6 +43,15 @@ router.get('/movies', async (req, res) => {
 	}
 });
 
+router.get('/series', async (req, res) => {
+	try {
+		const books = await contentService.findByType('series');
+		res.status(201).json(books);
+	} catch (err) {
+		res.status(500).json({message: err});
+	}
+});
+
 
 router.get('/podcasts', async (req, res) => {
 	try {

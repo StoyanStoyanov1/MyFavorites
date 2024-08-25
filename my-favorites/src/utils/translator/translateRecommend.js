@@ -113,7 +113,13 @@ const translateRecommend = {
 		en: "Edit",
 		de: "Bearbeiten",
 		bg: "Редактирай",
-	}
+	},
+	series: {
+		en: "Series",
+		de: "Serie",
+		bg: "Сериал"
+	},
+
 
 
 };

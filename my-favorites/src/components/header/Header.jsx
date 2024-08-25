@@ -23,6 +23,7 @@ export default function Header() {
 
 					<Link to={Path.Books}>{translateHeader.books[language]}</Link>
 					<Link to={Path.Movies}>{translateHeader.movies[language]}</Link>
+					<Link to={Path.Series}>{translateHeader.series[language]}</Link>
 					<Link to={Path.Podcasts}>{translateHeader.podcasts[language]}</Link>
 				</div>
 				<div className="favorites-container">

@@ -38,6 +38,7 @@ function App() {
 							<Route path={Path.Books} element={<Contents/>}/>
 							<Route path={Path.Movies} element={<Contents/>}/>
 							<Route path={Path.Podcasts} element={<Contents/>}/>
+							<Route path={Path.Series} element={<Contents/>}/>
 							<Route path={`${Path.Details}/:detailId`} element={<ContentInfo/>}/>
 							<Route path={`${Path.EditRecommend}/:contentId`} element={<Recommend/>}/>
 							<Route path={`${Path.MyRecommends}/:userId`} element={<Contents/>}/>

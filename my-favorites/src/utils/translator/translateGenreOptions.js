@@ -135,7 +135,49 @@ const translateGenreOptions = {
 			{ value: "sci-fi", label: "Science Fiction" },
 			{ value: "thriller", label: "Thriller" }
 		]
-	}
+	},
+	series: {
+		bg: [
+			{ value: '', label: 'Изберете жанр' },
+			{ value: "action", label: "Екшън" },
+			{ value: "adventure", label: "Приключенски" },
+			{ value: "comedy", label: "Комедия" },
+			{ value: "drama", label: "Драма" },
+			{ value: "fantasy", label: "Фантастика" },
+			{ value: "horror", label: "Ужаси" },
+			{ value: "mystery", label: "Мистерия" },
+			{ value: "romance", label: "Романтика" },
+			{ value: "sci-fi", label: "Научна фантастика" },
+			{ value: "thriller", label: "Трилър" }
+		],
+		de: [
+			{ value: '', label: 'Genre auswählen' },
+			{ value: "action", label: "Action" },
+			{ value: "adventure", label: "Abenteuer" },
+			{ value: "comedy", label: "Komödie" },
+			{ value: "drama", label: "Drama" },
+			{ value: "fantasy", label: "Fantasy" },
+			{ value: "horror", label: "Horror" },
+			{ value: "mystery", label: "Mystery" },
+			{ value: "romance", label: "Romantik" },
+			{ value: "sci-fi", label: "Science-Fiction" },
+			{ value: "thriller", label: "Thriller" }
+		],
+		en: [
+			{ value: '', label: 'Select Genre' },
+			{ value: "action", label: "Action" },
+			{ value: "adventure", label: "Adventure" },
+			{ value: "comedy", label: "Comedy" },
+			{ value: "drama", label: "Drama" },
+			{ value: "fantasy", label: "Fantasy" },
+			{ value: "horror", label: "Horror" },
+			{ value: "mystery", label: "Mystery" },
+			{ value: "romance", label: "Romance" },
+			{ value: "sci-fi", label: "Science Fiction" },
+			{ value: "thriller", label: "Thriller" }
+		]
+	},
+
 
 };
 

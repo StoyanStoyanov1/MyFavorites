@@ -96,7 +96,7 @@ export default function Recommend() {
 				navigate(`${Path.Details}/${contentId}`);
 			} else {
 				await contentService.create(values);
-				navigate(Path.Home)
+				navigate(`${Path.MyRecommends}/${_id}`);
 			}
 		} catch (error) {
 			console.error(error.message);
@@ -121,7 +121,7 @@ export default function Recommend() {
 				text: translateRecommend.host[language],
 				placeholder: translateRecommend.hostPlaceholder[language],
 			});
-		} else if (values[recommendFormKeys.Type] === 'book') {
+		} else if (values[recommendFormKeys.Type] === 'book' || values[recommendFormKeys.Type] === 'series') {
 			setCreatorText({
 				text: translateRecommend.author[language],
 				placeholder: translateRecommend.authorPlaceholder[language],
@@ -150,6 +150,7 @@ export default function Recommend() {
 								<option value="book">{translateRecommend.book[language]}</option>
 								<option value="movie">{translateRecommend.movie[language]}</option>
 								<option value="podcast">{translateRecommend.podcast[language]}</option>
+								<option value="series">{translateRecommend.series[language]}</option>
 							</select>
 						</div>
 

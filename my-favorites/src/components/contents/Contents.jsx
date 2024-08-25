@@ -20,7 +20,7 @@ export default function Contents() {
 	const location = useLocation();
 	let path = location.pathname.split('/')[1];
 
-	const currentType = userId ? '' : path.slice(0, -1);
+	const currentType = userId ? '' : path === 'series' ? 'series' : path.slice(0, -1);
 	const initialValues = {
 		type: !userId ? currentType : '',
 		title: '',
@@ -53,7 +53,7 @@ export default function Contents() {
 
 		if (!userId) {
 			setIsLoading(true);
-
+			console.log(values.type)
 			try {
 				const searchResult = await contentService.getSearchResult(values.title, values.genre, values.type);
 				setItems(searchResult);
@@ -120,6 +120,7 @@ export default function Contents() {
 						<option value="book">{translateRecommend.book[language]}</option>
 						<option value="movie">{translateRecommend.movie[language]}</option>
 						<option value="podcast">{translateRecommend.podcast[language]}</option>
+						<option value="series">{translateRecommend.series[language]}</option>
 					</select>
 				</div> : ''}
 
