@@ -10,6 +10,7 @@ const Path = {
 	Movies: '/movies',
 	EditRecommend: '/recommend/edit',
 	MyRecommends: '/my-recommends',
+	MyFavorites: '/my-favorites',
 };
 
 export default Path;

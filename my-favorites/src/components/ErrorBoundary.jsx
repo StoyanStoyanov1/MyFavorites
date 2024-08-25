@@ -1,4 +1,4 @@
-import {Component} from "react";
+import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import Path from "../paths.js";
 
@@ -26,11 +26,12 @@ export default class ErrorBoundary extends Component {
 	render() {
 		if (this.state.hasError) {
 			return (
-				<div className="error-container">
-					<h1 className="error-code">404</h1>
-					<p className="error-message">This page doesn't exist. Go back to the <Link to={Path.Home}
-																							className="home-link">homepage</Link> or
-						search for what you need.</p>
+				<div className="not-found">
+					<h1 className="not-found-code">Something went wrong</h1>
+					<p className="not-found-message">
+						An unexpected error occurred. Please try refreshing the page, or go back to the{' '}
+						<Link to={Path.Home} className="home-link">homepage</Link>.
+					</p>
 				</div>
 			);
 		}

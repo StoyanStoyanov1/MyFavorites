@@ -41,6 +41,7 @@ function App() {
 							<Route path={`${Path.Details}/:detailId`} element={<ContentInfo/>}/>
 							<Route path={`${Path.EditRecommend}/:contentId`} element={<Recommend/>}/>
 							<Route path={`${Path.MyRecommends}/:userId`} element={<Contents/>}/>
+							<Route path={`${Path.MyFavorites}/:userId`} element={<Contents/>}/>
 							<Route path="*" element={<NotFoundPage/>}/>
 						</Routes>
 						<Footer/>

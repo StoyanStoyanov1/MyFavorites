@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import ContentDetails from "./ContentDetails.jsx";
 import {useLanguage} from "../../context/LanguageContext.jsx";
 import {recommendFormKeys} from "../../utils/formKeys/recommendFormKeys.js";
