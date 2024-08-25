@@ -5,16 +5,15 @@ import {recommendFormKeys} from "../../utils/formKeys/recommendFormKeys.js";
 import translateGenreOptions from "../../utils/translator/translateGenreOptions.js";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import * as contentService from "../../services/contentService.js";
+import * as userService from "../../services/userService.js";
 import translateContents from "../../utils/translator/translateContents/translateContents.js";
 import translateHeader from "../../utils/translator/translateHeader.js";
 import useForm from "../../hooks/useForm.js";
 import translateRecommend from "../../utils/translator/translateRecommend.js";
-import authContext from "../../context/authContext.jsx";
 
 export default function Contents() {
 	const navigate = useNavigate();
 
-	const {_id} = useContext(authContext);
 	const {userId} = useParams();
 	const [language] = useLanguage();
 	const location = useLocation();
@@ -30,22 +29,30 @@ export default function Contents() {
 	const [items, setItems] = useState([]);
 	const {values, onChange, onSubmit, setValues} = useForm(searchHandler, initialValues);
 	const [foundItems, setFoundItems] = useState([]);
-
+	const [owner, setOwner] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 	useEffect(() => {
-		setValues(initialValues);
-		contentService.getAll(`${path}/${userId ? userId : ''}`)
-			.then(result => {
-				setFoundItems(result);
-				setItems(result);
+		setOwner(null)
+		async function loadMore() {
+			try {
+				const found = await contentService.getAll(`${path}/${userId ? userId : ''}`);
+				setFoundItems(found);
+				setItems(found);
+				if (userId) {
+					const user = await userService.getById(userId);
+					setOwner(user);
+				}
 				setIsLoading(false);
-			})
-			.catch(err => {
+			} catch (err) {
 				console.error(err.message);
 				if (err.message === 'Invalid User ID format') {
 					navigate('*');
 				}
-			});
+			}
+		}
+
+		setValues(initialValues);
+		loadMore()
 
 	}, [path, userId]);
 
@@ -53,7 +60,6 @@ export default function Contents() {
 
 		if (!userId) {
 			setIsLoading(true);
-			console.log(values.type)
 			try {
 				const searchResult = await contentService.getSearchResult(values.title, values.genre, values.type);
 				setItems(searchResult);
@@ -77,7 +83,7 @@ export default function Contents() {
 
 	return (
 		<div id='content-body'>
-			<h1 className='content-header'>{translateHeader[path][language]}</h1>
+			<h1 className='content-header'>{owner? `${translateHeader[path][language]} ${owner.username}`:translateHeader[path][language]}</h1>
 			<form className='search' onSubmit={onSubmit}>
 				<div className='search-input'>
 					<label htmlFor={recommendFormKeys.Title} className='search-label'></label>
