@@ -66,36 +66,38 @@ export default function ContentInfo() {
 			await contentService.remove(content._id);
 			console.log('Delete successful');
 			navigate(Path.Home);
-		} catch (err)  {
+		} catch (err) {
 			alert(err.message);
 			navigate(Path.Home);
 		}
 
 	}
 
-	console.log(favoriteMessage)
 	const handleLike = async () => {
 		setTimeout(() => {
 			setIsDisabled(false);
 		}, 2000);
 
 		setIsDisabled(true);
-		if (isLiked) {
-			userService.removeFavorite(content._id, _id);
-			user.favorites = user.favorites.filter(contentId => contentId !== content._id);
-		} else {
-			userService.addFavorite(content._id, _id);
-			user.favorites.push(content._id);
-		}
 
-		setIsLiked(user.favorites.includes(content._id));
+		if (_id) {
+			if (isLiked) {
+				userService.removeFavorite(content._id, _id);
+				user.favorites = user.favorites.filter(contentId => contentId !== content._id);
+			} else {
+				userService.addFavorite(content._id, _id);
+				user.favorites.push(content._id);
+			}
+
+			setIsLiked(user.favorites.includes(content._id));
+		}
 	}
 
 	return (
 		content ? (
 			<div className='container-content'>
 				{isDisabled && <div className='message-box'>
-					<p>{isLiked ? favoriteMessage.addFavorite[language] : favoriteMessage.removeFavorite[language]}</p>
+					<p>{!_id ? favoriteMessage.logged[language] : isLiked ? favoriteMessage.addFavorite[language] : favoriteMessage.removeFavorite[language]}</p>
 				</div>}
 				<div className='left-site'>
 					<img
@@ -109,11 +111,11 @@ export default function ContentInfo() {
 					>
 					</div>
 
-
-					<div className='buttons'>
+					{_id === content.userId && <div className='buttons'>
 						<button onClick={() => navigate(`${Path.EditRecommend}/${detailId}`)}>Edit</button>
 						<button onClick={handleDelete}>Delete</button>
-					</div>
+					</div>}
+
 				</div>
 
 				<div className='divider'></div>
