@@ -15,12 +15,13 @@ import Footer from "./components/footer/Footer.jsx";
 import Contents from "./components/contents/Contents.jsx";
 import ContentInfo from "./components/contents/ContentInfo.jsx";
 import Home from "./components/home/Home.jsx";
-import NotFoundPage from "./components/NotFoundPage.jsx";
+import NotFoundPage from "./components/guards/NotFoundPage.jsx";
 
 //context
 import {LanguageProvider} from "./context/LanguageContext.jsx";
 import {AuthProvider} from "./context/authContext.jsx";
 import ErrorBoundary from "./components/ErrorBoundary.jsx";
+import AuthGuard from "./components/guards/AuthGuard.jsx";
 
 function App() {
 	return (
@@ -33,16 +34,17 @@ function App() {
 							<Route path={Path.Home} element={<Home/>}/>
 							<Route path={Path.Register} element={<Register/>}/>
 							<Route path={Path.Login} element={<Login/>}/>
-							<Route path={Path.Logout} element={<Logout/>}/>
-							<Route path={Path.Recommend} element={<Recommend/>}/>
 							<Route path={Path.Books} element={<Contents/>}/>
 							<Route path={Path.Movies} element={<Contents/>}/>
 							<Route path={Path.Podcasts} element={<Contents/>}/>
 							<Route path={Path.Series} element={<Contents/>}/>
-							<Route path={`${Path.Details}/:detailId`} element={<ContentInfo/>}/>
-							<Route path={`${Path.EditRecommend}/:contentId`} element={<Recommend/>}/>
 							<Route path={`${Path.MyRecommends}/:userId`} element={<Contents/>}/>
 							<Route path={`${Path.MyFavorites}/:userId`} element={<Contents/>}/>
+							<Route element={<AuthGuard/>}>
+								<Route path={Path.Logout} element={<Logout/>}/>
+								<Route path={`${Path.EditRecommend}/:contentId`} element={<Recommend/>}/>
+								<Route path={Path.Recommend} element={<Recommend/>}/>
+							</Route>
 							<Route path="*" element={<NotFoundPage/>}/>
 						</Routes>
 						<Footer/>
