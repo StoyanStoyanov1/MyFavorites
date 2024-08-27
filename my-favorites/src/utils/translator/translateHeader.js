@@ -45,14 +45,14 @@ const translateHeader = {
 		bg: "Любими",
 	},
 	'my-recommends': {
-		en: "My Recommendations",
-		de: "Meine Empfehlungen",
-		bg: "Моите препоръки",
+		en: "Recommendations from",
+		de: "Empfehlungen von",
+		bg: "Препоръки от",
 	},
 	'my-favorites': {
-		en: "My Favorites",
-		de: "Meine Favoriten",
-		bg: "Моите любими",
+		en: "Favorites of",
+		de: "Favoriten von",
+		bg: "Любими на",
 	},
 	series: {
 		en: "Series",
