@@ -40,6 +40,7 @@ function App() {
 							<Route path={Path.Series} element={<Contents/>}/>
 							<Route path={`${Path.MyRecommends}/:userId`} element={<Contents/>}/>
 							<Route path={`${Path.MyFavorites}/:userId`} element={<Contents/>}/>
+							<Route path={`${Path.Details}/:contentId`} element={<ContentInfo/>}/>
 							<Route element={<AuthGuard/>}>
 								<Route path={Path.Logout} element={<Logout/>}/>
 								<Route path={`${Path.EditRecommend}/:contentId`} element={<Recommend/>}/>

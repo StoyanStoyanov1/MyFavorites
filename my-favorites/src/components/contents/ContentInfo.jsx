@@ -14,7 +14,7 @@ export default function ContentInfo() {
 	const navigate = useNavigate();
 	const {_id} = useContext(authContext);
 	const [language] = useLanguage();
-	const {detailId} = useParams();
+	const {contentId} = useParams();
 	const [content, setContent] = useState(null);
 	const [user, setUser] = useState(null);
 	const [creatorText, setCreatorText] = useState('');
@@ -23,7 +23,7 @@ export default function ContentInfo() {
 	const [favoriteMessage, setFavoriteMessage] = useState({})
 
 	useEffect(() => {
-		contentService.getById(detailId)
+		contentService.getById(contentId)
 			.then(foundContent => {
 				setContent(foundContent);
 				setFavoriteMessage(translateMessages(foundContent));
@@ -33,7 +33,7 @@ export default function ContentInfo() {
 				navigate(Path.Home);
 				alert(translateContents.notFoundMessage[language])
 			});
-	}, [detailId]);
+	}, [contentId]);
 
 	useEffect(() => {
 
@@ -112,7 +112,7 @@ export default function ContentInfo() {
 					</div>
 
 					{_id === content.userId && <div className='buttons'>
-						<button onClick={() => navigate(`${Path.EditRecommend}/${detailId}`)}>Edit</button>
+						<button onClick={() => navigate(`${Path.EditRecommend}/${contentId}`)}>Edit</button>
 						<button onClick={handleDelete}>Delete</button>
 					</div>}
 
