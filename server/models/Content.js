@@ -51,10 +51,10 @@ const contentSchema = mongoose.Schema({
 		},
 	},
 
-	voters: [{
+	voters: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Vote',
-	}],
+	},
 	image: {
 		type: String,
 		validate: {

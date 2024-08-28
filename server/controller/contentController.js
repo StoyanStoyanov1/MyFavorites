@@ -1,11 +1,15 @@
 const router = require('express').Router();
 const contentService = require('../service/contentService');
 const userService = require('../service/userService')
+const voteService = require('../service/voteService');
 const {Types} = require("mongoose");
 
 router.post('/create', async (req, res) => {
 	try {
 		const data = req.body;
+		const voters = await voteService.createVote();
+
+		data.voters = voters
 		const content = await contentService.create(data);
 		await userService.contentToList(content.userId, content._id);
 
