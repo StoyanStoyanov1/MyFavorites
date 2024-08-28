@@ -32,7 +32,6 @@ export default function Contents() {
 	const [owner, setOwner] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 	useEffect(() => {
-		setOwner(null)
 		async function loadMore() {
 			try {
 				const found = await contentService.getAll(`${path}/${userId ? userId : ''}`);

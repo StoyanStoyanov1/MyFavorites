@@ -1,14 +1,15 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {useNavigate, useParams} from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import * as contentService from '../../services/contentService.js';
 import * as userService from '../../services/userService.js';
 import translateRecommend from '../../utils/translator/translateRecommend.js';
-import {useLanguage} from '../../context/LanguageContext.jsx';
+import { useLanguage } from '../../context/LanguageContext.jsx';
 import translateGenre from "./translateGenre.js";
 import Path from "../../paths.js";
 import translateContents from "../../utils/translator/translateContents/translateContents.js";
 import authContext from "../../context/authContext.jsx";
 import translateMessages from "../../utils/translator/translateMessages/translateMessages.js";
+import Vote from "./Vote.jsx";
 
 export default function ContentInfo() {
 	const navigate = useNavigate();
@@ -20,7 +21,8 @@ export default function ContentInfo() {
 	const [creatorText, setCreatorText] = useState('');
 	const [isLiked, setIsLiked] = useState(false);
 	const [isDisabled, setIsDisabled] = useState(false);
-	const [favoriteMessage, setFavoriteMessage] = useState({})
+	const [favoriteMessage, setFavoriteMessage] = useState({});
+
 
 	useEffect(() => {
 		contentService.getById(contentId)
@@ -31,17 +33,16 @@ export default function ContentInfo() {
 			.catch(err => {
 				console.error(err.message.message);
 				navigate(Path.Home);
-				alert(translateContents.notFoundMessage[language])
+				alert(translateContents.notFoundMessage[language]);
 			});
 	}, [contentId]);
 
 	useEffect(() => {
-
 		if (content) {
 			if (content.type === 'movie') {
 				setCreatorText(translateRecommend.director[language]);
 			} else if (content.type === 'podcast') {
-				setCreatorText(translateRecommend.host[language])
+				setCreatorText(translateRecommend.host[language]);
 			} else if (content.type === 'book' || content.type === 'series') {
 				setCreatorText(translateRecommend.author[language]);
 			}
@@ -57,21 +58,19 @@ export default function ContentInfo() {
 				})
 				.catch(err => {
 					console.error(err.message);
-				})
+				});
 		}
 	}, [_id, content]);
 
 	const handleDelete = async () => {
 		try {
 			await contentService.remove(content._id);
-			console.log('Delete successful');
 			navigate(Path.Home);
 		} catch (err) {
 			alert(err.message);
 			navigate(Path.Home);
 		}
-
-	}
+	};
 
 	const handleLike = async () => {
 		setTimeout(() => {
@@ -91,7 +90,7 @@ export default function ContentInfo() {
 
 			setIsLiked(user.favorites.includes(content._id));
 		}
-	}
+	};
 
 	return (
 		content ? (
@@ -105,6 +104,7 @@ export default function ContentInfo() {
 						alt='Image'
 						onError={(e) => e.target.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkK98VBjmf1Q6_3SC9Nmz8CILkBdm1BUiFLg&s'}
 					/>
+					<Vote voteId={content.voters} userId={_id} />
 					<div
 						className={`heart ${isLiked ? 'is-liked' : 'not-liked'}`}
 						onClick={!isDisabled ? handleLike : null}
@@ -115,7 +115,6 @@ export default function ContentInfo() {
 						<button onClick={() => navigate(`${Path.EditRecommend}/${contentId}`)}>Edit</button>
 						<button onClick={handleDelete}>Delete</button>
 					</div>}
-
 				</div>
 
 				<div className='divider'></div>
@@ -126,7 +125,6 @@ export default function ContentInfo() {
 					<p>{creatorText}: {content.creator}</p>
 					<p>{translateRecommend.genre[language]}: {translateGenre(content.genre, language)}</p>
 					<p>{translateRecommend.year[language]}: {content.year}</p>
-					<p>Rating: Rating</p>
 					<span>{translateRecommend.description[language]}:</span>
 					<div className='content-description'>
 						<p>

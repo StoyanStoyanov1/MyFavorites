@@ -130,3 +130,50 @@
 .not-liked {
     background: #d2cfcf;
 }
+
+.vote-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: nowrap;
+}
+
+.star-rating {
+    display: inline-flex;
+    font-size: 2rem;
+    position: relative;
+    direction: ltr;
+    white-space: nowrap;
+}
+
+.star-rating input[type="radio"] {
+    display: none;
+}
+
+.star-rating label {
+    color: #ddd;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+}
+
+.star-rating label.full {
+    color: gold;
+}
+
+.star-rating label.half::before {
+    content: '★';
+    color: gold;
+    position: absolute;
+    left: 0;
+    width: 50%;
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: 1;
+}
+
+.average-rating {
+    font-size: 1.2rem;
+    white-space: nowrap;
+}
+
