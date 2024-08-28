@@ -4,7 +4,7 @@ exports.createVote = async () => await Vote.create({reviewers: new Map()});
 
 exports.deleteVote = async (voteId) => await Vote.deleteOne(voteId);
 
-exports.getVoteById = async id => await Vote.findById(id);
+exports.getVoteById = async (voteId) => await Vote.findById(voteId).lean();
 
 exports.addVote = async (voteId, userId, rating) => {
 	try {
