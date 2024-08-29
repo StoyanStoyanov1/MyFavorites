@@ -10,7 +10,8 @@ export default function Header() {
 	const {_id, username, isAuthenticated} = useContext(authContext);
 
 	const getNavLinkClass = (path) => {
-		return location.pathname === path ? 'current-page' : '';
+
+		return location.pathname.includes(path) ? 'current-page' : '';
 	};
 
 	const handleLanguageChange = (e) => {
@@ -31,13 +32,13 @@ export default function Header() {
 					<Link className={getNavLinkClass(Path.Podcasts)} to={Path.Podcasts}>{translateHeader.podcasts[language]}</Link>
 				</div>
 				<div className="favorites-container">
-					<Link className={`favorites-text ${getNavLinkClass(Path.Home)}`} to={Path.Home}>My Favorites</Link>
+					<Link className={`favorites-text ${location.pathname === Path.Home ? 'current-page' : ''}`} to={Path.Home}>My Favorites</Link>
 				</div>
 				<div className="nav-right">
 
 					{isAuthenticated && <>
 							<div className='profilMenu'>
-								<button className="profilMenu-button">{username}</button>
+								<button className={`profilMenu-button ${getNavLinkClass(Path.Recommend) || getNavLinkClass(_id)}`}>{username}</button>
 								<div className="profilMenu-content">
 									<Link className={getNavLinkClass(Path.MyRecommends)} to={`${Path.MyRecommends}/${_id}`}>{translateHeader.myRecommendations[language]}</Link>
 									<Link className={getNavLinkClass(Path.Recommend)} to={Path.Recommend}>{translateHeader.recommend[language]}</Link>

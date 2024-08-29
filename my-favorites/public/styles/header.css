@@ -38,9 +38,6 @@ nav a {
     transition: background-color 0.3s ease;
 }
 
-
-
-
 .favorites-text {
     font-family: "Whisper", cursive;
     font-weight: 400;
@@ -53,9 +50,6 @@ nav a:hover, .profilMenu-button:hover{
     color: #e77d00;
 }
 
-.current-page {
-    color: #e77d00;
-}
 
 .language-selector select {
     padding: 5px 8px;
@@ -90,17 +84,6 @@ nav a:hover, .profilMenu-button:hover{
     display: inline-block;
 }
 
-.profilMenu-button {
-    background-color: #02021c;
-    color: #fff;
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    border-radius: 16px;
-    transition: background-color 0.3s ease;
-}
-
 
 
 .profilMenu-content {
@@ -112,6 +95,8 @@ nav a:hover, .profilMenu-button:hover{
     z-index: 1001;
     border-radius: 4px;
 }
+
+
 
 .profilMenu-content a {
     color: #fff;
@@ -128,4 +113,19 @@ nav a:hover, .profilMenu-button:hover{
 
 .profilMenu{
     z-index: 1001;
+}
+
+.profilMenu-button {
+    background-color: #02021c;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.current-page {
+    color: #e77d00;
 }
