@@ -1,10 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import translateRecommend from "../../utils/translator/translateRecommend.js";
 import { recommendFormKeys } from "../../utils/formKeys/recommendFormKeys.js";
 import { useLanguage } from "../../context/LanguageContext.jsx";
 import {useNavigate} from "react-router-dom";
 import Path from "../../paths.js";
 import translateGenre from "./translateGenre.js";
+import Vote from "./Vote.jsx";
+import authContext from "../../context/authContext.jsx";
 
 export default function ContentDetails({
 	_id,
@@ -14,10 +16,12 @@ export default function ContentDetails({
 	image,
 	creator,
 	type,
+	voters,
 									   }) {
 	const [language] = useLanguage();
 	const navigate = useNavigate()
-
+	const authContextValue = useContext(authContext);
+	const userId = authContextValue._id;
 
 
 	const [creatorText, setCreatorText] = useState({});
@@ -63,6 +67,8 @@ export default function ContentDetails({
 				<p>{translateRecommend[recommendFormKeys.Year][language]}: {year}</p>
 
 			</div>
+
+			<Vote voteId={voters} userId={userId} />
 		</section>
 	);
 }
