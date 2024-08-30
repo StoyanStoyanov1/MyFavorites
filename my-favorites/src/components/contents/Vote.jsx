@@ -9,7 +9,7 @@ export default function Vote(values) {
 	const [totalVotes, setTotalVotes] = useState(0);
 
 	useEffect(() => {
-		if (values.voteId && values.userId) {
+		if (values.voteId) {
 			voteService.getById(values.voteId)
 				.then(foundVote => {
 					setVote(foundVote);
@@ -32,7 +32,7 @@ export default function Vote(values) {
 	}, [values.voteId, values.userId]);
 
 	const handleRating = (rating) => {
-		if (!hasVoted) {
+		if (!hasVoted && values.userId) {
 			voteService.voting(values.voteId, values.userId, rating);
 			setHasVoted(true);
 			setTotalVotes(prevVotes => prevVotes + 1);
