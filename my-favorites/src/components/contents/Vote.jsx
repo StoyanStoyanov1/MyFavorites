@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import * as voteService from "../../services/voteService.js";
 
 export default function Vote(values) {
@@ -36,6 +36,13 @@ export default function Vote(values) {
 			voteService.voting(values.voteId, values.userId, rating);
 			setHasVoted(true);
 			setTotalVotes(prevVotes => prevVotes + 1);
+			vote.reviewers[values.userId] = rating;
+			const ratings = Object.values(vote.reviewers);
+
+			const totalRating = ratings.reduce((sum, value) => sum + value, 0);
+			const averageRating = totalRating / ratings.length;
+			setCurrentRating(averageRating);
+			setTotalVotes(ratings.length);
 		}
 	};
 
