@@ -177,3 +177,10 @@
     white-space: nowrap;
 }
 
+.infopage {
+    margin-top: 6em;
+}
+
+.content-header {
+    text-align: center;
+}

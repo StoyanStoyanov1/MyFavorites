@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, {useContext, useEffect, useState} from 'react';
+import {useNavigate, useParams} from 'react-router-dom';
 import * as contentService from '../../services/contentService.js';
 import * as userService from '../../services/userService.js';
 import translateRecommend from '../../utils/translator/translateRecommend.js';
-import { useLanguage } from '../../context/LanguageContext.jsx';
+import {useLanguage} from '../../context/LanguageContext.jsx';
 import translateGenre from "./translateGenre.js";
 import Path from "../../paths.js";
 import translateContents from "../../utils/translator/translateContents/translateContents.js";
@@ -94,42 +94,44 @@ export default function ContentInfo() {
 
 	return (
 		content ? (
-			<div className='container-content'>
-				{isDisabled && <div className='message-box'>
-					<p>{!_id ? favoriteMessage.logged[language] : isLiked ? favoriteMessage.addFavorite[language] : favoriteMessage.removeFavorite[language]}</p>
-				</div>}
-				<div className='left-site'>
-					<img
-						src={content.image}
-						alt='Image'
-						onError={(e) => e.target.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkK98VBjmf1Q6_3SC9Nmz8CILkBdm1BUiFLg&s'}
-					/>
-					<Vote voteId={content.voters} userId={_id} />
-					<div
-						className={`heart ${isLiked ? 'is-liked' : 'not-liked'}`}
-						onClick={!isDisabled ? handleLike : null}
-					>
+			<div className='infopage'><h1 className='content-header'>{translateRecommend[content.type][language]}</h1>
+				<div className='container-content'>
+
+					{isDisabled && <div className='message-box'>
+						<p>{!_id ? favoriteMessage.logged[language] : isLiked ? favoriteMessage.addFavorite[language] : favoriteMessage.removeFavorite[language]}</p>
+					</div>}
+					<div className='left-site'>
+						<img
+							src={content.image}
+							alt='Image'
+							onError={(e) => e.target.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkK98VBjmf1Q6_3SC9Nmz8CILkBdm1BUiFLg&s'}
+						/>
+						<Vote voteId={content.voters} userId={_id}/>
+						<div
+							className={`heart ${isLiked ? 'is-liked' : 'not-liked'}`}
+							onClick={!isDisabled ? handleLike : null}
+						>
+						</div>
+
+						{_id === content.userId && <div className='buttons'>
+							<button onClick={() => navigate(`${Path.EditRecommend}/${contentId}`)}>Edit</button>
+							<button onClick={handleDelete}>Delete</button>
+						</div>}
 					</div>
 
-					{_id === content.userId && <div className='buttons'>
-						<button onClick={() => navigate(`${Path.EditRecommend}/${contentId}`)}>Edit</button>
-						<button onClick={handleDelete}>Delete</button>
-					</div>}
-				</div>
+					<div className='divider'></div>
 
-				<div className='divider'></div>
-
-				<div className='right-site'>
-					<h1>{translateRecommend[content.type][language]}</h1>
-					<p>{translateRecommend.title[language]}: {content.title}</p>
-					<p>{creatorText}: {content.creator}</p>
-					<p>{translateRecommend.genre[language]}: {translateGenre(content.genre, language)}</p>
-					<p>{translateRecommend.year[language]}: {content.year}</p>
-					<span>{translateRecommend.description[language]}:</span>
-					<div className='content-description'>
-						<p>
-							{content.description}
-						</p>
+					<div className='right-site'>
+						<h1>{content.title}</h1>
+						<p>{creatorText}: {content.creator}</p>
+						<p>{translateRecommend.genre[language]}: {translateGenre(content.genre, language)}</p>
+						<p>{translateRecommend.year[language]}: {content.year}</p>
+						<span>{translateRecommend.description[language]}:</span>
+						<div className='content-description'>
+							<p>
+								{content.description}
+							</p>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -137,5 +139,6 @@ export default function ContentInfo() {
 			<section id='authentication'>
 				<div className="lds-dual-ring"></div>
 			</section>)
+
 	);
 }
