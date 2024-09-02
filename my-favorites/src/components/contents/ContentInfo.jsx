@@ -10,6 +10,7 @@ import translateContents from "../../utils/translator/translateContents/translat
 import authContext from "../../context/authContext.jsx";
 import translateMessages from "../../utils/translator/translateMessages/translateMessages.js";
 import Vote from "./Vote.jsx";
+import countries from "../../utils/countries.js";
 
 export default function ContentInfo() {
 	const navigate = useNavigate();
@@ -124,8 +125,9 @@ export default function ContentInfo() {
 					<div className='right-site'>
 						<h1>{content.title}</h1>
 						<p>{creatorText}: {content.creator}</p>
-						<p>{translateRecommend.genre[language]}: {translateGenre(content.genre, language)}</p>
-						<p>{translateRecommend.year[language]}: {content.year}</p>
+						<p>{translateRecommend.genre[language]}: {content.genre.map(genre => translateGenre(genre.value, language)).join(', ')}</p>
+						<p>{translateRecommend.country[language]}: {content.country}</p>
+						<p>{translateRecommend.year[language]}: {countries[content.country][language]}</p>
 						<span>{translateRecommend.description[language]}:</span>
 						<div className='content-description'>
 							<p>

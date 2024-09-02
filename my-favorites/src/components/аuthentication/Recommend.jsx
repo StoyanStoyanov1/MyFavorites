@@ -4,18 +4,19 @@ import translateRecommend from "../../utils/translator/translateRecommend.js";
 import {useLanguage} from "../../context/LanguageContext.jsx";
 import translateGenreOptions from "../../utils/translator/translateGenreOptions.js"
 import useForm from "../../hooks/useForm.js";
-import translateAuthErrors from "../../utils/translator/translateAuthErrors.js";
 import recommendValidator from "../../validators/recommendValidator.js";
 import * as contentService from "../../services/contentService.js"
 import {useNavigate, useParams} from "react-router-dom";
 import Path from "../../paths.js";
 import authContext from "../../context/authContext.jsx";
+import Select from 'react-select';
+import countries from "../../utils/countries.js";
 
 export default function Recommend() {
 	const [language] = useLanguage()
 	const {_id} = useContext(authContext);
 	const {contentId} = useParams();
-	const path = location.pathname;
+	const [selectedOptions, setSelectedOptions] = useState([]);
 
 	const navigate = useNavigate();
 	const [validator, setValidator] = useState({});
@@ -31,11 +32,14 @@ export default function Recommend() {
 		[recommendFormKeys.Description]: '',
 		[recommendFormKeys.Creator]: '',
 		[recommendFormKeys.Image]: '',
+		[recommendFormKeys.Image]: '',
 	});
 
 	const currentYear = new Date().getFullYear();
 	const years = Array.from({length: currentYear - 1970 + 1}, (_, i) => currentYear - i);
 	const {values, onChange, onSubmit, setValues} = useForm(submitHandler, initialValues);
+	const [countryOptions, setCountryOptions] = useState([]);
+
 
 	useEffect(() => {
 		if (contentId) {
@@ -59,6 +63,7 @@ export default function Recommend() {
 				[recommendFormKeys.Description]: '',
 				[recommendFormKeys.Creator]: '',
 				[recommendFormKeys.Image]: '',
+				[recommendFormKeys.Country]: '',
 			})
 		}
 
@@ -76,6 +81,10 @@ export default function Recommend() {
 
 		if (!values[recommendFormKeys.Type]) return;
 
+		values[recommendFormKeys.Genre] = selectedOptions;
+
+		console.log(values)
+
 		const {inputIsValid, validatorMessages} = recommendValidator(values, {}, language)
 
 		setRecommendAttempt(true);
@@ -84,10 +93,6 @@ export default function Recommend() {
 		if (!inputIsValid) {
 			return;
 		}
-
-		Object.keys(values).map(key => {
-			values[key] = values[key].trim();
-		})
 
 		try {
 			values.userId = _id;
@@ -102,6 +107,12 @@ export default function Recommend() {
 			console.error(error.message);
 		}
 	}
+
+	const handleChange = (selected) => {
+		if (selected.length <= 3) {
+			setSelectedOptions(selected);
+		}
+	};
 
 	useEffect(() => {
 		if (recommendAttempt) {
@@ -128,6 +139,7 @@ export default function Recommend() {
 			});
 		}
 	}, [values[recommendFormKeys.Type], language]);
+
 	return (
 		<section id='authentication'>
 			{isLoading ? <div className="lds-dual-ring"></div> :
@@ -195,24 +207,47 @@ export default function Recommend() {
 								<div className='input-container'>
 									<label htmlFor={recommendFormKeys.Genre}
 										   className='auth-input'>{translateRecommend.genre[language]}</label>
-									<select
+									<Select
+										isMulti
 										id={recommendFormKeys.Genre}
-										className={recommendFormKeys.Genre}
+										className="genre-select"
+										classNamePrefix="my-select"
+										options={translateGenreOptions[values[recommendFormKeys.Type]][language]}
+										closeMenuOnSelect={false}
 										name={recommendFormKeys.Genre}
-										value={values[recommendFormKeys.Genre]}
-										onChange={onChange}
+										placeholder={translateRecommend.selectGenre[language]}
+										value={selectedOptions}
+										onChange={handleChange}
+										isSearchable={false}
 									>
-										{translateGenreOptions[values[recommendFormKeys.Type]][language].map((genre) => (
-											<option key={genre.value} value={genre.value}>
-												{genre.label}
-											</option>
-										))}
-									</select>
+
+									</Select>
 									{validator[recommendFormKeys.Genre] &&
 										<div className='authValidate'>
 											<p>{validator[recommendFormKeys.Genre]}</p>
 										</div>}
 								</div>
+
+								<div className='input-container'>
+									<label htmlFor={recommendFormKeys.Country}
+										   className='auth-input'>{translateRecommend.country[language]}</label>
+									<select
+										id={recommendFormKeys.Country}
+										className={recommendFormKeys.Country}
+										name={recommendFormKeys.Country}
+										onChange={onChange}
+										value={values[recommendFormKeys.Country]}
+									>
+										<option value='' disabled
+												hidden>{translateRecommend.selectCountry[language]}</option>
+										{Object.entries(countries).map(([key, value]) => (
+											<option key={key} value={key}>{value[language]}</option>
+										))}
+
+
+									</select>
+								</div>
+
 								<div className='input-container'>
 									<label htmlFor={recommendFormKeys.Year}
 										   className='auth-input'>{translateRecommend.year[language]}</label>

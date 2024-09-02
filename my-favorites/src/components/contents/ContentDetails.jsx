@@ -7,6 +7,7 @@ import Path from "../../paths.js";
 import translateGenre from "./translateGenre.js";
 import Vote from "./Vote.jsx";
 import authContext from "../../context/authContext.jsx";
+import countries from "../../utils/countries.js";
 
 export default function ContentDetails({
 	_id,
@@ -23,7 +24,6 @@ export default function ContentDetails({
 	const authContextValue = useContext(authContext);
 	const userId = authContextValue._id;
 
-
 	const [creatorText, setCreatorText] = useState({});
 
 	const handleClick = (e) => {
@@ -31,6 +31,7 @@ export default function ContentDetails({
 		navigate(`${Path.Details}/${_id}`)
 	}
 
+	console.log(genre.map(g => translateGenre(g.value, language)).join(', '))
 	useEffect(() => {
 		if (type === 'movie' || type === 'series') {
 			setCreatorText({
@@ -63,7 +64,7 @@ export default function ContentDetails({
 					<p>{translateRecommend[recommendFormKeys.Title][language]}: {title}</p>
 				</div>
 				<p>{creatorText.text}: {translateGenre(creator)}</p>
-				<p>{translateRecommend[recommendFormKeys.Genre][language]}: {translateGenre(genre, language)}</p>
+				<p>{translateRecommend[recommendFormKeys.Genre][language]}: {genre.map(g => translateGenre(g.value, language)).join(', ')}</p>
 				<p>{translateRecommend[recommendFormKeys.Year][language]}: {year}</p>
 
 			</div>

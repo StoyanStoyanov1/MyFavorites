@@ -22,7 +22,7 @@ const contentSchema = mongoose.Schema({
 		}
 	},
 	genre: {
-		type: String,
+		type: Array,
 		require: true,
 	},
 	year: {
@@ -49,6 +49,10 @@ const contentSchema = mongoose.Schema({
 			},
 			message: "The description must be at least 20 characters long."
 		},
+	},
+	country: {
+		type: String,
+		required: true,
 	},
 
 	voters: {

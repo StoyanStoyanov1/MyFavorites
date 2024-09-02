@@ -45,9 +45,9 @@ const translateRecommend = {
 		bg: "Жанр"
 	},
 	selectGenre: {
-		en: "Select the genre",
-		de: "Wählen Sie das Genre aus",
-		bg: "Изберете жанра",
+		en: "Please select a maximum of 3 genres",
+		de: "Bitte wählen Sie maximal 3 Genres aus",
+		bg: "Моля, изберете до 3 жанра",
 	},
 	year: {
 		en: "Year",
@@ -118,6 +118,16 @@ const translateRecommend = {
 		en: "Series",
 		de: "Serie",
 		bg: "Сериал"
+	},
+	country: {
+		en: "Country",
+		de: "Land",
+		bg: "Държава"
+	},
+	selectCountry: {
+		en: "Select country",
+		de: "Land auswählen",
+		bg: "Изберете държава"
 	},
 
 

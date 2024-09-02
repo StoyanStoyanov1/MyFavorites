@@ -148,3 +148,15 @@ textarea:focus {
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
 
+.genre-select {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.my-select__control {
+    background: rgb(255, 255, 255, 0.6) !important;
+    border: 1px solid #cccccc !important;
+    border-radius: 5px !important;
+    padding: 5px !important;
+    box-shadow: none !important;
+}

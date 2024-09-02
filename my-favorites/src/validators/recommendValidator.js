@@ -11,7 +11,7 @@ export default function recommendValidator(values, validator, language) {
 		inputIsValid = false;
 	}
 
-	if (!values[recommendFormKeys.Genre]) {
+	if (!values[recommendFormKeys.Genre].length) {
 		validatorMessages[recommendFormKeys.Genre] = translateRecommendValidators.genre[language];
 		inputIsValid = false;
 	}

@@ -18,7 +18,7 @@ exports.search = async (type, title, genre) => {
 	}
 
 	if (genre) {
-		query.genre = genre;
+		query.genre = { $in: genre};
 	}
 
 	return await Content.find(query).lean();
