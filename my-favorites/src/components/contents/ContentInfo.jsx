@@ -126,8 +126,8 @@ export default function ContentInfo() {
 						<h1>{content.title}</h1>
 						<p>{creatorText}: {content.creator}</p>
 						<p>{translateRecommend.genre[language]}: {content.genre.map(genre => translateGenre(genre.value, language)).join(', ')}</p>
-						<p>{translateRecommend.country[language]}: {content.country}</p>
-						<p>{translateRecommend.year[language]}: {countries[content.country][language]}</p>
+						<p>{translateRecommend.country[language]}: {countries[content.country][language]}</p>
+						<p>{translateRecommend.year[language]}: {content.year}</p>
 						<span>{translateRecommend.description[language]}:</span>
 						<div className='content-description'>
 							<p>

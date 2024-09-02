@@ -18,6 +18,7 @@ export default function ContentDetails({
 	creator,
 	type,
 	voters,
+	country,
 									   }) {
 	const [language] = useLanguage();
 	const navigate = useNavigate()
@@ -52,6 +53,9 @@ export default function ContentDetails({
 	}, [type, language]);
 	return (
 		<section className='section-content' onClick={handleClick}>
+			<div className='content-title'>
+				<p>{title}</p>
+			</div>
 			<div className='upercase'>
 				<img
 					src={image}
@@ -60,16 +64,15 @@ export default function ContentDetails({
 				/>
 			</div>
 			<div className='infocase'>
-				<div className='content-title'>
-					<p>{translateRecommend[recommendFormKeys.Title][language]}: {title}</p>
-				</div>
+
 				<p>{creatorText.text}: {translateGenre(creator)}</p>
+				<p>{translateRecommend[recommendFormKeys.Country][language]}: {countries[country][language]}</p>
 				<p>{translateRecommend[recommendFormKeys.Genre][language]}: {genre.map(g => translateGenre(g.value, language)).join(', ')}</p>
 				<p>{translateRecommend[recommendFormKeys.Year][language]}: {year}</p>
 
 			</div>
 
-			<Vote voteId={voters} userId={userId} />
+			<Vote voteId={voters} userId={userId}/>
 		</section>
 	);
 }
