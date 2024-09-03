@@ -13,7 +13,7 @@ const commentSchema = mongoose.Schema({
 		type: String,
 		required: true,
 		validate: {
-			validator: (v) => v.length > 0,
+			validator: (v) => v.trim().length > 0,
 		},
 		message: "The message cannot be empty.",
 	}
