@@ -28,6 +28,11 @@ const translateRecommendValidators = {
 		en: "This field must be between 2 and 20 characters long",
 		de: "Dieses Feld muss zwischen 2 und 20 Zeichen lang sein",
 		bg: "Това поле трябва да е между 2 и 20 символа дълго."
+	},
+	country: {
+		en: "Select country",
+		de: "Wählen Sie Land",
+		bg: "Изберете държава",
 	}
 }
 

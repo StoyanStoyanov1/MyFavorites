@@ -27,12 +27,19 @@ export default function recommendValidator(values, validator, language) {
 	}
 
 	if (values[recommendFormKeys.Image] !== '' && !/^https?:\/\//.test(values[recommendFormKeys.Image])) {
-		validatorMessages[recommendFormKeys.Image] = translateRecommendValidators.image[language]
+		validatorMessages[recommendFormKeys.Image] = translateRecommendValidators.image[language];
 		inputIsValid = false;
 	}
 
 	if (values[recommendFormKeys.Creator].length < 2 || values[recommendFormKeys.Creator].length > 20) {
-		validatorMessages[recommendFormKeys.Creator] = translateRecommendValidators.creator[language]
+		validatorMessages[recommendFormKeys.Creator] = translateRecommendValidators.creator[language];
+		inputIsValid = false;
+	}
+
+	if (!values[recommendFormKeys.Country].length) {
+		validatorMessages[recommendFormKeys.Country] = translateRecommendValidators.country[language];
+		inputIsValid = false;
+
 	}
 	return { inputIsValid, validatorMessages };
 }

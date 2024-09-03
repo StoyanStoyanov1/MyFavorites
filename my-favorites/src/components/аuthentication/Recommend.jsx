@@ -38,7 +38,6 @@ export default function Recommend() {
 	const currentYear = new Date().getFullYear();
 	const years = Array.from({length: currentYear - 1970 + 1}, (_, i) => currentYear - i);
 	const {values, onChange, onSubmit, setValues} = useForm(submitHandler, initialValues);
-	const [countryOptions, setCountryOptions] = useState([]);
 
 
 	useEffect(() => {
@@ -52,6 +51,7 @@ export default function Recommend() {
 					[recommendFormKeys.Description]: foundContent[recommendFormKeys.Description] || '',
 					[recommendFormKeys.Creator]: foundContent[recommendFormKeys.Creator] || '',
 					[recommendFormKeys.Image]: foundContent[recommendFormKeys.Image] || '',
+					[recommendFormKeys.Country]: foundContent[recommendFormKeys.Country] || '',
 				}))
 				.catch(err => console.error(err))
 		} else {
@@ -243,9 +243,11 @@ export default function Recommend() {
 										{Object.entries(countries).map(([key, value]) => (
 											<option key={key} value={key}>{value[language]}</option>
 										))}
-
-
 									</select>
+									{validator[recommendFormKeys.Country] &&
+										<div className='authValidate'>
+											<p>{validator[recommendFormKeys.Country]}</p>
+										</div>}
 								</div>
 
 								<div className='input-container'>
