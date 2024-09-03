@@ -93,50 +93,79 @@ export default function ContentInfo() {
 		}
 	};
 
+	const comments = [
+		{username: 'user', text: 'blq blq blq blq', date: '14.24.2245'},
+		{username: 'user', text: 'blq blq blq blq', date: '14.24.2245'},
+		{username: 'user', text: 'blq blq blq blq', date: '14.24.2245'},
+		{username: 'user', text: 'blq blq blq blq', date: '14.24.2245'},
+	]
 	return (
 		content ? (
-			<div className='infopage'><h1 className='content-header'>{translateRecommend[content.type][language]}</h1>
+			<div className='infopage'>
+				<h1 className='type-header'>{translateRecommend[content.type][language]}</h1>
 				<div className='container-content'>
+					{isDisabled && (
+						<div className='message-box'>
+							<p>
+								{!_id
+									? favoriteMessage.logged[language]
+									: isLiked
+										? favoriteMessage.addFavorite[language]
+										: favoriteMessage.removeFavorite[language]}
+							</p>
+						</div>
+					)}
+					<div className='content-header'>
+						<h1>{content.title}</h1>
 
-					{isDisabled && <div className='message-box'>
-						<p>{!_id ? favoriteMessage.logged[language] : isLiked ? favoriteMessage.addFavorite[language] : favoriteMessage.removeFavorite[language]}</p>
-					</div>}
-					<div className='left-site'>
 						<img
 							src={content.image}
 							alt='Image'
-							onError={(e) => e.target.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkK98VBjmf1Q6_3SC9Nmz8CILkBdm1BUiFLg&s'}
+							onError={(e) => (e.target.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkK98VBjmf1Q6_3SC9Nmz8CILkBdm1BUiFLg&s')}
 						/>
 						<Vote voteId={content.voters} userId={_id}/>
 						<div
 							className={`heart ${isLiked ? 'is-liked' : 'not-liked'}`}
 							onClick={!isDisabled ? handleLike : null}
-						>
-						</div>
+						></div>
 
-						{_id === content.userId && <div className='buttons'>
-							<button onClick={() => navigate(`${Path.EditRecommend}/${contentId}`)}>Edit</button>
-							<button onClick={handleDelete}>Delete</button>
-						</div>}
+
 					</div>
 
 					<div className='divider'></div>
 
-					<div className='right-site'>
-						<h1>{content.title}</h1>
+					<div className='content-body'>
 						<p>{creatorText}: {content.creator}</p>
 						<p>{translateRecommend.genre[language]}: {content.genre.map(genre => translateGenre(genre.value, language)).join(', ')}</p>
 						<p>{translateRecommend.country[language]}: {countries[content.country][language]}</p>
 						<p>{translateRecommend.year[language]}: {content.year}</p>
-						<span>{translateRecommend.description[language]}:</span>
-						<div className='content-description'>
-							<p>
-								{content.description}
-							</p>
-						</div>
+						<p>{translateRecommend.description[language]}: {content.description}</p>
+
 					</div>
+
+					<div className='comments-container'>
+						<h2>Comments</h2>
+
+						{comments.map((comment, index) => (
+							<div key={index} className='comment-body'>
+								<div className='comment-header'>
+									<h3 className='comment-username'>{comment.username}</h3>
+									<span className='comment-date'>{new Date(comment.date).toLocaleDateString()}</span>
+								</div>
+								<p className='comment-text'>{comment.text}</p>
+							</div>
+						))}
+					</div>
+					{_id === content.userId && (
+						<div className='buttons'>
+							<button onClick={() => navigate(`${Path.EditRecommend}/${contentId}`)}>Edit</button>
+							<button onClick={handleDelete}>Delete</button>
+						</div>
+					)}
 				</div>
+
 			</div>
+
 		) : (
 			<section id='authentication'>
 				<div className="lds-dual-ring"></div>
