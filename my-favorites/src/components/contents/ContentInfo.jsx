@@ -11,6 +11,7 @@ import authContext from "../../context/authContext.jsx";
 import translateMessages from "../../utils/translator/translateMessages/translateMessages.js";
 import Vote from "./Vote.jsx";
 import countries from "../../utils/countries.js";
+import { FaPaperPlane } from 'react-icons/fa'
 
 export default function ContentInfo() {
 	const navigate = useNavigate();
@@ -98,6 +99,13 @@ export default function ContentInfo() {
 		{username: 'user', text: 'blq blq blq blq', date: '14.24.2245'},
 		{username: 'user', text: 'blq blq blq blq', date: '14.24.2245'},
 		{username: 'user', text: 'blq blq blq blq', date: '14.24.2245'},
+		{username: 'user', text: 'blq blq blq blq', date: '14.24.2245'},
+		{username: 'user', text: 'blq blq blq blq', date: '14.24.2245'},
+		{username: 'user', text: 'blq blq blq blq', date: '14.24.2245'},
+		{username: 'user', text: 'blq blq blq blq', date: '14.24.2245'},
+		{username: 'user', text: 'blq blq blq blq', date: '14.24.2245'},
+		{username: 'user', text: 'blq blq blq blq', date: '14.24.2245'},
+		{username: 'user', text: 'blq blq blq blq', date: '14.24.2245'},
 	]
 	return (
 		content ? (
@@ -155,6 +163,15 @@ export default function ContentInfo() {
 								<p className='comment-text'>{comment.text}</p>
 							</div>
 						))}
+
+					</div>
+					<div className='comment-form'>
+                                <textarea
+									placeholder='Write a comment...'
+								/>
+						<FaPaperPlane
+							className='send-icon'
+						/>
 					</div>
 					{_id === content.userId && (
 						<div className='buttons'>

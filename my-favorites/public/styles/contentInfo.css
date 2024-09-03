@@ -245,3 +245,34 @@
     text-align: center;
     color: white;
 }
+
+.comment-form {
+    position: relative;
+    width: 100%;
+    margin-top: 1em;
+}
+
+.comment-form textarea {
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    padding-right: 40px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    resize: none;
+    box-sizing: border-box;
+}
+
+.comment-form .send-icon {
+    position: absolute;
+    right: 10px;
+    bottom: 20px;
+    font-size: 24px;
+    color: #007bff;
+    cursor: pointer;
+}
+
+.comment-form .send-icon:hover {
+    color: #0056b3;
+}
