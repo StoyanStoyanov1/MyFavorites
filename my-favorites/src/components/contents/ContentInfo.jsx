@@ -14,6 +14,8 @@ import countries from "../../utils/countries.js";
 import { FaPaperPlane } from 'react-icons/fa'
 
 export default function ContentInfo() {
+	const maxLengthDescription = 150;
+	
 	const navigate = useNavigate();
 	const {_id} = useContext(authContext);
 	const [language] = useLanguage();
@@ -24,6 +26,12 @@ export default function ContentInfo() {
 	const [isLiked, setIsLiked] = useState(false);
 	const [isDisabled, setIsDisabled] = useState(false);
 	const [favoriteMessage, setFavoriteMessage] = useState({});
+	const [descriptionText, setDescriptionText] = useState('');
+	const [lengthDesciption, setLengthDescription] = useState(maxLengthDescription);
+
+	useEffect(() => {
+		setLengthDescription(maxLengthDescription - descriptionText.trimStart().length);
+	}, [descriptionText])
 
 
 	useEffect(() => {
@@ -150,7 +158,7 @@ export default function ContentInfo() {
 						<p>{translateRecommend.description[language]}: {content.description}</p>
 
 					</div>
-
+						
 					<div className='comments-container'>
 						<h2>Comments</h2>
 
@@ -168,21 +176,27 @@ export default function ContentInfo() {
 					<div className='comment-form'>
                                 <textarea
 									placeholder='Write a comment...'
+									onChange={(e) => setDescriptionText(e.target.value)}
+									value={descriptionText.trimStart()}
 								/>
 						<FaPaperPlane
+
 							className='send-icon'
 						/>
 					</div>
+					<p className={lengthDesciption < 0 ? 'negative-counter': 'positive-counter'}>{translateContents.textCounterMesage[language]} ({lengthDesciption})</p>
+
 					{_id === content.userId && (
 						<div className='buttons'>
 							<button onClick={() => navigate(`${Path.EditRecommend}/${contentId}`)}>Edit</button>
 							<button onClick={handleDelete}>Delete</button>
 						</div>
 					)}
+
 				</div>
 
 			</div>
-
+			
 		) : (
 			<section id='authentication'>
 				<div className="lds-dual-ring"></div>

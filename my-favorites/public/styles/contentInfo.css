@@ -276,3 +276,11 @@
 .comment-form .send-icon:hover {
     color: #0056b3;
 }
+
+.positive-counter {
+    color: rgb(59, 233, 59);
+}
+
+.negative-counter {
+    color: rgb(241, 17, 17)
+}

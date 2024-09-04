@@ -46,19 +46,20 @@ export default function Recommend() {
 				.then(foundContent => setValues({
 					[recommendFormKeys.Type]: foundContent[recommendFormKeys.Type] || '',
 					[recommendFormKeys.Title]: foundContent[recommendFormKeys.Title] || '',
-					[recommendFormKeys.Genre]: foundContent[recommendFormKeys.Genre] || '',
+					[recommendFormKeys.Genre]: foundContent[recommendFormKeys.Genre] || [],
 					[recommendFormKeys.Year]: foundContent[recommendFormKeys.Year] || '',
 					[recommendFormKeys.Description]: foundContent[recommendFormKeys.Description] || '',
 					[recommendFormKeys.Creator]: foundContent[recommendFormKeys.Creator] || '',
 					[recommendFormKeys.Image]: foundContent[recommendFormKeys.Image] || '',
 					[recommendFormKeys.Country]: foundContent[recommendFormKeys.Country] || '',
 				}))
+
 				.catch(err => console.error(err))
 		} else {
 			setValues({
 				[recommendFormKeys.Type]: '',
 				[recommendFormKeys.Title]: '',
-				[recommendFormKeys.Genre]: '',
+				[recommendFormKeys.Genre]: [],
 				[recommendFormKeys.Year]: '',
 				[recommendFormKeys.Description]: '',
 				[recommendFormKeys.Creator]: '',
