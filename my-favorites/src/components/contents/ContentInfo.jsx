@@ -1,7 +1,10 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
+
 import * as contentService from '../../services/contentService.js';
 import * as userService from '../../services/userService.js';
+import * as commentService from '../../services/commentService.js';
+
 import translateRecommend from '../../utils/translator/translateRecommend.js';
 import {useLanguage} from '../../context/LanguageContext.jsx';
 import translateGenre from "./translateGenre.js";
@@ -11,13 +14,13 @@ import authContext from "../../context/authContext.jsx";
 import translateMessages from "../../utils/translator/translateMessages/translateMessages.js";
 import Vote from "./Vote.jsx";
 import countries from "../../utils/countries.js";
-import { FaPaperPlane } from 'react-icons/fa'
+import { FaPaperPlane } from 'react-icons/fa';
 
 export default function ContentInfo() {
 	const maxLengthDescription = 150;
 	
 	const navigate = useNavigate();
-	const {_id} = useContext(authContext);
+	const {_id, isAuthenticated} = useContext(authContext);
 	const [language] = useLanguage();
 	const {contentId} = useParams();
 	const [content, setContent] = useState(null);
@@ -102,6 +105,20 @@ export default function ContentInfo() {
 		}
 	};
 
+	const sendComment = () => {
+		if (!descriptionText.length) return;
+
+		const data = {
+			contentId,
+			userId: _id,
+			text: descriptionText
+		}
+
+		commentService.create(contentId, data);
+
+		setDescriptionText('');
+	}
+
 	const comments = [
 		{username: 'user', text: 'blq blq blq blq', date: '14.24.2245'},
 		{username: 'user', text: 'blq blq blq blq', date: '14.24.2245'},
@@ -173,18 +190,19 @@ export default function ContentInfo() {
 						))}
 
 					</div>
-					<div className='comment-form'>
+						{isAuthenticated && 					<><div className='comment-form'>
                                 <textarea
-									placeholder='Write a comment...'
+									placeholder={translateContents.writeComment[language]}
 									onChange={(e) => setDescriptionText(e.target.value)}
 									value={descriptionText.trimStart()}
 								/>
 						<FaPaperPlane
-
+							onClick={sendComment}
 							className='send-icon'
 						/>
 					</div>
-					<p className={lengthDesciption < 0 ? 'negative-counter': 'positive-counter'}>{translateContents.textCounterMesage[language]} ({lengthDesciption})</p>
+					<p className={lengthDesciption < 0 ? 'negative-counter': 'positive-counter'}>{translateContents.textCounterMesage[language]} ({lengthDesciption})</p></>} 
+
 
 					{_id === content.userId && (
 						<div className='buttons'>

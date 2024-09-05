@@ -24,6 +24,12 @@ const translateContents = {
 		de: "Verbleibende Zeichen zum Eingeben",
 		bg: "Оставащи символи за въвеждане",
 	},
+	writeComment: {
+		en: "Write a commend...",
+		de: "Schreinen Sie einen Kommentar...",
+		bg: "Напишете коментар..."
+
+	}
 }
 
 export default translateContents;
