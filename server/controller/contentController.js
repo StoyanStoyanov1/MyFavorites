@@ -139,6 +139,6 @@ router.get('/my-favorites/:userId', async (req, res) => {
 	} catch (err) {
 		res.status(500).json({ message: err.message });
 	}
-})
+});
 
 module.exports = router;
