@@ -2,4 +2,4 @@ const Comment = require('../models/Comment');
 
 exports.create = async (data) => await Comment.create(data);
 
-exports.getAll = async () => await Comment.getAll();
+exports.getByContentId = async (contentId) => await Comment.find({contentId});

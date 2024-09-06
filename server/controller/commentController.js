@@ -13,6 +13,18 @@ router.post('/create/:contentId', async (req, res) => {
     } catch (err) {
         res.status(500).json({message: err});
     }
-}) 
+});
+
+router.get('/:contentId', async (req, res) => {
+    const contentId = req.params.contentId;
+
+    try {
+        const comments = await commentService.getByContentId(contentId);
+
+        res.status(201).json(comments);
+    } catch (err) {
+        res.status(500).json({message: err.message});
+    }
+})
 
 module.exports = router;
