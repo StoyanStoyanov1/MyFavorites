@@ -14,4 +14,11 @@ export const getByContentId = async (contentId) => {
     const comments = await request('GET', `${baseUrl}/${contentId}`);
 
     return comments;
-}
+};
+
+export const removeComment = async (commentId) => {
+    const removedComment = await request("DELETE", `${baseUrl}/${commentId}`);
+
+    return removedComment;
+};
+

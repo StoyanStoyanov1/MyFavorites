@@ -39,6 +39,16 @@ const translateContents = {
 		en: "Comments",
 		de: "Komenntaren",
 		bg: "Коментари",
+	},
+	deleteKomment: {
+		en: 'Are you sure you want to delete this comment?',
+		de: 'Sind Sie sicher, dass Sie diesen Kommentar löschen möchten?',
+		bg: 'Сигурни ли сте, че искате да изтриете този коментар?',
+	},
+	deleteRecommend: {
+		en: 'Are you sure you want to delete this recommend?',
+		de: 'Sind Sie sicher, dass Sie diesen Empfehlung löschen möchten?',
+		bg: 'Сигурни ли сте, че искате да изтриете тази препоръка?',
 	}
 }
 

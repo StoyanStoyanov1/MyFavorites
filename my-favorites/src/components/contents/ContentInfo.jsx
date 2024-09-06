@@ -82,13 +82,18 @@ export default function ContentInfo() {
 	}, [_id, content]);
 
 	const handleDelete = async () => {
-		try {
-			await contentService.remove(content._id);
-			navigate(Path.Home);
-		} catch (err) {
-			alert(err.message);
-			navigate(Path.Home);
+		const confirmDelete = window.confirm(translateContents.deleteRecommend[language]);
+
+		if (confirmDelete) {
+			try {
+				await contentService.remove(content._id);
+				navigate(Path.Home);
+			} catch (err) {
+				alert(err.message);
+				navigate(Path.Home);
+			}
 		}
+		
 	};
 
 	const handleLike = async () => {
@@ -159,6 +164,18 @@ export default function ContentInfo() {
 		foundComments();
 	}, [contentId, newComment]);
 	
+	const deleteComment = async (commentId) => {
+		const confirmDelete = window.confirm(translateContents.deleteKomment[language]);
+
+		if (confirmDelete) {
+			try {
+				await commentService.removeComment(commentId);
+				setNewComment(true);
+			} catch (err) {
+				console.error(err.message);
+			}
+		}
+	}
 
 	return (
 		content ? (
@@ -215,7 +232,10 @@ export default function ContentInfo() {
 									<h3 className='comment-username'>{comment.username}</h3>
 									<span className='comment-date'>
 										{comment.userId === _id && comment._id === hoveredCommentId &&  
-										<button className='delete-button'>
+										<button 
+										className='delete-button'
+										onClick={() => deleteComment(comment._id)}
+										>
 										<FontAwesomeIcon icon={faTrashAlt} />
 									</button>
 									}	
