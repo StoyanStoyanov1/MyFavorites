@@ -32,4 +32,6 @@ exports.addUserToFavoritesList = async (contentId, userId) => await Content.find
 
 exports.removeUserFromFavoritesList = async (contentId, userId) => await Content.findByIdAndUpdate(contentId, {$pull: {'favorites_user_ids': userId}}, {new: true}).lean();
 
-exports.addCommentToCommentsArray = async (contentId, commentId) => await Content.findByIdAndUpdate(contentId, {$push: {comments: commentId}})
+exports.addCommentToCommentsArray = async (contentId, commentId) => await Content.findByIdAndUpdate(contentId, {$push: {comments: commentId}});
+
+exports.removeCommentFromCommentsArray = async (contentId, commentId) => await Content.findByIdAndUpdate(contentId, {$pull: {comments: commentId}})

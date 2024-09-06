@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { json } = require('express');
 const commentService = require('../service/commentService');
 const contentService = require('../service/contentService');
 
@@ -25,6 +26,23 @@ router.get('/:contentId', async (req, res) => {
     } catch (err) {
         res.status(500).json({message: err.message});
     }
-})
+});
+
+router.delete('/:commentId', async (req, res) => {
+    const commentId = req.params.commentId;
+
+
+    try {
+        const comment = await commentService.getOne(commentId);
+
+        await contentService.removeCommentFromCommentsArray(comment.contentId, commentId);
+        await commentService.remove(commentId);
+        res.status(201).json({message: "The comment is deleted!"});
+
+    } catch(err) {
+        res.status(500).json({message: err.message});
+    }
+});
+
 
 module.exports = router;
