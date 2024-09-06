@@ -31,6 +31,8 @@ export default function ContentInfo() {
 	const [favoriteMessage, setFavoriteMessage] = useState({});
 	const [descriptionText, setDescriptionText] = useState('');
 	const [lengthDesciption, setLengthDescription] = useState(maxLengthDescription);
+	const [comments, setComments] = useState([]);
+	const [newComment, setNewComment] = useState(false);
 
 	useEffect(() => {
 		setLengthDescription(maxLengthDescription - descriptionText.trimStart().length);
@@ -106,6 +108,7 @@ export default function ContentInfo() {
 	};
 
 	const sendComment = () => {
+		setNewComment(true);
 		if (!descriptionText.length) return;
 
 		const data = {
@@ -119,19 +122,37 @@ export default function ContentInfo() {
 		setDescriptionText('');
 	}
 
-	const comments = [
-		{username: 'user', text: 'blq blq blq blq', date: '14.24.2245'},
-		{username: 'user', text: 'blq blq blq blq', date: '14.24.2245'},
-		{username: 'user', text: 'blq blq blq blq', date: '14.24.2245'},
-		{username: 'user', text: 'blq blq blq blq', date: '14.24.2245'},
-		{username: 'user', text: 'blq blq blq blq', date: '14.24.2245'},
-		{username: 'user', text: 'blq blq blq blq', date: '14.24.2245'},
-		{username: 'user', text: 'blq blq blq blq', date: '14.24.2245'},
-		{username: 'user', text: 'blq blq blq blq', date: '14.24.2245'},
-		{username: 'user', text: 'blq blq blq blq', date: '14.24.2245'},
-		{username: 'user', text: 'blq blq blq blq', date: '14.24.2245'},
-		{username: 'user', text: 'blq blq blq blq', date: '14.24.2245'},
-	]
+	useEffect(() => {
+		async function foundComments() {
+			setNewComment(false);
+
+			try {
+				const comments = await commentService.getByContentId(contentId);
+	
+				const updatedComments = await Promise.all(
+					comments.map(async comment => {
+						const user = await userService.getById(comment.userId);
+						return {
+							...comment,
+							username: user.username,
+						};
+					})
+				
+				);
+
+				updatedComments.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+	
+				setComments(updatedComments);
+			} catch (err) {
+				console.error("Error fetching comments or users: ", err.message);
+			}
+		}
+	
+		foundComments();
+	}, [contentId, newComment]);
+	
+	
+	
 	return (
 		content ? (
 			<div className='infopage'>
@@ -183,7 +204,7 @@ export default function ContentInfo() {
 							<div key={index} className='comment-body'>
 								<div className='comment-header'>
 									<h3 className='comment-username'>{comment.username}</h3>
-									<span className='comment-date'>{new Date(comment.date).toLocaleDateString()}</span>
+									<span className='comment-date'>{new Date(comment.updatedAt).toLocaleString()}</span>
 								</div>
 								<p className='comment-text'>{comment.text}</p>
 							</div>
