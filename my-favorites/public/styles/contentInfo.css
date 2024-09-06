@@ -23,7 +23,7 @@
 .content-header img {
     width: 100%;
     max-width: 300px;
-    height: 300px;
+    height: 300px; 
     object-fit: cover;
     border-radius: 12px;
     margin-bottom: 20px;
@@ -134,7 +134,7 @@
 }
 
 .not-liked {
-    background: #d2cfcf;
+    background: #e2e9eb;
 }
 
 .vote-container {
@@ -281,7 +281,7 @@
 }
 
 .positive-counter {
-    color: rgb(25, 117, 25);
+    color: rgb(54, 180, 54);
 }
 
 .negative-counter {
@@ -305,3 +305,16 @@
     color: #f19010;
     font-size: 24px;
 }
+
+.edit-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #007bff; 
+    font-size: 16px; 
+  }
+  
+  .edit-button:hover {
+    color: #0056b3; 
+  }
+  

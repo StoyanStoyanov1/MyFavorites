@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt, faPen } from '@fortawesome/free-solid-svg-icons';
 
 import * as contentService from '../../services/contentService.js';
 import * as userService from '../../services/userService.js';
@@ -17,7 +17,7 @@ import authContext from "../../context/authContext.jsx";
 import translateMessages from "../../utils/translator/translateMessages/translateMessages.js";
 import Vote from "./Vote.jsx";
 import countries from "../../utils/countries.js";
-import { FaPaperPlane } from 'react-icons/fa';
+import { FaPaperPlane} from 'react-icons/fa';
 
 export default function ContentInfo() {
 	const maxLengthDescription = 300;
@@ -236,12 +236,15 @@ export default function ContentInfo() {
 									<h3 className='comment-username'>{comment.username}</h3>
 									<span className='comment-date'>
 										{comment.userId === _id && comment._id === hoveredCommentId &&  
+										<><button className="edit-button">
+											<FontAwesomeIcon icon={faPen} />
+										  </button>
 										<button 
 										className='delete-button'
 										onClick={() => deleteComment(comment._id)}
 										>
 										<FontAwesomeIcon icon={faTrashAlt} />
-									</button>
+									</button></>
 									}	
 										{new Date(comment.updatedAt).toLocaleString()}</span>
 								</div>
