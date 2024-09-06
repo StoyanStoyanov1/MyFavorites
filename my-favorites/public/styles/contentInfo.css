@@ -287,3 +287,17 @@
 .negative-counter {
     color: rgb(241, 17, 17)
 }
+
+.delete-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #dc3545; 
+    font-size: 16px;
+}
+
+.delete-button:hover {
+    color: #c82333; 
+}
+
+

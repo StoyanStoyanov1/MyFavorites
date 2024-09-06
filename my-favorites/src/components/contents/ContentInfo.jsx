@@ -1,6 +1,9 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+
 import * as contentService from '../../services/contentService.js';
 import * as userService from '../../services/userService.js';
 import * as commentService from '../../services/commentService.js';
@@ -33,6 +36,7 @@ export default function ContentInfo() {
 	const [lengthDesciption, setLengthDescription] = useState(maxLengthDescription);
 	const [comments, setComments] = useState([]);
 	const [newComment, setNewComment] = useState(false);
+	const [hoveredCommentId, setHoveredCommentId] = useState(null);
 
 	useEffect(() => {
 		setLengthDescription(maxLengthDescription - descriptionText.trimStart().length);
@@ -155,8 +159,7 @@ export default function ContentInfo() {
 		foundComments();
 	}, [contentId, newComment]);
 	
-	
-	
+
 	return (
 		content ? (
 			<div className='infopage'>
@@ -205,10 +208,18 @@ export default function ContentInfo() {
 						<h2>{translateContents.comments[language]} ({comments.length})</h2>
 
 						{comments.map((comment, index) => (
-							<div key={index} className='comment-body'>
+							<div key={index} className='comment-body'
+							onMouseEnter={() => setHoveredCommentId(comment._id)}
+							onMouseLeave={() => setHoveredCommentId(null)}>
 								<div className='comment-header'>
 									<h3 className='comment-username'>{comment.username}</h3>
-									<span className='comment-date'>{new Date(comment.updatedAt).toLocaleString()}</span>
+									<span className='comment-date'>
+										{comment.userId === _id && comment._id === hoveredCommentId &&  
+										<button className='delete-button'>
+										<FontAwesomeIcon icon={faTrashAlt} />
+									</button>
+									}	
+										{new Date(comment.updatedAt).toLocaleString()}</span>
 								</div>
 								<p className='comment-text'>{comment.text}</p>
 							</div>
