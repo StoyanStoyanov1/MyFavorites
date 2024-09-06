@@ -49,6 +49,11 @@ const translateContents = {
 		en: 'Are you sure you want to delete this recommend?',
 		de: 'Sind Sie sicher, dass Sie diesen Empfehlung löschen möchten?',
 		bg: 'Сигурни ли сте, че искате да изтриете тази препоръка?',
+	},
+	firstComment: {
+		en: 'No one has dared to leave a comment yet. Be the first!',
+		de: 'Niemand hat sich bisher getraut, einen Kommentar zu hinterlassen. Sei der Erste!',
+		bg: 'Никой още не се е осмелил да остави коментар. Бъди първият!',
 	}
 }
 

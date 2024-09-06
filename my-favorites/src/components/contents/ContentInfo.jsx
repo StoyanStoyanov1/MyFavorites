@@ -224,7 +224,11 @@ export default function ContentInfo() {
 					<div className='comments-container'>
 						<h2>{translateContents.comments[language]} ({comments.length})</h2>
 
-						{comments.map((comment, index) => (
+						{comments.length === 0 ? 
+						
+						<p className='first-comment'>{translateContents.firstComment[language]}</p>
+						
+						:comments.map((comment, index) => (
 							<div key={index} className='comment-body'
 							onMouseEnter={() => setHoveredCommentId(comment._id)}
 							onMouseLeave={() => setHoveredCommentId(null)}>
