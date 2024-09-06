@@ -2,6 +2,7 @@ const router = require('express').Router();
 const contentService = require('../service/contentService');
 const userService = require('../service/userService')
 const voteService = require('../service/voteService');
+const commentService = require('../service/commentService');
 const {Types} = require("mongoose");
 
 router.post('/create', async (req, res) => {
@@ -99,6 +100,9 @@ router.delete('/:contentId', async (req, res) => {
 		for (const userId of content['favorites_user_ids']) {
 			await userService.removeFavorite(userId, contentId);
 		}
+
+		content.comments.map(commentId => commentService.remove(commentId));
+		
 		 res.status(201).json(content);
 	} catch (err) {
 		res.status(500).json({message: 'Content is not found!'})
