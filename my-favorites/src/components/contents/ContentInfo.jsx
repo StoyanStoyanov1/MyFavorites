@@ -168,9 +168,9 @@ export default function ContentInfo() {
 		const confirmDelete = window.confirm(translateContents.deleteKomment[language]);
 
 		if (confirmDelete) {
+			setComments(comments.filter(comment => commentId !== comment._id));
 			try {
 				await commentService.removeComment(commentId);
-				setNewComment(true);
 			} catch (err) {
 				console.error(err.message);
 			}
