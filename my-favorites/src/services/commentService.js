@@ -22,3 +22,8 @@ export const removeComment = async (commentId) => {
     return removedComment;
 };
 
+export const edit = async (commentId, newText) => {
+    const newComment = await request('PUT', `${baseUrl}/${commentId}`, {text: newText});
+
+    return newComment;
+}

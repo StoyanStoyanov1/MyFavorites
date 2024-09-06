@@ -7,3 +7,5 @@ exports.getByContentId = async (contentId) => await Comment.find({contentId});
 exports.remove = async (commentId) => await Comment.findByIdAndDelete(commentId);
 
 exports.getOne = async (commentId) => await Comment.findById(commentId).lean();
+
+exports.edit = async (commentId, data) => await Comment.findByIdAndUpdate(commentId, data) 

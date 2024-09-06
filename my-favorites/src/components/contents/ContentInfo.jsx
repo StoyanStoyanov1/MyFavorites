@@ -37,6 +37,7 @@ export default function ContentInfo() {
 	const [comments, setComments] = useState([]);
 	const [newComment, setNewComment] = useState(false);
 	const [hoveredCommentId, setHoveredCommentId] = useState(null);
+	const [commentEdit, setCommentEdit] = useState(false);
 
 	useEffect(() => {
 		setLengthDescription(maxLengthDescription - descriptionText.trimStart().length);
@@ -177,6 +178,29 @@ export default function ContentInfo() {
 		}
 	}
 
+	const handleEditComment = (commentId) => {
+
+		const foundComment = comments.find(comment => comment._id === commentId);
+		
+		if (commentEdit) {
+			const newText = commentEdit.trim();
+			if (newText.length > maxLengthDescription) {
+				return alert(translateContents.longComment[language]);
+			}
+
+			if (newText && foundComment.text !== newText) {
+				foundComment.text = newText;
+				
+				commentService.edit(commentId, newText);
+			}
+
+			setCommentEdit(false);
+			
+		} else {
+			setCommentEdit(foundComment.text);
+		}
+	}
+
 	return (
 		content ? (
 			<div className='infopage'>
@@ -236,7 +260,9 @@ export default function ContentInfo() {
 									<h3 className='comment-username'>{comment.username}</h3>
 									<span className='comment-date'>
 										{comment.userId === _id && comment._id === hoveredCommentId &&  
-										<><button className="edit-button">
+										<><button 
+											onClick={() => handleEditComment(comment._id)}
+										className="edit-button">
 											<FontAwesomeIcon icon={faPen} />
 										  </button>
 										<button 
@@ -248,7 +274,16 @@ export default function ContentInfo() {
 									}	
 										{new Date(comment.updatedAt).toLocaleString()}</span>
 								</div>
-								<p className='comment-text'>{comment.text}</p>
+								{
+									commentEdit !== false ? 
+									<textarea
+									className='edit-comment-textarea'
+									onChange={(e) => setCommentEdit(e.target.value)}
+									value={commentEdit}
+									></textarea>
+									:
+									<p className='comment-text'>{comment.text}</p>
+								}
 							</div>
 						))}
 

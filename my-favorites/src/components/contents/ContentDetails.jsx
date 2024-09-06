@@ -32,7 +32,6 @@ export default function ContentDetails({
 		navigate(`${Path.Details}/${_id}`)
 	}
 
-	console.log(genre.map(g => translateGenre(g.value, language)).join(', '))
 	useEffect(() => {
 		if (type === 'movie' || type === 'series') {
 			setCreatorText({

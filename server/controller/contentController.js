@@ -97,6 +97,7 @@ router.delete('/:contentId', async (req, res) => {
 		 const content = await contentService.findById(contentId);
 		 await contentService.delete(contentId);
 		 await userService.removeContent(content.userId, contentId);
+		 await voteService.deleteVote(content.voters);
 		for (const userId of content['favorites_user_ids']) {
 			await userService.removeFavorite(userId, contentId);
 		}

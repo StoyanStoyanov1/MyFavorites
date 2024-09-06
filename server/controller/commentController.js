@@ -44,5 +44,18 @@ router.delete('/:commentId', async (req, res) => {
     }
 });
 
+router.put('/:commentId', async (req, res) => {
+    const commentId = req.params.commentId;
+    const data = req.body;
+    
+    try {
+        const comment = await commentService.edit(commentId, data);
+
+        res.status(201).json(comment)
+    } catch (err) {
+        res.status(500).json({message: err.message});
+    }
+})
+
 
 module.exports = router;
