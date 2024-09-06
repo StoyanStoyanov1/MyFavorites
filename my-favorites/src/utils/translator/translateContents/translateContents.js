@@ -29,6 +29,16 @@ const translateContents = {
 		de: "Schreinen Sie einen Kommentar...",
 		bg: "Напишете коментар..."
 
+	},
+	longComment: {
+		en: "The comment is too long!",
+		de: "Der Kommentar ist zu lang.!",
+		bg: "Коментара е прекалено дълъг!",
+	},
+	comments: {
+		en: "Comments",
+		de: "Komenntaren",
+		bg: "Коментари",
 	}
 }
 

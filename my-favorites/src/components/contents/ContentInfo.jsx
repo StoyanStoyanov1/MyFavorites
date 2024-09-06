@@ -17,7 +17,7 @@ import countries from "../../utils/countries.js";
 import { FaPaperPlane } from 'react-icons/fa';
 
 export default function ContentInfo() {
-	const maxLengthDescription = 150;
+	const maxLengthDescription = 300;
 	
 	const navigate = useNavigate();
 	const {_id, isAuthenticated} = useContext(authContext);
@@ -108,6 +108,10 @@ export default function ContentInfo() {
 	};
 
 	const sendComment = () => {
+		if (lengthDesciption < 0) {
+			return alert(translateContents.longComment[language]);
+		}
+
 		setNewComment(true);
 		if (!descriptionText.length) return;
 
@@ -198,7 +202,7 @@ export default function ContentInfo() {
 					</div>
 						
 					<div className='comments-container'>
-						<h2>Comments</h2>
+						<h2>{translateContents.comments[language]} ({comments.length})</h2>
 
 						{comments.map((comment, index) => (
 							<div key={index} className='comment-body'>
