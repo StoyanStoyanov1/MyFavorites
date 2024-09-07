@@ -1,9 +1,3 @@
-.email-container {
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    height: 90vh; 
-}    
 
 .email-form {
     display: flex;
@@ -62,10 +56,6 @@
     background-color: #0056b3;
   }
 
-  .email-form h1 {
-    text-align: center;
-    padding-bottom: 10px;
-  }
 
   .contactUs, .contactProvide {
     color: #a7680b;
@@ -73,6 +63,7 @@
     line-height: 1.5;
     font-size: 18px;
     padding-bottom: 10xp;
+    padding-bottom: 10px;
   }
 
   .contactProvide {
