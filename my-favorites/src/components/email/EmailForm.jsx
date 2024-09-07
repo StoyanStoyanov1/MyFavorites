@@ -32,9 +32,10 @@ const EmailForm = () => {
       });
   };
 
-  return (<div class="email-container">
+  return (<div id='content-body'>
+        <h1 className='content-header'>{translateHeader.contactUs[language]}</h1>
+
     <form onSubmit={handleSubmit} className="email-form">
-    <h1>{translateHeader.contactUs[language]}</h1>
     <p className='contactUs'>{translateEmail.contactUs[language]}</p>
     <p className='contactProvide'>{translateEmail.contactProvide[language]}</p>
 
