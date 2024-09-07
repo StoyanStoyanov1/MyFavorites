@@ -35,6 +35,7 @@ export default function Header() {
 					<Link className={`favorites-text ${location.pathname === Path.Home ? 'current-page' : ''}`} to={Path.Home}>My Favorites</Link>
 				</div>
 				<div className="nav-right">
+				<Link className={getNavLinkClass(Path.EmailForm)} to={Path.EmailForm}>{translateHeader.contactUs[language]}</Link>
 
 					{isAuthenticated && <>
 							<div className='profilMenu'>
@@ -51,6 +52,7 @@ export default function Header() {
 							</>
 						||
 						<>
+
 							<Link className={getNavLinkClass(Path.Login)} to={Path.Login}>{translateHeader.login[language]}</Link>
 							<Link className={getNavLinkClass(Path.Register)} to={Path.Register}>{translateHeader.register[language]}</Link>
 						</>}

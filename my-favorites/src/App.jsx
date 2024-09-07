@@ -16,6 +16,7 @@ import Contents from "./components/contents/Contents.jsx";
 import ContentInfo from "./components/contents/ContentInfo.jsx";
 import Home from "./components/home/Home.jsx";
 import NotFoundPage from "./components/guards/NotFoundPage.jsx";
+import EmailForm from './components/email/EmailForm.jsx';
 
 //context
 import {LanguageProvider} from "./context/LanguageContext.jsx";
@@ -38,6 +39,7 @@ function App() {
 							<Route path={Path.Movies} element={<Contents/>}/>
 							<Route path={Path.Podcasts} element={<Contents/>}/>
 							<Route path={Path.Series} element={<Contents/>}/>
+							<Route path={Path.EmailForm} element={<EmailForm/>} />
 							<Route path={`${Path.MyRecommends}/:userId`} element={<Contents/>}/>
 							<Route path={`${Path.MyFavorites}/:userId`} element={<Contents/>}/>
 							<Route path={`${Path.Details}/:contentId`} element={<ContentInfo/>}/>

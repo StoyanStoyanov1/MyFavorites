@@ -12,6 +12,7 @@ const Path = {
 	EditRecommend: '/recommend/edit',
 	MyRecommends: '/my-recommends',
 	MyFavorites: '/my-favorites',
+	EmailForm: '/email-form',
 };
 
 export default Path;

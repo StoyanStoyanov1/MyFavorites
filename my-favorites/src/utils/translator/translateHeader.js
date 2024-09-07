@@ -58,7 +58,12 @@ const translateHeader = {
 		en: "Series",
 		de: "Serien",
 		bg: "Сериали"
-	}
+	},
+	contactUs: {
+		en: "Contact Us",
+		de: "Kontaktieren Sie uns",
+		bg: "Свържете се с нас",
+	},
 
 };
 
