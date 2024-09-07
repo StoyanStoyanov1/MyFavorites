@@ -106,9 +106,11 @@ export default function ContentInfo() {
 
 		if (_id) {
 			if (isLiked) {
+				content['favorites_user_ids'] = content['favorites_user_ids'].filter(id => id !== _id);
 				userService.removeFavorite(content._id, _id);
 				user.favorites = user.favorites.filter(contentId => contentId !== content._id);
 			} else {
+				content['favorites_user_ids'].push(_id);
 				userService.addFavorite(content._id, _id);
 				user.favorites.push(content._id);
 			}
@@ -230,6 +232,7 @@ export default function ContentInfo() {
 							className={`heart ${isLiked ? 'is-liked' : 'not-liked'}`}
 							onClick={!isDisabled ? handleLike : null}
 						></div>
+						<p className='count-favorites'>({content['favorites_user_ids'].length})</p>
 
 
 					</div>
@@ -237,11 +240,11 @@ export default function ContentInfo() {
 					<div className='divider'></div>
 
 					<div className='content-body'>
-						<p>{creatorText}: {content.creator}</p>
-						<p>{translateRecommend.genre[language]}: {content.genre.map(genre => translateGenre(genre.value, language)).join(', ')}</p>
-						<p>{translateRecommend.country[language]}: {countries[content.country][language]}</p>
-						<p>{translateRecommend.year[language]}: {content.year}</p>
-						<p>{translateRecommend.description[language]}: {content.description}</p>
+						<p><span className='content-details'>{creatorText}:</span> {content.creator}</p>
+						<p><span className='content-details'>{translateRecommend.genre[language]}:</span> {content.genre.map(genre => translateGenre(genre.value, language)).join(', ')}</p>
+						<p><span className='content-details'>{translateRecommend.country[language]}:</span> {countries[content.country][language]}</p>
+						<p><span className='content-details'>{translateRecommend.year[language]}:</span> {content.year}</p>
+						<p><span className='content-details'>{translateRecommend.description[language]}:</span> {content.description}</p>
 
 					</div>
 						

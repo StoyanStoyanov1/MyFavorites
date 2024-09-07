@@ -64,10 +64,10 @@ export default function ContentDetails({
 			</div>
 			<div className='infocase'>
 
-				<p>{creatorText.text}: {translateGenre(creator)}</p>
-				<p>{translateRecommend[recommendFormKeys.Country][language]}: {countries[country][language]}</p>
-				<p>{translateRecommend[recommendFormKeys.Genre][language]}: {genre.map(g => translateGenre(g.value, language)).join(', ')}</p>
-				<p>{translateRecommend[recommendFormKeys.Year][language]}: {year}</p>
+				<p><span className='content-details'>{creatorText.text}:</span> {translateGenre(creator)}</p>
+				<p><span className='content-details'>{translateRecommend[recommendFormKeys.Country][language]}:</span> {countries[country][language]}</p>
+				<p><span className='content-details'>{translateRecommend[recommendFormKeys.Genre][language]}:</span> {genre.map(g => translateGenre(g.value, language)).join(', ')}</p>
+				<p><span className='content-details'>{translateRecommend[recommendFormKeys.Year][language]}:</span>{year}</p>
 
 			</div>
 
