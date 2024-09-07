@@ -129,3 +129,10 @@ nav a:hover, .profilMenu-button:hover{
 .current-page {
     color: #e77d00;
 }
+
+.profilMenu-email {
+    font-size: 12px;
+    padding: 16px 16px 0 16px;
+    text-align: center;
+    cursor:default;
+}

@@ -7,7 +7,7 @@ import authContext from "../../context/authContext.jsx";
 
 export default function Header() {
 	const [language, setLanguage] = useLanguage();
-	const {_id, username, isAuthenticated} = useContext(authContext);
+	const {_id, username, isAuthenticated, email} = useContext(authContext);
 
 	const getNavLinkClass = (path) => {
 
@@ -40,6 +40,8 @@ export default function Header() {
 							<div className='profilMenu'>
 								<button className={`profilMenu-button ${getNavLinkClass(Path.Recommend) || getNavLinkClass(_id)}`}>{username}</button>
 								<div className="profilMenu-content">
+								<p className='profilMenu-email'>{email}</p>
+
 									<Link className={getNavLinkClass(Path.MyRecommends)} to={`${Path.MyRecommends}/${_id}`}>{translateHeader.myRecommendations[language]}</Link>
 									<Link className={getNavLinkClass(Path.Recommend)} to={Path.Recommend}>{translateHeader.recommend[language]}</Link>
 									<Link className={getNavLinkClass(Path.MyFavorites)} to={`${Path.MyFavorites}/${_id}`}>{translateHeader.favorites[language]}</Link>
