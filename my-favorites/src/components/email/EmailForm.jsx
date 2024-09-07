@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import emailjs from 'emailjs-com';
 import { EMAILJS_USER_ID, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID } from '../../configs/emailjs-config';
+import translateHeader from '../../utils/translator/translateHeader';
+import { useLanguage } from '../../context/LanguageContext';
+import translateEmail from '../../utils/translator/translateEmail/translateEmail';
 
 const EmailForm = () => {
+  const [language] = useLanguage();
+
   const [fromEmail, setFromEmail] = useState(''); // Имейл на потребителя
   const [subject, setSubject] = useState('');
   const [text, setText] = useState('');
@@ -29,6 +34,10 @@ const EmailForm = () => {
 
   return (<div class="email-container">
     <form onSubmit={handleSubmit} className="email-form">
+    <h1>{translateHeader.contactUs[language]}</h1>
+    <p className='contactUs'>{translateEmail.contactUs[language]}</p>
+    <p className='contactProvide'>{translateEmail.contactProvide[language]}</p>
+
       <label>
         Your Email:
         <input
