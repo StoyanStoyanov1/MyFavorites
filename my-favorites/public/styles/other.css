@@ -36,3 +36,8 @@
   .config-here:hover {
     color: #71b9f3;
   }
+
+.confirm {
+    background-color: rgb(13, 202, 139);
+    border: 1px solid rgb(6, 167, 113); 
+}
