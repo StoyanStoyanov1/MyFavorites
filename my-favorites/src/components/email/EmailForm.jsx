@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import emailjs from 'emailjs-com';
 import { EMAILJS_USER_ID, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID } from '../../configs/emailjs-config';
 import translateHeader from '../../utils/translator/translateHeader';
 import { useLanguage } from '../../context/LanguageContext';
 import translateEmail from '../../utils/translator/translateEmail/translateEmail';
+import AuthContext from '../../context/authContext';
 
 const EmailForm = () => {
   const [language] = useLanguage();
+  const {email} = useContext(AuthContext);
 
-  const [fromEmail, setFromEmail] = useState(''); // Имейл на потребителя
+  const [fromEmail, setFromEmail] = useState(email);
   const [subject, setSubject] = useState('');
   const [text, setText] = useState('');
 
