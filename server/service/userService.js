@@ -15,3 +15,5 @@ exports.removeContent = async (userId, contentId) => await User.findByIdAndUpdat
 exports.addFavorite = async (userId, contentId) => await User.findByIdAndUpdate(userId, {$push: {favorites: contentId}}, {new: true}).lean();
 
 exports.removeFavorite = async (userId, contentId) => await User.findByIdAndUpdate(userId, {$pull: {favorites: contentId}}, {new: true}).lean();
+
+exports.configUser = async (userId) => await User.findByIdAndUpdate(userId, {aktiv: true}, {new: true});

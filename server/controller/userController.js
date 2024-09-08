@@ -42,8 +42,18 @@ router.get('/:userId', async (req, res) => {
 	} catch (err) {
 		res.status(500).json({message: err});
 	}
-})
+});
 
+router.put('/aktiv/:userId', async (req, res) => {
+	const userId = req.params.userId;
+
+	try {
+		const user = await userService.configUser(userId);
+		res.status(201).json(user);
+	} catch (err) {
+		res.status(500).json({message: err});
+	}
+})
 
 
 module.exports = router;

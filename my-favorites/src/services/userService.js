@@ -21,3 +21,7 @@ export const removeFavorite = async (contentId, userId) => {
 	return result;
 }
 
+export const aktivUser = async(userId) => {
+	await request('PUT', `${baseUrl}/aktiv/${userId}`);
+}
+

@@ -23,6 +23,7 @@ import {LanguageProvider} from "./context/LanguageContext.jsx";
 import {AuthProvider} from "./context/authContext.jsx";
 import ErrorBoundary from "./components/ErrorBoundary.jsx";
 import AuthGuard from "./components/guards/AuthGuard.jsx";
+import AktivEmail from './components/аuthentication/AktivEmail.jsx';
 
 function App() {
 	return (
@@ -47,8 +48,10 @@ function App() {
 								<Route path={Path.Logout} element={<Logout/>}/>
 								<Route path={`${Path.EditRecommend}/:contentId`} element={<Recommend/>}/>
 								<Route path={Path.Recommend} element={<Recommend/>}/>
+								<Route path={`${Path.Confim}/:userId`} element={<AktivEmail/>}/>
 							</Route>
 							<Route path="*" element={<NotFoundPage/>}/>
+						
 						</Routes>
 						<Footer/>
 					</div>

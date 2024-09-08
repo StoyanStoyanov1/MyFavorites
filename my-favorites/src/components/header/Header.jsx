@@ -5,10 +5,14 @@ import translateHeader from "../../utils/translator/translateHeader.js";
 import { useLanguage } from "../../context/LanguageContext.jsx";
 import authContext from "../../context/authContext.jsx";
 import translateEmail from '../../utils/translator/translateEmail/translateEmail.js';
+import sendEmail from '../../utils/email/configEmail.js';
 
 export default function Header() {
+
 	const [language, setLanguage] = useLanguage();
-	const { _id, username, isAuthenticated, email, aktiv} = useContext(authContext);
+	const { _id, username, isAuthenticated, email, aktiv } = useContext(authContext);
+	const [isClicked, setIsClicked] = useState(false);
+
 
 	const getNavLinkClass = (path) => {
 
@@ -19,15 +23,12 @@ export default function Header() {
 		setLanguage(e.target.value);
 	};
 
-
 	return (
 		<header>
 
 			<nav>
 
 				<div className="nav-left">
-
-
 					<Link className={getNavLinkClass(Path.Books)} to={Path.Books}>{translateHeader.books[language]}</Link>
 					<Link className={getNavLinkClass(Path.Movies)} to={Path.Movies}>{translateHeader.movies[language]}</Link>
 					<Link className={getNavLinkClass(Path.Series)} to={Path.Series}>{translateHeader.series[language]}</Link>
@@ -69,10 +70,18 @@ export default function Header() {
 					</div>
 				</div>
 			</nav>
-			<p className='config-message'>{translateEmail.configEmail[language]}
-			
-				{<a className='config-here' onClick={() => console.log('ha')}>{language === 'bg' ? 'тук' : 'here'}</a>}
-				 .</p>
+			{isAuthenticated && !aktiv && <p className='config-message'>{translateEmail.configEmail[language]}
+				<a className='config-here' onClick={() => {
+					setIsClicked(true);
+
+					setTimeout(() => {
+						setIsClicked(false);
+
+					}, 5000)
+
+					if (!isClicked) sendEmail(username, _id, email);
+				}}>{language === 'bg' ? 'тук' : 'here'}</a>
+				.</p>}
 
 		</header>
 	)

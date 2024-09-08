@@ -39,13 +39,16 @@ export const AuthProvider = ({ children }) => {
 		navigate(Path.Login);
 	}
 
+
 	const values = {
 		registerSubmitHandler,
 		loginSubmitHandler,
 		logoutHandler,
+		setAuth,
 		username: auth.username,
 		email: auth.email,
 		_id: auth._id,
+		aktiv: auth.aktiv,
 		isAuthenticated: !!auth.email,
 	};
 
