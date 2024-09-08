@@ -40,7 +40,7 @@ const EmailForm = () => {
     <p className='contactProvide'>{translateEmail.contactProvide[language]}</p>
 
       <label>
-        Your Email:
+        {translateEmail.yourEmail[language]}:
         <input
           type="email"
           value={fromEmail}
@@ -49,7 +49,7 @@ const EmailForm = () => {
         />
       </label>
       <label>
-        Subject:
+        {translateEmail.subject[language]}:
         <input
           type="text"
           value={subject}
@@ -58,14 +58,14 @@ const EmailForm = () => {
         />
       </label>
       <label>
-        Message:
+        {translateEmail.message[language]}:
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
           required
         />
       </label>
-      <button type="submit">Send Email</button>
+      <button type="submit">{translateEmail.send[language]}</button>
     </form>
   </div>
   );

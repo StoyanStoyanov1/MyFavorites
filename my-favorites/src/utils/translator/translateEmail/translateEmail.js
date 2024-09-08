@@ -8,7 +8,30 @@ const translateEmail = {
         en: "Please ensure that you provide your email address correctly, as we will not be able to respond if the email address is incorrect.",
         de: "Bitte stellen Sie sicher, dass Sie Ihre E-Mail-Adresse korrekt eingeben, da wir Ihnen sonst nicht antworten können.",
         bg: "Моля, уверете се, че сте въвели правилно Вашия имейл адрес, тъй като не можем да отговорим, ако адресът е грешен.",
+    },
+    yourEmail: {
+        en: "Your Email",
+        de: "Ihre E-Mail",
+        bg: "Вашият имейл",
+    },
+    subject: {
+        en: "Subject",
+        de: "Betreff",
+        bg: "Тема",
+    },
+    message: {
+        en: "Message",
+        de: "Nachricht",
+        bg: "Съобщение",
+    },
+    send: {
+        en: "Send",
+        de: "Senden",
+        bg: "Изпрати",
     }
+
+
+
 };
 
 export default translateEmail;
