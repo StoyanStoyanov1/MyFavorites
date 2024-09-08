@@ -1,13 +1,14 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Path from '../../paths.js'
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import translateHeader from "../../utils/translator/translateHeader.js";
-import {useLanguage} from "../../context/LanguageContext.jsx";
+import { useLanguage } from "../../context/LanguageContext.jsx";
 import authContext from "../../context/authContext.jsx";
+import translateEmail from '../../utils/translator/translateEmail/translateEmail.js';
 
 export default function Header() {
 	const [language, setLanguage] = useLanguage();
-	const {_id, username, isAuthenticated, email} = useContext(authContext);
+	const { _id, username, isAuthenticated, email, aktiv} = useContext(authContext);
 
 	const getNavLinkClass = (path) => {
 
@@ -17,6 +18,7 @@ export default function Header() {
 	const handleLanguageChange = (e) => {
 		setLanguage(e.target.value);
 	};
+
 
 	return (
 		<header>
@@ -35,21 +37,21 @@ export default function Header() {
 					<Link className={`favorites-text ${location.pathname === Path.Home ? 'current-page' : ''}`} to={Path.Home}>My Favorites</Link>
 				</div>
 				<div className="nav-right">
-				<Link className={getNavLinkClass(Path.EmailForm)} to={Path.EmailForm}>{translateHeader.contactUs[language]}</Link>
+					<Link className={getNavLinkClass(Path.EmailForm)} to={Path.EmailForm}>{translateHeader.contactUs[language]}</Link>
 
 					{isAuthenticated && <>
-							<div className='profilMenu'>
-								<button className={`profilMenu-button ${getNavLinkClass(Path.Recommend) || getNavLinkClass(_id)}`}>{username}</button>
-								<div className="profilMenu-content">
+						<div className='profilMenu'>
+							<button className={`profilMenu-button ${getNavLinkClass(Path.Recommend) || getNavLinkClass(_id)}`}>{username}</button>
+							<div className="profilMenu-content">
 								<p className='profilMenu-email'>{email}</p>
 
-									<Link className={getNavLinkClass(Path.MyRecommends)} to={`${Path.MyRecommends}/${_id}`}>{translateHeader.myRecommendations[language]}</Link>
-									<Link className={getNavLinkClass(Path.Recommend)} to={Path.Recommend}>{translateHeader.recommend[language]}</Link>
-									<Link className={getNavLinkClass(Path.MyFavorites)} to={`${Path.MyFavorites}/${_id}`}>{translateHeader.favorites[language]}</Link>
-									<Link  to={Path.Logout}>{translateHeader.logout[language]}</Link>
-								</div>
+								<Link className={getNavLinkClass(Path.MyRecommends)} to={`${Path.MyRecommends}/${_id}`}>{translateHeader.myRecommendations[language]}</Link>
+								<Link className={getNavLinkClass(Path.Recommend)} to={Path.Recommend}>{translateHeader.recommend[language]}</Link>
+								<Link className={getNavLinkClass(Path.MyFavorites)} to={`${Path.MyFavorites}/${_id}`}>{translateHeader.favorites[language]}</Link>
+								<Link to={Path.Logout}>{translateHeader.logout[language]}</Link>
 							</div>
-							</>
+						</div>
+					</>
 						||
 						<>
 
@@ -67,6 +69,10 @@ export default function Header() {
 					</div>
 				</div>
 			</nav>
+			<p className='config-message'>{translateEmail.configEmail[language]}
+			
+				{<a className='config-here' onClick={() => console.log('ha')}>{language === 'bg' ? 'тук' : 'here'}</a>}
+				 .</p>
 
 		</header>
 	)

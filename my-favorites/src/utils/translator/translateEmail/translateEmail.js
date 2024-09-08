@@ -28,9 +28,12 @@ const translateEmail = {
         en: "Send",
         de: "Senden",
         bg: "Изпрати",
-    }
-
-
+    },
+    configEmail: {
+        en: `Please confirm your email address to gain full access to the site. If you have not received an email, please click `,
+        de: `Bitte bestätigen Sie Ihre E-Mail-Adresse, um vollen Zugang zur Website zu erhalten. Wenn Sie keine E-Mail erhalten haben, klicken Sie bitte `,
+        bg: `Моля, потвърдете своя имейл адрес, за да получите пълен достъп до сайта. Ако не сте получили имейл, моля, кликнете `,
+    },
 
 };
 

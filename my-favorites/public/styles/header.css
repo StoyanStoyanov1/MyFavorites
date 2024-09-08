@@ -1,9 +1,8 @@
 header {
-    background-color: #24655e
-;
+    background-color: #24655e;
     padding: 10px 0;
+    position: relative; 
 }
-
 nav {
     top: 0;
     left: 0;

@@ -14,7 +14,8 @@ const translateMessages = (values) => {
 			en: `To add ${values.title} to your favorites, you need to be logged in.`,
 			de: `Um ${values.title} zu Ihren Favoriten hinzuzufügen, müssen Sie angemeldet sein.`,
 			bg: `За да добавите ${values.title} към вашите любими, трябва да сте влезли в профила си.`
-		}
+		},
+		
 	}
 };
 
