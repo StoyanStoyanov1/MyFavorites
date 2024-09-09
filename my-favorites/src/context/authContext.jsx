@@ -3,6 +3,8 @@ import {useNavigate} from 'react-router-dom';
 import * as authService from '../services/authService.js';
 import Path from "../paths.js";
 import usePersistedState from "../hooks/usePersistedState.js";
+import configEmail from "../utils/email/configEmail.js";
+
 
 
 const AuthContext = createContext();
@@ -14,6 +16,9 @@ export const AuthProvider = ({ children }) => {
 
 	const registerSubmitHandler = async (values) => {
 		const result = await authService.register(values);
+		console.log(result);
+		
+		configEmail(result.user.username, result.user._id, result.user.email)
 
 		if (result.accessToken) {
 			setAuth(result.user);

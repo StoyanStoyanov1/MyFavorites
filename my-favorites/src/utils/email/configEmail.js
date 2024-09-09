@@ -14,11 +14,9 @@ const sendEmail = (username, userId, email) => {
       emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_USER_ID)
         .then((response) => {
           console.log('Email sent successfully:', response);
-          alert('Email sent successfully!');
         })
         .catch((error) => {
           console.error('Error sending email:', error);
-          alert('Failed to send email.');
         });
 }
 

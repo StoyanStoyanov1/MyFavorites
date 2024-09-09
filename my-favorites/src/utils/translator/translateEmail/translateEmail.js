@@ -34,6 +34,11 @@ const translateEmail = {
         de: `Bitte bestätigen Sie Ihre E-Mail-Adresse, um vollen Zugang zur Website zu erhalten. Wenn Sie keine E-Mail erhalten haben, klicken Sie bitte `,
         bg: `Моля, потвърдете своя имейл адрес, за да получите пълен достъп до сайта. Ако не сте получили имейл, моля, кликнете `,
     },
+    waitConfirm: {
+        en: 'A confirmation email has been successfully sent to your email address. Please wait a few minutes, and if you do not receive it, check if you provided the correct email address during registration. If the issue persists, please contact us, and we will do our best to assist you.',
+        de: "Eine Bestätigungs-E-Mail wurde erfolgreich an Ihre E-Mail-Adresse gesendet. Bitte warten Sie einige Minuten und prüfen Sie, ob Sie die richtige E-Mail-Adresse bei der Registrierung angegeben haben, falls Sie die E-Mail nicht erhalten. Wenn das Problem weiterhin besteht, kontaktieren Sie uns bitte und wir werden unser Bestes tun, um Ihnen zu helfen.",
+        bg: "Имейл за потвърждение беше успешно изпратен на Вашия имейл адрес. Моля, изчакайте няколко минути и ако не получите имейла, проверете дали сте въвели правилния адрес при регистрацията. Ако проблемът продължава, моля, свържете се с нас и ние ще се опитаме да Ви помогнем."
+    }
 
 };
 

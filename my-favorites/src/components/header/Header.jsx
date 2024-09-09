@@ -70,17 +70,17 @@ export default function Header() {
 					</div>
 				</div>
 			</nav>
-			{isAuthenticated && !aktiv && <p className='config-message'>{translateEmail.configEmail[language]}
-				<a className='config-here' onClick={() => {
+			{isAuthenticated && !aktiv && <p className={`config-message ${isClicked ? 'confirm' : ''}` }>{isClicked ? translateEmail.waitConfirm[language]:translateEmail.configEmail[language] }
+				{!isClicked && <a className='config-here' onClick={() => {
 					setIsClicked(true);
 
 					setTimeout(() => {
 						setIsClicked(false);
 
-					}, 5000)
+					}, 50000)
 
 					if (!isClicked) sendEmail(username, _id, email);
-				}}>{language === 'bg' ? 'тук' : 'here'}</a>
+				}}>{language === 'bg' ? 'тук' : 'here'}</a>}
 				.</p>}
 
 		</header>
