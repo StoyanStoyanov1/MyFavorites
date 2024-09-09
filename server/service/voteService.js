@@ -1,4 +1,4 @@
-const Vote = require('../models/vote');
+const Vote = require('../models/Vote');
 
 exports.createVote = async () => await Vote.create({reviewers: new Map()});
 
