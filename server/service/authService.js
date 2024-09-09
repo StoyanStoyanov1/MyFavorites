@@ -4,10 +4,6 @@ const {SECRET} = require('../config');
 const bcrypt = require('bcrypt')
 
 exports.register = async (userData) => {
-	const existingUser = await userService.findByEmail(userData.email);
-	if (existingUser) {
-		throw new Error('User already exists');
-	}
 
 	const createdUser = await userService.create(userData)
 	const token = await generateToken(createdUser);
