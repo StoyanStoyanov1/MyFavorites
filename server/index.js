@@ -6,6 +6,7 @@ const cors = require('cors');
 
 const userRouter = require('./router');  // Импортиране на рутера
 
+// Middlewares
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -14,22 +15,27 @@ app.use(cors({
 	credentials: true
 }));
 app.use(express.json());
-app.use('/api',userRouter);
+app.use('/api', userRouter);
 
+// MongoDB Connection URI
 const dbURI = process.env.MONGODB_URI || "mongodb+srv://myfavorites:myfavoritespassword@myfavorites.mrbrd.mongodb.net/?retryWrites=true&w=majority&appName=MyFavorites";
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+
+// Connect to MongoDB
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: { version: ServerApiVersion.v1, strict: true, deprecationErrors: true } })
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.error('Failed to connect to MongoDB:', err));
 
+// MongoDB Event Listeners
 mongoose.connection.on('connected', () => console.log('MongoDB Connected'));
 mongoose.connection.on('disconnected', () => console.log('MongoDB Disconnected'));
 mongoose.connection.on('error', err => console.log('MongoDB Error:', err));
 
+// Error Handling Middleware
 app.use((err, req, res, next) => {
-	console.error(err.stack);
+	console.error('Error:', err.stack);
 	res.status(500).send('Something broke!');
 });
 
+// Start Server
 const port = process.env.PORT || 3030;
-
 app.listen(port, () => console.log(`Server started on port ${port}`));
