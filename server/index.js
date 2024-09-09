@@ -16,7 +16,7 @@ app.use(cors({
 app.use(express.json());
 app.use('/api',userRouter);
 
-const dbURI = process.env.MONGODB_URI || "mongodb+srv://myfavorites:myfavoritespassword@myfavorites.mrbrd.mongodb.net/?retryWrites=true&w=majority&appName=MyFavorites";
+const dbURI = "mongodb+srv://myfavorites:NY7MbFerrvTOsBUV@myfavorites.mrbrd.mongodb.net/?retryWrites=true&w=majority&appName=MyFavorites";
 mongoose.connect(dbURI, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
