@@ -1,3 +1,3 @@
-const mainUrl = 'http://localhost:3030/api/';
+const mainUrl = 'https://myfavorites-db.onrender.com/api/';
 
 export default mainUrl;
