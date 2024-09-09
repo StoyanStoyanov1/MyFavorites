@@ -20,8 +20,6 @@ const dbURI = process.env.MONGODB_URI || "mongodb+srv://myfavorites:myfavoritesp
 mongoose.connect(dbURI, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
-	tls: true, 
-	tlsValidate: true 
   })
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.error('Failed to connect to MongoDB:', err));
