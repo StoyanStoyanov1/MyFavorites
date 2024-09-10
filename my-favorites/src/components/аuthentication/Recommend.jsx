@@ -43,7 +43,7 @@ export default function Recommend() {
 	useEffect(() => {
 		if (contentId) {
 			contentService.getById(contentId)
-				.then(foundContent => setValues({
+				.then(foundContent => {setValues({
 					[recommendFormKeys.Type]: foundContent[recommendFormKeys.Type] || '',
 					[recommendFormKeys.Title]: foundContent[recommendFormKeys.Title] || '',
 					[recommendFormKeys.Genre]: foundContent[recommendFormKeys.Genre] || [],
@@ -52,7 +52,9 @@ export default function Recommend() {
 					[recommendFormKeys.Creator]: foundContent[recommendFormKeys.Creator] || '',
 					[recommendFormKeys.Image]: foundContent[recommendFormKeys.Image] || '',
 					[recommendFormKeys.Country]: foundContent[recommendFormKeys.Country] || '',
-				}))
+				})
+				setIsLoading(false);
+			})
 
 				.catch(err => console.error(err))
 		} else {
@@ -65,10 +67,12 @@ export default function Recommend() {
 				[recommendFormKeys.Creator]: '',
 				[recommendFormKeys.Image]: '',
 				[recommendFormKeys.Country]: '',
-			})
+			});
+
+			setIsLoading(false)
 		}
 
-		setIsLoading(false)
+		
 	}, [contentId]);
 
 	const validateInput = (e) => {
@@ -95,6 +99,8 @@ export default function Recommend() {
 			return;
 		}
 
+
+
 		try {
 			values.userId = _id;
 			if (contentId) {
@@ -106,6 +112,7 @@ export default function Recommend() {
 			}
 		} catch (error) {
 			console.error(error.message);
+			navigate(Path.Home)
 		}
 	}
 
