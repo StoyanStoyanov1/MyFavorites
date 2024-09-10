@@ -8,7 +8,7 @@ const sendEmail = (username, userId, email) => {
     const templateParams = {
         to_email: email,
         to_name: username,
-        link: `http://localhost:5173/confim/${userId}`,
+        link: `https://myfavorites.onrender.com/confim/${userId}`,
       };
   
       emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_USER_ID)
