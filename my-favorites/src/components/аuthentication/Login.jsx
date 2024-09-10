@@ -20,6 +20,8 @@ export default function Login() {
 	const [isLoading, setIsLoading] = useState(false);
 
 	async function submitHandler(values) {
+		setIsLoading(true);
+
 		try {
 			await loginSubmitHandler(values);
 		} catch (error) {

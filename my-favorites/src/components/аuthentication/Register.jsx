@@ -63,7 +63,8 @@ export default function Register() {
 		if (!inputIsValid) {
 			return;
 		}
-
+		
+		setIsLoading(true);
 		try {
 			await registerSubmitHandler(values);
 		} catch (error) {
