@@ -25,6 +25,7 @@ export default function Login() {
 		try {
 			await loginSubmitHandler(values);
 		} catch (error) {
+			setIsLoading(false);
 			let message;
 
 			if (error.message === "User does not exist") message = translateAuthErrors.userNotExist[language];

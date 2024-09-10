@@ -68,6 +68,7 @@ export default function Register() {
 		try {
 			await registerSubmitHandler(values);
 		} catch (error) {
+			setIsLoading(false);
 			let message;
 
 			if (error.message === 'User already exists') message = translateAuthErrors.userIsExist[language]
