@@ -1,4 +1,4 @@
-﻿<h1>The server has been deployed and is now accessible at <a href="https://myfavorites.onrender.com/">https://certify-me-3pfh.onrender.com/</a>.</h1>
+﻿<h1>The server has been deployed and is now accessible at <a href="https://myfavorites.onrender.com/">https://myfavorites.onrender.com/</a>.</h1>
 
    
    <h1>MyFavorites</h1>
