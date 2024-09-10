@@ -6,6 +6,7 @@ import { useLanguage } from "../../context/LanguageContext.jsx";
 import authContext from "../../context/authContext.jsx";
 import translateEmail from '../../utils/translator/translateEmail/translateEmail.js';
 import sendEmail from '../../utils/email/configEmail.js';
+import MobilHeader from './MobilHeader.jsx';
 
 export default function Header() {
 
@@ -27,6 +28,7 @@ export default function Header() {
 		<header>
 
 			<nav>
+			<MobilHeader/>
 
 				<div className="nav-left">
 					<Link className={getNavLinkClass(Path.Books)} to={Path.Books}>{translateHeader.books[language]}</Link>
