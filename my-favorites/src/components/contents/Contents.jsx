@@ -31,7 +31,9 @@ export default function Contents() {
 	const [foundItems, setFoundItems] = useState([]);
 	const [owner, setOwner] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
+
 	useEffect(() => {
+		setIsLoading(true);
 		async function loadMore() {
 			try {
 				const found = await contentService.getAll(`${path}/${userId ? userId : ''}`);
@@ -43,6 +45,7 @@ export default function Contents() {
 				}
 				setIsLoading(false);
 			} catch (err) {
+				setIsLoading(false);
 				console.error(err.message);
 				if (err.message === 'Invalid User ID format') {
 					navigate('*');
